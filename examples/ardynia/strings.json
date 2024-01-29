@@ -1,0 +1,21 @@
+{
+    "strings": [
+        { "key": "newGame", "value": "NEW GAME" },
+        { "key": "continue", "value": "CONTINUE" },
+        { "key": "deleteSave", "value": "DELETE SAVE" },
+        { "key": "sfxOn", "value": "SFX!" },
+        { "key": "sfxOff", "value": "SFX" },
+        { "key": "gameOver", "value": "GAME OVER" },
+        { "key": "quitFromGameOver", "value": "QUIT" },
+        { "key": "equip", "value": "EQUIP" },
+        { "key": "map", "value": "MAP" },
+        { "key": "congrats", "value": "CONGRATS" },
+        { "key": "gotSword", "value": "YOU GOT THE SWORD" },
+        { "key": "gotHeartContainer", "value": "YOU GOT A HEART" },
+        { "key": "gotBoomerang", "value": "YOU GOT THE BOOMERANG" },
+        { "key": "gotBombs", "value": "YOU GOT THE BOMBS" },
+        { "key": "gotRing", "value": "YOU GOT THE MAGIC RING" },
+        { "key": "gotKey", "value": "YOU GOT A KEY" },
+        { "key": "gotBossKey", "value": "YOU GOT THE BOSS KEY" }
+    ]
+}
