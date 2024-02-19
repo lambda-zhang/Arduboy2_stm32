@@ -81,6 +81,12 @@ void ShadowRunner_setup () {
 
 void ShadowRunner_loop() {
   if (!(arduboy.nextFrame())) return;
+
+  // The timer() function is called once per frame, so duration values will be
+  // the number of frames that the tone plays for.
+  // At 25 frames per second each frame will be 40ms.
+  beep.timer(); // handle tone duration
+
   arduboy.pollButtons();
   arduboy.clear();
 

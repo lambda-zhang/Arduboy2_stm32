@@ -7,6 +7,10 @@
 #ifndef ARDUBOY2_BEEP_H
 #define ARDUBOY2_BEEP_H
 
+#ifdef STM32F103xB
+#include <math.h>
+#endif /* STM32F103xB */
+
 /** \brief
  * Play simple square wave tones using speaker pin 1.
  *
@@ -249,7 +253,11 @@ class BeepPin1
    */
   static constexpr uint16_t freq(const float hz)
   {
+#ifndef STM32F103xB
     return (uint16_t) (((F_CPU / 8 / 2) + (hz / 2)) / hz) - 1;
+#else
+    return round(hz); // do not convert hz to counter， stm32 could set pwm freq direct
+#endif /* STM32F103xB */
   }
 };
 
