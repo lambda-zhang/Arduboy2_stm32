@@ -162,7 +162,7 @@ void Platform::ExpectLoadDelay()
 	lastTimingSample = millis();
 }
 
-void Arduboy3D_setup()
+void setup()
 {
   arduboy.boot();
   arduboy.flashlight();
@@ -180,7 +180,7 @@ void Arduboy3D_setup()
   lastTimingSample = millis();
 }
 
-void Arduboy3D_loop()
+void loop()
 {
   static int16_t tickAccum = 0;
   unsigned long timingSample = millis();

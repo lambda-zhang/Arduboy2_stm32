@@ -395,7 +395,7 @@ void drawFrame() {
   arduboy.display();
 }
 
-void ArduboyTetris_setup() {
+void setup() {
   arduboy.begin();
   arduboy.setFrameRate(60);
   arduboy.display();
@@ -404,7 +404,7 @@ void ArduboyTetris_setup() {
   initGame();
 }
 
-void ArduboyTetris_loop() {
+void loop() {
   if(!arduboy.nextFrame()) {
     return;
   }

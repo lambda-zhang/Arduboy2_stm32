@@ -220,8 +220,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	/* Prevent unused argument(s) compilation warning */
 	UNUSED(htim);
-	static int cnt1 = 0;
-	static int cnt4 = 0;
 	if(htim->Instance == TIM1) {
 		audio_timer1_PeriodElapsedCallback();
 	} else if (htim->Instance == TIM4) {

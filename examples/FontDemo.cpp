@@ -46,7 +46,7 @@ constexpr uint8_t infoBorder = 1;
 int16_t xPos = 0;
 int16_t yPos = 0;
 
-void FontDemo_setup() {
+void setup() {
   arduboy.begin();
   arduboy.setFrameRate(20);
 
@@ -64,7 +64,7 @@ void FontDemo_setup() {
   }
 }
 
-void FontDemo_loop() {
+void loop() {
   if (!arduboy.nextFrame()) {
     return;
   }

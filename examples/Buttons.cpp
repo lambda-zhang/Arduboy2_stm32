@@ -49,7 +49,7 @@ byte y;
 
 // This function runs once in your game.
 // use it for anything that needs to be set only once in your game.
-void Buttons_setup() {
+void setup() {
   //initiate arduboy instance
   arduboy.begin();
 
@@ -65,7 +65,7 @@ void Buttons_setup() {
 
 // our main game loop, this runs once every cycle/frame.
 // this is where our game logic goes.
-void Buttons_loop() {
+void loop() {
   // pause render until it's time for the next frame
   if (!(arduboy.nextFrame()))
     return;

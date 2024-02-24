@@ -92,7 +92,7 @@ static int d_tumble_t;
 
 static int ox;
 
-void halloweend_setup()
+void setup()
 {
   arduboy.begin();
   arduboy.setFrameRate(30);
@@ -113,7 +113,7 @@ void halloweend_setup()
 //  Serial.begin(9600);
 }
 
-void halloweend_loop()
+void loop()
 {
   // pause render until it's time for the next frame
   if (!(arduboy.nextFrame()))
@@ -129,7 +129,7 @@ void halloweend_loop()
   }
 
   if (d_tumble_t && arduboy.pressed(A_BUTTON)) {
-    halloweend_setup();
+    setup();
     return;
   }
 

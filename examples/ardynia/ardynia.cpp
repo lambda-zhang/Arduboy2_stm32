@@ -19,7 +19,7 @@ ArduboyPlaytune tones(arduboy.audio.enabled);
 Renderer renderer(arduboy);
 Game game;
 
-void ardynia_setup() {
+void setup() {
     arduboy.boot();
     arduboy.audio.begin();
     Sfx::init(&tones);
@@ -33,7 +33,7 @@ void ardynia_setup() {
 
 uint8_t loopCounter = 1;
 
-void ardynia_loop() {
+void loop() {
     if (!arduboy.nextFrame()) {
         return;
     }

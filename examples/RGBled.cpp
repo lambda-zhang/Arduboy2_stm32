@@ -94,7 +94,7 @@ void printValue(byte val);
 #endif /* STM32F103xB */
 
 // ============================= SETUP ===================================
-void RGBled_setup() {
+void setup() {
   arduboy.begin();
   arduboy.setFrameRate(FRAME_RATE);
   analogSet();
@@ -103,7 +103,7 @@ void RGBled_setup() {
 
 
 // =========================== MAIN LOOP =================================
-void RGBled_loop() {
+void loop() {
   if (!arduboy.nextFrame()) {
     return;
   }

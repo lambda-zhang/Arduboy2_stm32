@@ -79,7 +79,7 @@ void ShadowRunner_setup () {
  
 }
 
-void ShadowRunner_loop() {
+void loop() {
   if (!(arduboy.nextFrame())) return;
 
   // The timer() function is called once per frame, so duration values will be

@@ -93,7 +93,7 @@ boolean displayHighScores(byte file);
 boolean titleScreen();
 #endif /* STM32F103xB */
 
-void ArduBreakout_setup()
+void setup()
 {
   arduboy.begin();
   beep.begin();
@@ -101,7 +101,7 @@ void ArduBreakout_setup()
   arduboy.initRandomSeed();
 }
 
-void ArduBreakout_loop()
+void loop()
 {
   // pause render until it's time for the next frame
   if (!(arduboy.nextFrame()))

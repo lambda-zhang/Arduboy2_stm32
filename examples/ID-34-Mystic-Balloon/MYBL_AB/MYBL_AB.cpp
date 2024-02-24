@@ -44,7 +44,7 @@ const FunctionPointer PROGMEM  mainGameLoop[] = {
   stateMenuPlayNew,
 };
 
-void Mystic_Balloon_setup()
+void setup()
 {
   arduboy.boot();                                           // begin with the boot logo en setting up the device to work
   arduboy.audio.begin();
@@ -53,7 +53,7 @@ void Mystic_Balloon_setup()
   loadSetEEPROM();
 }
 
-void Mystic_Balloon_loop() {
+void loop() {
   if (!(arduboy.nextFrame())) return;
   if (gameState < STATE_GAME_NEXT_LEVEL && arduboy.everyXFrames(10))sparkleFrames = (++sparkleFrames) % 5;
   arduboy.pollButtons();

@@ -140,7 +140,7 @@ boolean checkPipe(byte x);
 byte getOffset(unsigned int s);
 #endif /* STM32F103xB */
 
-void FlappyBall_setup() {
+void setup() {
   arduboy.begin();
   arduboy.setFrameRate(FRAMES_PER_SECOND);
   arduboy.clear();
@@ -159,7 +159,7 @@ void FlappyBall_setup() {
   for (byte x = 0; x < PIPE_ARRAY_SIZE; x++) { pipes[0][x] = 0; }  // Set all pipes offscreen
 }
 
-void FlappyBall_loop() {
+void loop() {
   if (!arduboy.nextFrame())
     return;
 

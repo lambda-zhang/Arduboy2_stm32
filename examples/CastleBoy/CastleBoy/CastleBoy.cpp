@@ -10,7 +10,7 @@ extern "C" {
 
 uint8_t bootCounter = 0;
 
-void CastleBoy_setup()
+void setup()
 {
   ab.begin();
   ab.setFrameRate(FPS);
@@ -18,7 +18,7 @@ void CastleBoy_setup()
   Menu::showTitle();
 }
 
-void CastleBoy_loop()
+void loop()
 {
   if (!ab.nextFrame())
   {

@@ -97,7 +97,7 @@ static int d_tumble_t;
 
 static int ox;
 
-void rund_setup()
+void setup()
 {
   arduboy.begin();
   arduboy.setFrameRate(30);
@@ -117,7 +117,7 @@ void rund_setup()
   ox = 130;
 }
 
-void rund_loop()
+void loop()
 {
   // pause render until it's time for the next frame
   if (!(arduboy.nextFrame()))
@@ -133,7 +133,7 @@ void rund_loop()
   }
 
   if (d_tumble_t && arduboy.pressed(A_BUTTON)) {
-    rund_setup();
+    setup();
     return;
   }
 

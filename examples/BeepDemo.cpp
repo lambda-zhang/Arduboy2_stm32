@@ -39,7 +39,7 @@ char displayText[60];
 void commandText(const char* text);
 #endif /* STM32F103xB */
 
-void BeepDemo_setup() {
+void setup() {
   arduboy.begin();
   arduboy.setFrameRate(25);
 
@@ -48,7 +48,7 @@ void BeepDemo_setup() {
   commandText("none - Press buttons");
 }
 
-void BeepDemo_loop() {
+void loop() {
   if (!arduboy.nextFrame()) {
     return;
   }

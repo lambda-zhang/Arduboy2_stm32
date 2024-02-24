@@ -446,7 +446,7 @@ void printDecimalHelper(int x, int y, uint8_t width, uint16_t pwr10, uint16_t va
 #endif /* STM32F103xB */
 
 // ============================= SETUP ===================================
-void SetSystemEEPROM_setup() {
+void setup() {
   arduboy.begin();
   arduboy.setFrameRate(frameRate);
   setState(State::sMain);
@@ -455,7 +455,7 @@ void SetSystemEEPROM_setup() {
 
 
 // =========================== MAIN LOOP =================================
-void SetSystemEEPROM_loop() {
+void loop() {
   if (!arduboy.nextFrame()) {
     return;
   }

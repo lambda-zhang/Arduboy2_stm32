@@ -133,7 +133,7 @@ const byte score[] PROGMEM = {
 static Arduboy2 arduboy;
 ArduboyPlaytune tunes(arduboy.audio.enabled);
 
-void PlayTune_setup()
+void setup()
 {
   arduboy.begin();
 
@@ -157,7 +157,7 @@ void PlayTune_setup()
 
 static int x = 20, y = 10; // initial text position
 
-void PlayTune_loop()
+void loop()
 {
   // pause render until it's time for the next frame
   if (!(arduboy.nextFrame()))
