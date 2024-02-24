@@ -7,23 +7,33 @@ unsigned long millis();
 void delay(unsigned long ms);
 uint32_t get_adc_val(void);
 
-#define LCDBOOTPROGRAMARR                                                                                              \
-	0xAE, /* 关LCD */                                                                                             \
-		0xE3, /* NOP */                                                                                        \
-		0xA1, /* 设置液晶驱动电压偏置比，偏压1/9 */                                              \
-		0xA0, /* 设置RAM地址 正常 */                                                                     \
-		0xC8, /* 设置COM输出扫描方向,反向 */                                                         \
-		0x25, /* 设置V0内部电阻比设置，可设置范围0x20～0x27 */                                                              \
-		0x81, /* 设置V0输出电压电子量寄存器 */                                                     \
-		0x15, /* 1A=9.0V,此参数根据屏幕不同设置不同 0x1a,微调对比度的值，可设置范围0x00～0x3f*/                                            \
-		0xF8, /* 选择升压比 */                                                                            \
-		0x00, /* 2x,3x,4x */                                                                                   \
-		0x2C, /* 选择内部电源操作模式 */                                                             \
-		0x2E, /* */                                                                                            \
-		0x2F, /* */                                                                                            \
-		0xA7, /* 0xa6为常规  0xa7为反显 */ \
-		0xAF, /* 开LCD */                                                                                     \
-		0x40, /* 设置显示起始行 */
+#define LCDBOOTPROGRAMARR \
+	0xAE, /* set display display ON/OFF,AFH/AEH */ \
+	0x02, \
+	0x10, \
+	0x40, /* set display start line:COM0 */ \
+	0xB0, \
+	0x81, /* set contrast control */ \
+	0xCF, \
+	0xA1, /* entire display on: A4H:OFF/A5H:ON */ \
+	0xC8, /* 该指令控制显示方向显示方向0xc8或者0xc0 */ \
+	0xAF, \
+	0xA7, /* set normal/inverse display: A6H:normal/A7H:inverse */ \
+	0xA8, /* set multiplex ratio */ \
+	0x3F, /* 1/64duty */ \
+	0xD3, /* set display offset */ \
+	0x00, \
+	0xD5, /* set display clock divide ratio/oscillator frequency */ \
+	0x80, /* 105Hz */ \
+	0xD9, /* Dis-charge /Pre-charge Period Mode Set */ \
+	0xF1, \
+	0xDA, /* Common Pads Hardware Configuration Mode Set */ \
+	0x12, \
+	0xDB, /* set vcomh deselect level */ \
+	0x40, /* VCOM = β X VREF = (0.430 + A[7:0] X 0.006415) X VREF */ \
+	0xA4, \
+	0xA6, \
+	0xAF /* set display display ON/OFF,AEH/AFH */
 
 #define CS_PIN GPIO_PIN_1 // Display CS pin number
 #define CS_PORT GPIOA // Display CS port

@@ -384,7 +384,7 @@ void Arduboy2Core::paintScreen(const uint8_t *image)
 #ifdef STM32F103xB
     if (i % 128 == 0) {
       sendLCDCommand(0x10);
-      sendLCDCommand(0x00);
+      sendLCDCommand(0x02);
       sendLCDCommand(i/128 + 0xb0);
     }
 #endif /* STM32F103xB */
@@ -441,11 +441,14 @@ void Arduboy2Core::paintScreen(uint8_t image[], bool clear)
 #ifdef STM32F103xB
     if (i % 128 == 0) {
       sendLCDCommand(0x10);
-      sendLCDCommand(0x00);
+      sendLCDCommand(0x02);
       sendLCDCommand(i/128 + 0xb0);
     }
 #endif /* STM32F103xB */
     SPItransfer(c);
+    if (clear) {
+      image[i] = 0;
+    }
     i++;
   }
 }
@@ -457,7 +460,7 @@ void Arduboy2Core::blank()
 #ifdef STM32F103xB
     if (i % 128 == 0) {
       sendLCDCommand(0x10);
-      sendLCDCommand(0x00);
+      sendLCDCommand(0x02);
       sendLCDCommand(i/128 + 0xb0);
     }
 #endif /* STM32F103xB */
