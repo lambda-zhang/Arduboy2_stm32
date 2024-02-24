@@ -19,10 +19,6 @@ With the DevKit only one part is played.
 #include <Arduboy2.h>
 #include <ArduboyPlaytune.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 // 2 Part Inventions No. 3 - J.S. Bach
 const byte score[] PROGMEM = {
  2,154, 0x90,62, 0,166, 0x90,64, 0,166, 0x90,66, 0,166, 0x90,64, 0,166,
@@ -196,7 +192,3 @@ void loop()
   if (!tunes.playing())
     tunes.playScore(score);
 }
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */

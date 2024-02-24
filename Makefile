@@ -32,8 +32,25 @@ APP_ARDUBOY3D ?= 0
 APP_SHADOWRUNNER ?= 0
 APP_MYSTICBALLOON ?= 0
 APP_ARDUBOYTETRIS ?= 0
-
-APP_DEFS =
+APP_BUBBLEPOP ?= 0
+APP_DUNGEONS ?= 0
+APP_ESCAPERDROID ?= 0
+APP_BLOBATTACK ?= 0
+APP_BEGEMMED ?= 0
+APP_RMH ?= 0
+APP_ECOMD ?= 0
+APP_TROLLYFISH ?= 0
+APP_DICEOFFATE ?= 0
+APP_VIRUSLQP79 ?= 0
+APP_SIRENE ?= 0
+APP_PINBALL ?= 0
+APP_ARDUVENTURE ?= 0
+APP_HELMETSHORDES ?= 0
+APP_FANTASYRAMPAGE ?= 0
+APP_OUTPOSTDEFENSE ?= 0
+APP_SUNFIRE ?= 0
+APP_EEPROMTOOL ?= 0
+APP_DARKANDUNDER ?= 0
 
 
 ######################################
@@ -95,51 +112,41 @@ lib/Arduino/EEPROM.cpp \
 lib/Arduino/Arduino.cpp \
 lib/Arduino/Print.cpp \
 lib/Arduino/Arduino_bsp_stm32f104c8t6.cpp \
+lib/Arduino/HardwareSerial.cpp \
 Core/Src/Arduboy2_app.cpp
 
 ifeq ($(APP_ARDUBREAKOUT), 1)
-APP_DEFS = -DAPP_ARDUBREAKOUT
 CPP_SOURCE += examples/ArduBreakout.cpp
 endif
 ifeq ($(APP_BEEPDEMO), 1)
-APP_DEFS = -DAPP_BEEPDEMO
 CPP_SOURCE += examples/BeepDemo.cpp
 endif
 ifeq ($(APP_BUTTONS), 1)
-APP_DEFS = -DAPP_BUTTONS
 CPP_SOURCE += examples/Buttons.cpp
 endif
 ifeq ($(APP_FONTDEMO), 1)
-APP_DEFS = -DAPP_FONTDEMO
 CPP_SOURCE += examples/FontDemo.cpp
 endif
 ifeq ($(APP_HELLOWORLD), 1)
-APP_DEFS = -DAPP_HELLOWORLD
 CPP_SOURCE += examples/HelloWorld.cpp
 endif
 ifeq ($(APP_RGBLED), 1)
-APP_DEFS = -DAPP_RGBLED
 CPP_SOURCE += examples/RGBled.cpp
 endif
 ifeq ($(APP_SETSYSTEMEEPROM), 1)
-APP_DEFS = -DAPP_SETSYSTEMEEPROM
 CPP_SOURCE += examples/SetSystemEEPROM.cpp
 endif
 ifeq ($(APP_PLAYTUNE), 1)
-APP_DEFS = -DAPP_PLAYTUNE
 CPP_SOURCE += lib/ArduboyPlaytune/src/ArduboyPlaytune.cpp
 CPP_SOURCE += examples/PlayTune.cpp
 endif
 ifeq ($(APP_RUND), 1)
-APP_DEFS = -DAPP_RUND
-CPP_SOURCE += examples/rund.cpp
+CPP_SOURCE += examples/arduboy-rund-ino/rund/rund.cpp
 endif
 ifeq ($(APP_HALLOWEEND), 1)
-APP_DEFS = -DAPP_HALLOWEEND
-CPP_SOURCE += examples/halloweend.cpp
+CPP_SOURCE += examples/arduboy-rund-ino/halloweend/halloweend.cpp
 endif
 ifeq ($(APP_ARDYNIA), 1)
-APP_DEFS = -DAPP_ARDYNIA
 CPP_SOURCE += lib/ArduboyPlaytune/src/ArduboyPlaytune.cpp
 CPP_SOURCE += examples/ardynia/src/drawBitmap.cpp \
 	examples/ardynia/src/entity.cpp \
@@ -177,7 +184,6 @@ CPP_SOURCE += examples/ardynia/src/drawBitmap.cpp \
 	examples/ardynia/ardynia.cpp
 endif
 ifeq ($(APP_CASTLEBOY), 1)
-APP_DEFS = -DAPP_CASTLEBOY
 CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
 CPP_SOURCE += examples/CastleBoy/CastleBoy/entity.cpp \
 	examples/CastleBoy/CastleBoy/game.cpp \
@@ -188,12 +194,10 @@ CPP_SOURCE += examples/CastleBoy/CastleBoy/entity.cpp \
 	examples/CastleBoy/CastleBoy/CastleBoy.cpp
 endif
 ifeq ($(APP_FLAPPYBALL), 1)
-APP_DEFS = -DAPP_FLAPPYBALL
 CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
 CPP_SOURCE += examples/FlappyBall/FlappyBall.cpp
 endif
 ifeq ($(APP_ARDUBOY3D), 1)
-APP_DEFS = -DAPP_ARDUBOY3D
 CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
 CPP_SOURCE += examples/Arduboy3D/Source/Arduboy3D/Draw.cpp \
 	examples/Arduboy3D/Source/Arduboy3D/Enemy.cpp \
@@ -211,20 +215,104 @@ CPP_SOURCE += examples/Arduboy3D/Source/Arduboy3D/Draw.cpp \
 	examples/Arduboy3D/Source/Arduboy3D/Arduboy3D.cpp
 endif
 ifeq ($(APP_SHADOWRUNNER), 1)
-APP_DEFS = -DAPP_SHADOWRUNNER
 CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
 CPP_SOURCE += examples/ID-15-Shadow-Runner/SHRUN_AB/SHRUN_AB.cpp
 endif
 ifeq ($(APP_MYSTICBALLOON), 1)
-APP_DEFS = -DAPP_MYSTICBALLOON
 CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
 CPP_SOURCE += examples/ID-34-Mystic-Balloon/MYBL_AB/MYBL_AB.cpp
 endif
 ifeq ($(APP_ARDUBOYTETRIS), 1)
-APP_DEFS = -DAPP_ARDUBOYTETRIS
 CPP_SOURCE += examples/ArduboyTetris/Background.cpp \
 	examples/ArduboyTetris/Piece.cpp \
 	examples/ArduboyTetris/Tetris.cpp
+endif
+ifeq ($(APP_BUBBLEPOP), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/ID-14-Bubble-PoP/BPOP_AB/BPOP_AB.cpp
+endif
+ifeq ($(APP_DUNGEONS), 1)
+CPP_SOURCE += examples/ID-10-Dungeons/DUN_AB/DUN_AB.cpp
+endif
+ifeq ($(APP_ESCAPERDROID), 1)
+CPP_SOURCE += examples/ID-20-Escaper-Droid/ESCD_AB/ESCD_AB.cpp
+endif
+ifeq ($(APP_BLOBATTACK), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/ID-28-Blob-Attack/BLBA_AB/BLBA_AB.cpp
+endif
+ifeq ($(APP_BEGEMMED), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/ID-30-BEGEMMED/BGEM_AB/BGEM_AB.cpp
+endif
+ifeq ($(APP_RMH), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/ID-31-RMH/RMH_AB/RMH_AB.cpp
+endif
+ifeq ($(APP_ECOMD), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/ID-33-ECOMD/ECOMD_AB/ECOMD_AB.cpp
+endif
+ifeq ($(APP_TROLLYFISH), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/ID-36-Trolly-Fish/FISH_AB/FISH_AB.cpp
+endif
+ifeq ($(APP_DICEOFFATE), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/ID-37-DICE-of-FATE/DICE_AB/DICE_AB.cpp
+endif
+ifeq ($(APP_VIRUSLQP79), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/ID-40-VIRUS-LQP-79/VLQP_AB/VLQP_AB.cpp \
+	examples/ID-40-VIRUS-LQP-79/VLQP_AB/bullet.cpp \
+	examples/ID-40-VIRUS-LQP-79/VLQP_AB/door.cpp \
+	examples/ID-40-VIRUS-LQP-79/VLQP_AB/elements.cpp \
+	examples/ID-40-VIRUS-LQP-79/VLQP_AB/enemies.cpp \
+	examples/ID-40-VIRUS-LQP-79/VLQP_AB/game.cpp \
+	examples/ID-40-VIRUS-LQP-79/VLQP_AB/globals.cpp \
+	examples/ID-40-VIRUS-LQP-79/VLQP_AB/level.cpp \
+	examples/ID-40-VIRUS-LQP-79/VLQP_AB/menu.cpp \
+	examples/ID-40-VIRUS-LQP-79/VLQP_AB/pickup.cpp \
+	examples/ID-40-VIRUS-LQP-79/VLQP_AB/player.cpp
+endif
+ifeq ($(APP_SIRENE), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/ID-42-Sirene/SRN_AB/SRN_AB.cpp
+endif
+ifeq ($(APP_PINBALL), 1)
+CPP_SOURCE += examples/ID-44-Pinball/PNBL_AB/PNBL_AB.cpp
+endif
+ifeq ($(APP_ARDUVENTURE), 1)
+CPP_SOURCE += examples/ID-46-Arduventure/ARDU_AB/ARDU_AB.cpp
+endif
+ifeq ($(APP_HELMETSHORDES), 1)
+CPP_SOURCE += examples/ID-47-Helmets-Hordes/HEHO_AB/HEHO_AB.cpp
+endif
+ifeq ($(APP_FANTASYRAMPAGE), 1)
+CPP_SOURCE += examples/ID-48-Fantasy-Rampage/FRMP_AB/FRMP_AB.cpp
+endif
+ifeq ($(APP_OUTPOSTDEFENSE), 1)
+CPP_SOURCE += examples/ID-49-Outpost-Defense/OPDE_AB/OPDE_AB.cpp
+endif
+ifeq ($(APP_SUNFIRE), 1)
+CPP_SOURCE += examples/ID-50-Sunfire/SUNF_AB/SUNF_AB.cpp
+endif
+ifeq ($(APP_EEPROMTOOL), 1)
+CPP_SOURCE += examples/ID-51-EEPROM-TOOL/ERTL_AB/ERTL_AB.cpp
+endif
+ifeq ($(APP_DARKANDUNDER), 1)
+CPP_SOURCE += examples/Dark-And-Under/Dark-And-Under/src/controllers/BaseController.cpp \
+	examples/Dark-And-Under/Dark-And-Under/src/controllers/EnemyController.cpp \
+	examples/Dark-And-Under/Dark-And-Under/src/controllers/PlayerController.cpp \
+	examples/Dark-And-Under/Dark-And-Under/src/entities/Base.cpp \
+	examples/Dark-And-Under/Dark-And-Under/src/entities/Enemy.cpp \
+	examples/Dark-And-Under/Dark-And-Under/src/entities/Item.cpp \
+	examples/Dark-And-Under/Dark-And-Under/src/entities/Player.cpp \
+	examples/Dark-And-Under/Dark-And-Under/src/fonts/Font3x5.cpp \
+	examples/Dark-And-Under/Dark-And-Under/src/levels/Level.cpp \
+	examples/Dark-And-Under/Dark-And-Under/src/utils/Arduboy2Ext.cpp \
+	examples/Dark-And-Under/Dark-And-Under/src/utils/EnemyNames.cpp \
+	examples/Dark-And-Under/Dark-And-Under/Dark-And-Under.cpp
 endif
 
 # ASM sources
@@ -285,9 +373,6 @@ C_DEFS =  \
 CPP_DEFS =  \
 -DUSE_HAL_DRIVER \
 -DSTM32F103xB
-
-C_DEFS += $(APP_DEFS)
-CPP_DEFS += $(APP_DEFS)
 
 # AS includes
 AS_INCLUDES = 

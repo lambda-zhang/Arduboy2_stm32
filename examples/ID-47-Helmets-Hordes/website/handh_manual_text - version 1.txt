@@ -1,0 +1,35 @@
+Helmets & Hordes
+Instruction Manual Text
+Graham Schneider
+UPDATED: 09-JUNE-2017
+
+Life in Middangeard was never easy, but the arrival of marauding hordes of Orcs has changed everything. But where some see only chaos and strife, others see opportunity! What's an unscrupulous treasure hunter to do? Why, take the battle to the bandits and claim their spoils as your own, of course!
+
+Game Play
+---------------
+Use the A Button to swing your Longsword or Dagger, or to activate a Helmet's special power.
+Use the B Button or the Left Arrow to jump over obstacles and enemies. Pressing the A Button in midair will allow you to perform a downward slash when equipped with a Longsword or Dagger.
+Press either the Up, Down or Right Arrow to pause the game.
+
+Player
+---------
+Helena: a fearless warrior and treasure hunter out to make her fortune. First stop - the darkened halls of the Orcish Warlords!
+
+Items
+---------
+Gold Bars: everyone knows you need a little bit of gold to get by in this world - and Helena aims to get by a little better than most!
+Helmets: the Orcs have stolen a cache of magical relics in the form of mystical Helmets that grant their wearer bizarre and potent abilities. The only problem is, they can't fit these human-sized Helmets on over their big ears! Use their ill-gotten gains against them to carve a swath of slaughter!
+Treasure Chests: having no use for their store of arcane headwear, the Orcs have sealed them all away in various treasure chests strewn throughout their darkened halls. Pop one open to harness the power of the magical Helmet hiding inside!
+Dagger: while lacking the reach of a good Longsword, this bite-sized blade is still handy in a pinch. Don't get caught without one!
+Longsword: reach and reliability make this blade the weapon of choice for bandits, brigands and brave battlers alike!
+Armour: your best defence against the piercing pikes of the pitiless, pillaging Orcs.
+
+Enemies & Hazards
+---------
+Orc Raiders: rough and tumble footsoldiers who are always spoiling for a scrap. They may be unarmed, but watch out - they pack a powerful punch!
+Orc Spearmen: these battle-hardened brutes bare down on their foes with unflinching ferocity and a killer reach. To jump or not to jump? Choose wisely!
+Bad Flame: the Orcish Warlords and their marauding hordes occupy what was once the seat of a great and malevolent spirit. The last vestiges of its sinister power spit and sputter forth from the darkness through the very elements themselves.
+Bad Weed: the site of an ancient evil can only bear witness to so many blood sacrifices before the roots that drink them in grow... foul.
+Stone Heads: these graven idols were carved into standing stones that have stood watch over these darkened halls since time immemorial. They sling contemptuous curses at those passing by - that is, once they're all out of arrows... 
+Spikes: the hordes of the Orcish Warlords have booby-trapped their new stomping grounds with these perilous pins - be ready to jump! 
+

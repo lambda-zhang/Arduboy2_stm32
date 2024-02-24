@@ -7,7 +7,7 @@
 
 #define TIMER_AMOUNT 48
 
-static void checkInputs()
+void checkInputs()
 {
   if (kid.balloons <= 0)
     return; // Cannot control player if dead

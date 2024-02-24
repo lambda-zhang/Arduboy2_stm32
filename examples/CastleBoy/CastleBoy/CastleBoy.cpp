@@ -4,10 +4,6 @@
 #include "game.h"
 #include "assets.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 uint8_t bootCounter = 0;
 
 void setup()
@@ -57,7 +53,3 @@ void loop()
   }
   ab.display();
 }
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */

@@ -18,7 +18,7 @@ byte cont = 0;
 
 extern void drawNumbers(byte numbersX, byte numbersY, byte fontType, byte data);
 
-static void drawTitleScreen()
+void drawTitleScreen()
 {
   if (arduboy.everyXFrames(8))blinkingFrames = (++blinkingFrames) % 32;
   for (byte i = 0; i < 4; i++) sprites.drawSelfMasked(32 * i, 0, titleScreen, i);
@@ -29,7 +29,7 @@ static void drawTitleScreen()
   sprites.drawSelfMasked(109, 34, rightGuyEyes, pgm_read_byte(&blinkingEyesRightGuy[blinkingFrames]));
 }
 
-static void stateMenuIntro()
+void stateMenuIntro()
 {
   globalCounter++;
   if (globalCounter < 160)
@@ -47,7 +47,7 @@ static void stateMenuIntro()
   }
 }
 
-static void stateMenuMain()
+void stateMenuMain()
 {
 
   drawTitleScreen();
@@ -70,7 +70,7 @@ static void stateMenuMain()
   sprites.drawPlusMask(46, 9 + 9 * (menuSelection - 2), selector_plus_mask, 0);
 }
 
-static void stateMenuHelp()
+void stateMenuHelp()
 {
   for (byte i = 0; i < 2; i++) sprites.drawSelfMasked(32, 32 * i, qrcode, i);
   if (arduboy.justPressed(A_BUTTON | B_BUTTON))
@@ -81,7 +81,7 @@ static void stateMenuHelp()
 }
 
 
-static void stateMenuInfo()
+void stateMenuInfo()
 {
   sprites.drawSelfMasked(43, 2, badgeMysticBalloon, 0);
   sprites.drawSelfMasked(37, 0, stars, sparkleFrames);
@@ -104,7 +104,7 @@ static void stateMenuInfo()
   }
 }
 
-static void stateMenuSoundfx()
+void stateMenuSoundfx()
 {
   drawTitleScreen();
   sprites.drawOverwrite(51, 9, soundMenu, 0);
@@ -123,7 +123,7 @@ static void stateMenuSoundfx()
   }
 }
 
-static void stateMenuPlaySelect()
+void stateMenuPlaySelect()
 {
   drawTitleScreen();
   sprites.drawOverwrite(53, 18, continueMenu, 0);

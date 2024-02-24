@@ -2,10 +2,6 @@
 #include "Piece.h"
 #include "Background.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 static Arduboy2 arduboy;
 
 static const int BOARD_HEIGHT = 22;
@@ -412,7 +408,3 @@ void loop() {
   manageGame();
   drawFrame();
 }
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */

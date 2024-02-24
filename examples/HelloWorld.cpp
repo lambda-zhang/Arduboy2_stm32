@@ -13,10 +13,6 @@ version 2.1 of the License, or (at your option) any later version.
 
 #include <Arduboy2.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 // make an instance of arduboy used for many functions
 static Arduboy2 arduboy;
 
@@ -53,7 +49,3 @@ void loop() {
   // then we finally we tell the arduboy to display what we just wrote to the display
   arduboy.display();
 }
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */

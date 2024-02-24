@@ -71,31 +71,31 @@ struct HighRect
     int height;
 };
 
-static Arduboy2Base arduboy;
-static Sprites sprites;
-static ArduboyTones sound(arduboy.audio.enabled);
+Arduboy2Base arduboy;
+Sprites sprites;
+ArduboyTones sound(arduboy.audio.enabled);
 
-static byte gameState = STATE_MENU_INTRO;   // start the game with the TEAM a.r.g. logo
-static byte menuSelection = STATE_MENU_PLAY; // PLAY menu item is pre-selected
-static byte globalCounter = 0;
-static byte level;
-static unsigned long scorePlayer;
-static byte coinsCollected = 0;
-static byte totalCoins = 0;
-static byte balloonsLeft;
+byte gameState = STATE_MENU_INTRO;   // start the game with the TEAM a.r.g. logo
+byte menuSelection = STATE_MENU_PLAY; // PLAY menu item is pre-selected
+byte globalCounter = 0;
+byte level;
+unsigned long scorePlayer;
+byte coinsCollected = 0;
+byte totalCoins = 0;
+byte balloonsLeft;
 
-static boolean nextLevelIsVisible;
-static boolean scoreIsVisible;
-static boolean canPressButton;
-static boolean pressKeyIsVisible;
+boolean nextLevelIsVisible;
+boolean scoreIsVisible;
+boolean canPressButton;
+boolean pressKeyIsVisible;
 
-static byte walkerFrame = 0;
-static byte fanFrame = 0;
-static byte coinFrame = 0;
-static byte coinsActive = 0;
-static vec2 levelExit = vec2(0, 0);
-static vec2 startPos;
-static byte mapTimer = 10;
+byte walkerFrame = 0;
+byte fanFrame = 0;
+byte coinFrame = 0;
+byte coinsActive = 0;
+vec2 levelExit = vec2(0, 0);
+vec2 startPos;
+byte mapTimer = 10;
 
 void loadSetEEPROM()
 {

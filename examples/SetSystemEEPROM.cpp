@@ -68,10 +68,6 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <Arduboy2.h>
 #include <EEPROM.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 // The frame rate determines the button auto-repeat rate for unit name entry
 constexpr uint8_t frameRate = 10;
 
@@ -1263,7 +1259,3 @@ int centerStr2_P(const char* str) {
 int rightStr_P(const char* str) {
   return WIDTH - (strlen_P(str) * charWidth) + charSpacing;
 }
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */

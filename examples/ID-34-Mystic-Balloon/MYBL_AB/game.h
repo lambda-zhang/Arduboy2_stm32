@@ -17,7 +17,7 @@ PROGMEM const byte tones[] = {
 
 byte toneindex = 0;
 
-static void stateMenuPlayNew()
+void stateMenuPlayNew()
 {
   level = LEVEL_TO_START_WITH - 1;
   coinsCollected = 0;
@@ -32,7 +32,7 @@ static void stateMenuPlayNew()
   pressKeyIsVisible = false;
 }
 
-static void stateMenuPlayContinue()
+void stateMenuPlayContinue()
 {
   level = EEPROM.read(OFFSET_LEVEL);
   totalCoins = EEPROM.read(OFFSET_COINS);
@@ -49,7 +49,7 @@ static void stateMenuPlayContinue()
 }
 
 
-static void stateGameNextLevel()
+void stateGameNextLevel()
 {
   //if (level < TOTAL_LEVELS)
   //{
@@ -142,7 +142,7 @@ static void stateGameNextLevel()
 };
 
 
-static void stateGamePlaying()
+void stateGamePlaying()
 {
   checkInputs();
   checkKid();
@@ -158,7 +158,7 @@ static void stateGamePlaying()
 }
 
 
-static void stateGamePause()
+void stateGamePause()
 {
   sprites.drawSelfMasked(47, 17, badgePause, 0);
   if (arduboy.justPressed(A_BUTTON | B_BUTTON))
@@ -168,7 +168,7 @@ static void stateGamePause()
 }
 
 
-static void stateGameOver()
+void stateGameOver()
 {
   byte x = 35 + 12;
   if (level < TOTAL_LEVELS)

@@ -7,6 +7,9 @@
 #include <EEPROM.h>
 
 #include "Arduino_bsp_stm32f104c8t6.h"
+#include "HardwareSerial.h"
+
+extern HardwareSerial Serial;
 
 #undef AB_DEVKIT
 #define ARDUBOY_10 YES
@@ -27,6 +30,8 @@ void ltoa(long n, char s[], int base);
 
 typedef uint8_t byte;
 typedef bool boolean;
+
+#define PI               3.14159265358979f
 
 #define _BV(bit) (1 << (bit))
 #define LOW 0
@@ -91,6 +96,8 @@ typedef bool boolean;
 #define pgm_read_dword(addr) (*(const unsigned long *)(addr))
 #define pgm_read_float(addr) (*(const float *)(addr))
 #define pgm_read_ptr(addr) (*(const void **)(addr))
+
+#define pgm_read_byte_near(addr) pgm_read_byte(addr)
 
 #define B0 0
 #define B00 0

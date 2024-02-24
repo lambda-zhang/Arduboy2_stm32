@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+volatile uint8_t ubrrh;
+volatile uint8_t ubrrl;
+volatile uint8_t ucsra;
+volatile uint8_t ucsrb;
+volatile uint8_t ucsrc;
+volatile uint8_t udr;
+HardwareSerial Serial(&ubrrh, &ubrrl, &ucsra, &ucsrb, &ucsrc, &udr);
+
 void randomSeed(int a)
 {
 	srand(a);

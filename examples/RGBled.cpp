@@ -18,10 +18,6 @@ this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
 #include <Arduboy2.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 // The frame rate determines the button auto-repeat rate
 #define FRAME_RATE 25
 
@@ -387,6 +383,3 @@ void printValue(byte val) {
   arduboy.print(val, HEX);
 }
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */

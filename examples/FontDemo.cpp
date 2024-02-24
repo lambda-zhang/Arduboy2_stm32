@@ -30,10 +30,6 @@ this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
 #include <Arduboy2.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 static Arduboy2 arduboy;
 
 constexpr uint8_t charWidth = arduboy.getCharacterWidth() + arduboy.getCharacterSpacing();
@@ -129,7 +125,3 @@ void loop() {
     
   arduboy.display();
 }
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */

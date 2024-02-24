@@ -10,6 +10,7 @@
 extern uint8_t *eepromPtr;
 
 struct EEPROMClass {
+	uint16_t length(void);
 	uint8_t read(int idx);
 	void write(int idx, uint8_t val);
 	void update(int idx, uint8_t val);

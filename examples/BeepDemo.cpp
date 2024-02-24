@@ -22,10 +22,6 @@ this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 // There's no need to #include <Arduboy2Beep.h>
 // It will be included in Arduboy2.h
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 static Arduboy2 arduboy;
 
 static BeepPin1 beep; // Create a class instance for speaker pin 1
@@ -144,7 +140,3 @@ void commandText(const char* text) {
   strncpy(displayText, text, sizeof displayText);
   displayText[sizeof displayText - 1] = '\0';
 }
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */

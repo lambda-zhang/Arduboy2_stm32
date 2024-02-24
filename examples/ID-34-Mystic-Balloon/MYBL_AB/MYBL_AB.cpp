@@ -23,10 +23,6 @@
 #include "elements.h"
 #include "levels.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 typedef void (*FunctionPointer) ();
 
 const FunctionPointer PROGMEM  mainGameLoop[] = {
@@ -62,6 +58,3 @@ void loop() {
   arduboy.display();
 }
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */

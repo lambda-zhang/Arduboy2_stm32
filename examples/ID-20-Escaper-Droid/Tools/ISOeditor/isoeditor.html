@@ -1,0 +1,1918 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script src="jquery2-1-4.js"></script>
+<link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+<script src="jquery-ui/jquery-ui.js"></script>
+<script src="jqueryRotateCompressed.2.2.js" type="text/javascript"></script>
+<script src="jquery-simulate.js" type="text/javascript"></script>
+	<style>
+        table{
+        border-collapse:collapse;
+        margin:0 auto;
+        }
+        td{
+            min-width: 16px;
+            height: 16px;
+        }
+        button{
+            border:1px solid #000000;
+            background-color:#2e456e;
+            color:#ffffff;
+            cursor:pointer;
+            position: relative;
+        }
+        img{
+            position: absolute;
+        }
+        .changeImage{
+            width: 80px;
+        }
+        .left{
+            width: 110px;
+        }
+        .right{
+            width: 25px;
+        }
+        .box{
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            cursor: move;
+        }
+        .box > label{
+            position: absolute;
+            left: 50px;
+        }
+        .line{
+            width: 100px;
+            height: 2px;
+            position: absolute;
+            background-color: #00969C;
+        }
+        .imgtablesmall{
+             margin-top: -13px;
+        }
+        #objtable td{
+             padding-top: 8px;
+             padding-right: 5px;
+        }
+    </style>
+    <script type="text/javascript">
+        var xOffset = {N:25, E:50, S:25, W:0};
+        var yOffset = {N:0, E:25, S:50, W:25};
+        var posTableX = [
+                            48,//51, 
+                            36,//39,
+                            24,//27,
+                            12,//15,
+                            0, // 3,
+                            60,//63,
+                            48,//51,
+                            36,//39,
+                            24,//27,
+                            12,//15,
+                            72,//75,
+                            60,//63,
+                            48,//51,
+                            36,//39,
+                            24,//27,
+                            84,//87,
+                            72,//75,
+                            60,//63,
+                            48,//51,
+                            36,//39,
+                            96,//99,
+                            84,//87,
+                            72,//75,
+                            60,//63,
+                            48,//51,
+                        ];
+        var posTableY = [
+                            43,//41, 
+                            49,//47,
+                            55,//53,
+                            61,//59,
+                            67,//65,
+                            49,//47,
+                            55,//53,
+                            61,//59,
+                            67,//65,
+                            73,//71,
+                            55,//53,
+                            61,//59,
+                            67,//65,
+                            73,//71,
+                            79,//77,
+                            61,//59,
+                            67,//65,
+                            73,//71,
+                            79,//77,
+                            85,//83,
+                            67,//65,
+                            73,//71,
+                            79,//77,
+                            85,//83,
+                            91,//89,
+                        ];
+
+        var rooms = [
+            {empty:'empty'},
+            {
+                doorNorthTo:'', 
+                doorEastTo:'', 
+                doorSouthTo:'', 
+                doorWestTo:'', 
+                doorNorthStatus:'', 
+                doorEastStatus:'', 
+                doorSouthStatus:'', 
+                doorWestStatus:'', 
+                type1:1, 
+                type2:1, 
+                type3:1, 
+                type4:1, 
+                type5:1, 
+                type6:1, 
+                type7:1, 
+                type8:1,
+                pos1:'',
+                pos2:'',
+                pos3:'',
+                pos4:'',
+                pos5:'',
+                pos6:'',
+                pos7:'',
+                pos8:'',
+                status1: 'off',
+                status2: 'off',
+                status3: 'off',
+                status4: 'off',
+                status5: 'off',
+                status6: 'off',
+                status7: 'off',
+                status8: 'off',  
+            }
+        ];
+        /*var rooms = [
+            {empty:'empty'},
+            {
+                doorNorthTo:'2', 
+                doorEastTo:'3', 
+                doorSouthTo:'4', 
+                doorWestTo:'5', 
+                doorNorthStatus:'open', 
+                doorEastStatus:'open', 
+                doorSouthStatus:'open', 
+                doorWestStatus:'open', 
+                type1:1, 
+                type2:1, 
+                type3:1, 
+                type4:1, 
+                type5:1, 
+                type6:1, 
+                type7:1, 
+                type8:1,
+                pos1:'',
+                pos2:'',
+                pos3:'',
+                pos4:'',
+                pos5:'',
+                pos6:'',
+                pos7:'',
+                pos8:'',
+                status1: 'off',
+                status2: 'off',
+                status3: 'off',
+                status4: 'off',
+                status5: 'off',
+                status6: 'off',
+                status7: 'off',
+                status8: 'off',  
+            },
+            {
+                doorNorthTo:'', 
+                doorEastTo:'', 
+                doorSouthTo:'1', 
+                doorWestTo:'', 
+                doorNorthStatus:'', 
+                doorEastStatus:'', 
+                doorSouthStatus:'open', 
+                doorWestStatus:'', 
+                type1:1, 
+                type2:1, 
+                type3:1, 
+                type4:1, 
+                type5:1, 
+                type6:1, 
+                type7:1, 
+                type8:1,
+                pos1:'',
+                pos2:'',
+                pos3:'',
+                pos4:'',
+                pos5:'',
+                pos6:'',
+                pos7:'',
+                pos8:'',  
+                status1: 'off',
+                status2: 'off',
+                status3: 'off',
+                status4: 'off',
+                status5: 'off',
+                status6: 'off',
+                status7: 'off',
+                status8: 'off',  
+            },
+            {
+                doorNorthTo:'', 
+                doorEastTo:'', 
+                doorSouthTo:'', 
+                doorWestTo:'1', 
+                doorNorthStatus:'', 
+                doorEastStatus:'', 
+                doorSouthStatus:'', 
+                doorWestStatus:'open', 
+                type1:1, 
+                type2:1, 
+                type3:1, 
+                type4:1, 
+                type5:1, 
+                type6:1, 
+                type7:1, 
+                type8:1,
+                pos1:'',
+                pos2:'',
+                pos3:'',
+                pos4:'',
+                pos5:'',
+                pos6:'',
+                pos7:'',
+                pos8:'',  
+                status1: 'off',
+                status2: 'off',
+                status3: 'off',
+                status4: 'off',
+                status5: 'off',
+                status6: 'off',
+                status7: 'off',
+                status8: 'off',  
+            },
+            {
+                doorNorthTo:'1', 
+                doorEastTo:'', 
+                doorSouthTo:'6', 
+                doorWestTo:'', 
+                doorNorthStatus:'open', 
+                doorEastStatus:'', 
+                doorSouthStatus:'open', 
+                doorWestStatus:'', 
+                type1:1, 
+                type2:1, 
+                type3:1, 
+                type4:1, 
+                type5:1, 
+                type6:1, 
+                type7:1, 
+                type8:1,
+                pos1:'',
+                pos2:'',
+                pos3:'',
+                pos4:'',
+                pos5:'',
+                pos6:'',
+                pos7:'',
+                pos8:'',  
+                status1: 'off',
+                status2: 'off',
+                status3: 'off',
+                status4: 'off',
+                status5: 'off',
+                status6: 'off',
+                status7: 'off',
+                status8: 'off',  
+            },
+            {
+                doorNorthTo:'', 
+                doorEastTo:'1', 
+                doorSouthTo:'', 
+                doorWestTo:'', 
+                doorNorthStatus:'', 
+                doorEastStatus:'open', 
+                doorSouthStatus:'', 
+                doorWestStatus:'', 
+                type1:1, 
+                type2:1, 
+                type3:1, 
+                type4:1, 
+                type5:1, 
+                type6:1, 
+                type7:1, 
+                type8:1,
+                pos1:'',
+                pos2:'',
+                pos3:'',
+                pos4:'',
+                pos5:'',
+                pos6:'',
+                pos7:'',
+                pos8:'',  
+                status1: 'off',
+                status2: 'off',
+                status3: 'off',
+                status4: 'off',
+                status5: 'off',
+                status6: 'off',
+                status7: 'off',
+                status8: 'off',  
+            },
+            {
+                doorNorthTo:'4', 
+                doorEastTo:'', 
+                doorSouthTo:'', 
+                doorWestTo:'', 
+                doorNorthStatus:'open', 
+                doorEastStatus:'', 
+                doorSouthStatus:'', 
+                doorWestStatus:'', 
+                type1:1, 
+                type2:1, 
+                type3:1, 
+                type4:1, 
+                type5:1, 
+                type6:1, 
+                type7:1, 
+                type8:1,
+                pos1:'',
+                pos2:'',
+                pos3:'',
+                pos4:'',
+                pos5:'',
+                pos6:'',
+                pos7:'',
+                pos8:'',  
+                status1: 'off',
+                status2: 'off',
+                status3: 'off',
+                status4: 'off',
+                status5: 'off',
+                status6: 'off',
+                status7: 'off',
+                status8: 'off',  
+            },
+        ];*/
+
+        function numericOnly(input){
+            input.value = input.value.replace(/[^0-9]*$/, "")
+        }
+
+        function makeBoxesDraggable(){
+            var dragElems = $(".box").draggable({ delay: 0, distance: 0, containment: "parent"},{
+                start: function(){
+                    drawRoomGetInfo(this);
+                    $('.changeImage').trigger('change');
+                },
+                drag: function(){
+                    var curBox = $(this).attr('id').slice(3);
+                    if(rooms[curBox]['doorNorthTo'] !== ''){
+                        if(rooms[rooms[curBox]['doorNorthTo']]['doorNorthTo'] === curBox){var secDoor= 'N';}
+                        if(rooms[rooms[curBox]['doorNorthTo']]['doorEastTo'] === curBox){var secDoor= 'E';}
+                        if(rooms[rooms[curBox]['doorNorthTo']]['doorSouthTo'] === curBox){var secDoor= 'S';}
+                        if(rooms[rooms[curBox]['doorNorthTo']]['doorWestTo'] === curBox){var secDoor= 'W';}
+
+                        var x1 = $(this).offset().left + 25;
+                        var x2 = $("#box"+rooms[curBox]['doorNorthTo']).offset().left + xOffset[secDoor];
+                        var y1 = $(this).offset().top + 0;
+                        var y2 = $("#box"+rooms[curBox]['doorNorthTo']).offset().top + yOffset[secDoor];
+    
+                        var hypotenuse = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+                        var angle = Math.atan2((y1-y2), (x1-x2)) * (180/Math.PI);
+                        if(angle >= 90 && angle < 180){
+                            y1 = y1 - (y1-y2);
+                        }
+                        if(angle > 0 && angle < 90){
+                            x1 = x1 - (x1-x2);
+                            y1 = y1 - (y1-y2);
+                        }
+                        if(angle <= 0 && angle > -90){
+                            x1 = x1 - (x1-x2);
+                        }
+
+                        $(".line[fromRoom='"+curBox+"'][toRoom='"+rooms[curBox]['doorNorthTo']+"'], .line[fromRoomRev='"+curBox+"'][toRoomRev='"+rooms[curBox]['doorNorthTo']+"']").queue(function(){
+                            $(this).offset({top: y1, left: x1});
+                            $(this).dequeue();
+                        }).queue(function(){
+                            $(this).width(hypotenuse);
+                            $(this).dequeue();
+                        }).queue(function(){
+                            $(this).rotate(angle);
+                            $(this).dequeue();
+                        });
+                    }
+
+                    if(rooms[curBox]['doorEastTo'] !== ''){
+                        if(rooms[rooms[curBox]['doorEastTo']]['doorNorthTo'] === curBox){var secDoor= 'N';}
+                        if(rooms[rooms[curBox]['doorEastTo']]['doorEastTo'] === curBox){var secDoor= 'E';}
+                        if(rooms[rooms[curBox]['doorEastTo']]['doorSouthTo'] === curBox){var secDoor= 'S';}
+                        if(rooms[rooms[curBox]['doorEastTo']]['doorWestTo'] === curBox){var secDoor= 'W';}
+
+                        var x1 = $(this).offset().left + 50;
+                        var x2 = $("#box"+rooms[curBox]['doorEastTo']).offset().left + xOffset[secDoor];
+                        var y1 = $(this).offset().top + 25;
+                        var y2 = $("#box"+rooms[curBox]['doorEastTo']).offset().top + yOffset[secDoor];
+    
+                        var hypotenuse = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+                        var angle = Math.atan2((y1-y2), (x1-x2)) * (180/Math.PI);
+                        if(angle >= 90 && angle < 180){
+                            y1 = y1 - (y1-y2);
+                        }
+                        if(angle > 0 && angle < 90){
+                            x1 = x1 - (x1-x2);
+                            y1 = y1 - (y1-y2);
+                        }
+                        if(angle <= 0 && angle > -90){
+                            x1 = x1 - (x1-x2);
+                        }
+
+                        $(".line[fromRoom='"+curBox+"'][toRoom='"+rooms[curBox]['doorEastTo']+"'], .line[fromRoomRev='"+curBox+"'][toRoomRev='"+rooms[curBox]['doorEastTo']+"']").queue(function(){
+                            $(this).offset({top: y1, left: x1});
+                            $(this).dequeue();
+                        }).queue(function(){
+                            $(this).width(hypotenuse);
+                            $(this).dequeue();
+                        }).queue(function(){
+                            $(this).rotate(angle);
+                            $(this).dequeue();
+                        });
+                    }
+
+                    if(rooms[curBox]['doorSouthTo'] !== ''){
+                        if(rooms[rooms[curBox]['doorSouthTo']]['doorNorthTo'] === curBox){var secDoor= 'N';}
+                        if(rooms[rooms[curBox]['doorSouthTo']]['doorEastTo'] === curBox){var secDoor= 'E';}
+                        if(rooms[rooms[curBox]['doorSouthTo']]['doorSouthTo'] === curBox){var secDoor= 'S';}
+                        if(rooms[rooms[curBox]['doorSouthTo']]['doorWestTo'] === curBox){var secDoor= 'W';}
+
+                        var x1 = $(this).offset().left + 25;
+                        var x2 = $("#box"+rooms[curBox]['doorSouthTo']).offset().left + xOffset[secDoor];
+                        var y1 = $(this).offset().top + 50;
+                        var y2 = $("#box"+rooms[curBox]['doorSouthTo']).offset().top + yOffset[secDoor];
+    
+                        var hypotenuse = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+                        var angle = Math.atan2((y1-y2), (x1-x2)) * (180/Math.PI);
+                        if(angle >= 90 && angle < 180){
+                            y1 = y1 - (y1-y2);
+                        }
+                        if(angle > 0 && angle < 90){
+                            x1 = x1 - (x1-x2);
+                            y1 = y1 - (y1-y2);
+                        }
+                        if(angle <= 0 && angle > -90){
+                            x1 = x1 - (x1-x2);
+                        }
+
+                        $(".line[fromRoom='"+curBox+"'][toRoom='"+rooms[curBox]['doorSouthTo']+"'], .line[fromRoomRev='"+curBox+"'][toRoomRev='"+rooms[curBox]['doorSouthTo']+"']").queue(function(){
+                            $(this).offset({top: y1, left: x1});
+                            $(this).dequeue();
+                        }).queue(function(){
+                            $(this).width(hypotenuse);
+                            $(this).dequeue();
+                        }).queue(function(){
+                            $(this).rotate(angle);
+                            $(this).dequeue();
+                        });
+                    }
+
+
+                    if(rooms[curBox]['doorWestTo'] !== ''){
+                        if(rooms[rooms[curBox]['doorWestTo']]['doorNorthTo'] === curBox){var secDoor= 'N';}
+                        if(rooms[rooms[curBox]['doorWestTo']]['doorEastTo'] === curBox){var secDoor= 'E';}
+                        if(rooms[rooms[curBox]['doorWestTo']]['doorSouthTo'] === curBox){var secDoor= 'S';}
+                        if(rooms[rooms[curBox]['doorWestTo']]['doorWestTo'] === curBox){var secDoor= 'W';}
+
+                        var x1 = $(this).offset().left + 0;
+                        var x2 = $("#box"+rooms[curBox]['doorWestTo']).offset().left + xOffset[secDoor];
+                        var y1 = $(this).offset().top + 25;
+                        var y2 = $("#box"+rooms[curBox]['doorWestTo']).offset().top + yOffset[secDoor];
+    
+                        var hypotenuse = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+                        var angle = Math.atan2((y1-y2), (x1-x2)) * (180/Math.PI);
+                        if(angle >= 90 && angle < 180){
+                            y1 = y1 - (y1-y2);
+                        }
+                        if(angle > 0 && angle < 90){
+                            x1 = x1 - (x1-x2);
+                            y1 = y1 - (y1-y2);
+                        }
+                        if(angle <= 0 && angle > -90){
+                            x1 = x1 - (x1-x2);
+                        }
+
+                        $(".line[fromRoom='"+curBox+"'][toRoom='"+rooms[curBox]['doorWestTo']+"'], .line[fromRoomRev='"+curBox+"'][toRoomRev='"+rooms[curBox]['doorWestTo']+"']").queue(function(){
+                            $(this).offset({top: y1, left: x1});
+                            $(this).dequeue();
+                        }).queue(function(){
+                            $(this).width(hypotenuse);
+                            $(this).dequeue();
+                        }).queue(function(){
+                            $(this).rotate(angle);
+                            $(this).dequeue();
+                        });
+                    }
+                }
+            });
+        }
+
+    function linesHelper(){
+        $('.line').remove();
+        $('input[name="conn"]').remove();
+
+        for(var i = 0; i < $('.box').length; i++){
+            var current = document.getElementsByClassName('box')[i];
+            var curid = current.id.slice(3);
+
+            if(rooms[curid]['doorNorthTo'] !== ''){
+                if(rooms[rooms[curid]['doorNorthTo']]['doorNorthTo'] === curid){var toDoor = 1;}
+                if(rooms[rooms[curid]['doorNorthTo']]['doorEastTo'] === curid){var toDoor = 1;}
+                if(rooms[rooms[curid]['doorNorthTo']]['doorSouthTo'] === curid){var toDoor = 1;}
+                if(rooms[rooms[curid]['doorNorthTo']]['doorWestTo'] === curid){var toDoor = 1;}
+                $('body').append("<input name='conn' type='hidden' fromRoom='"+curid+"' toRoom='"+rooms[curid]['doorNorthTo']+"' fromDoor='1' toDoor='"+toDoor+"'>");
+            }
+            if(rooms[curid]['doorEastTo'] !== ''){
+                if(rooms[rooms[curid]['doorEastTo']]['doorNorthTo'] === curid){var toDoor = 1;}
+                if(rooms[rooms[curid]['doorEastTo']]['doorEastTo'] === curid){var toDoor = 1;}
+                if(rooms[rooms[curid]['doorEastTo']]['doorSouthTo'] === curid){var toDoor = 1;}
+                if(rooms[rooms[curid]['doorEastTo']]['doorWestTo'] === curid){var toDoor = 1;}
+                $('body').append("<input name='conn' type='hidden' fromRoom='"+curid+"' toRoom='"+rooms[curid]['doorEastTo']+"' fromDoor='1' toDoor='"+toDoor+"'>");
+            }
+            if(rooms[curid]['doorSouthTo'] !== ''){
+                if(rooms[rooms[curid]['doorSouthTo']]['doorNorthTo'] === curid){var toDoor = 1;}
+                if(rooms[rooms[curid]['doorSouthTo']]['doorEastTo'] === curid){var toDoor = 1;}
+                if(rooms[rooms[curid]['doorSouthTo']]['doorSouthTo'] === curid){var toDoor = 1;}
+                if(rooms[rooms[curid]['doorSouthTo']]['doorWestTo'] === curid){var toDoor = 1;}
+                $('body').append("<input name='conn' type='hidden' fromRoom='"+curid+"' toRoom='"+rooms[curid]['doorSouthTo']+"' fromDoor='1' toDoor='"+toDoor+"'>");
+            }
+            if(rooms[curid]['doorWestTo'] !== ''){
+                if(rooms[rooms[curid]['doorWestTo']]['doorNorthTo'] === curid){var toDoor = 1;}
+                if(rooms[rooms[curid]['doorWestTo']]['doorEastTo'] === curid){var toDoor = 1;}
+                if(rooms[rooms[curid]['doorWestTo']]['doorSouthTo'] === curid){var toDoor = 1;}
+                if(rooms[rooms[curid]['doorWestTo']]['doorWestTo'] === curid){var toDoor = 1;}
+                $('body').append("<input name='conn' type='hidden' fromRoom='"+curid+"' toRoom='"+rooms[curid]['doorWestTo']+"' fromDoor='1' toDoor='"+toDoor+"'>");
+            }
+        }
+
+        for(var j = 0; j < document.getElementsByName('conn').length; j++){
+            var l = document.getElementsByName('conn');
+            $('#draw').append("<div id='line"+(j+1)+"' class='line' fromRoom='"+l[j].getAttribute('fromRoom')+"' toRoom='"+l[j].getAttribute('toRoom')+"' fromRoomRev='"+l[j].getAttribute('toRoom')+"' toRoomRev='"+l[j].getAttribute('fromRoom')+"'></div>");
+        }
+    }
+    function connectLines(){
+        for(var a = 0; a < $('.box').length; a++){
+            $('#box'+a).simulate('drag');
+        }
+    }
+
+    function editRoom(){
+        if(/*$.isNumeric($('#roomnumber').val()) && */$('#roomnumber').val() !== ''){
+            var room = $('#roomnumber').val();
+            var newn = $('#newnorth').val();
+            var newe = $('#neweast').val();
+            var news = $('#newsouth').val();
+            var neww = $('#newwest').val();
+            var stat = [];
+
+            if($('#closednorth').is(":checked") && newn !== ''){var statnorth = 'closed';}
+            if(!$('#closednorth').is(":checked") && newn !== ''){var statnorth = 'open';}
+            if($('#closedeast').is(":checked") && newe !== ''){var stateast = 'closed';}
+            if(!$('#closedeast').is(":checked") && newe !== ''){var stateast = 'open';}
+            if($('#closedsouth').is(":checked") && news !== ''){var statsouth = 'closed';}
+            if(!$('#closedsouth').is(":checked") && news !== ''){var statsouth = 'open';}
+            if($('#closedwest').is(":checked") && neww !== ''){var statwest = 'closed';}
+            if(!$('#closedwest').is(":checked") && neww !== ''){var statwest = 'open';}
+
+            if($('#status1').is(":checked")){stat[1] = 'on';}
+            if(!$('#status1').is(":checked")){stat[1] = 'off';}
+            if($('#status2').is(":checked")){stat[2] = 'on';}
+            if(!$('#status2').is(":checked")){stat[2] = 'off';}
+            if($('#status3').is(":checked")){stat[3] = 'on';}
+            if(!$('#status3').is(":checked")){stat[3] = 'off';}
+            if($('#status4').is(":checked")){stat[4] = 'on';}
+            if(!$('#status4').is(":checked")){stat[4] = 'off';}
+            if($('#status5').is(":checked")){stat[5] = 'on';}
+            if(!$('#status5').is(":checked")){stat[5] = 'off';}
+            if($('#status6').is(":checked")){stat[6] = 'on';}
+            if(!$('#status6').is(":checked")){stat[6] = 'off';}
+            if($('#status7').is(":checked")){stat[7] = 'on';}
+            if(!$('#status7').is(":checked")){stat[7] = 'off';}
+            if($('#status8').is(":checked")){stat[8] = 'on';}
+            if(!$('#status8').is(":checked")){stat[8] = 'off';}
+
+        if($('#box'+$('#roomnumber').val()).length === 0){
+            $('#draw').append('<div id="box'+room+'" class="box"><img src="images/kader.png"><label>'+room+'</label></div>');
+            rooms[room] = {
+                doorNorthTo: newn, 
+                doorEastTo: newe, 
+                doorSouthTo: news, 
+                doorWestTo: neww, 
+                doorNorthStatus: statnorth, 
+                doorEastStatus: stateast, 
+                doorSouthStatus: statsouth, 
+                doorWestStatus: statwest, 
+                type1: $('#type1').val(), 
+                type2: $('#type2').val(), 
+                type3: $('#type3').val(), 
+                type4: $('#type4').val(), 
+                type5: $('#type5').val(), 
+                type6: $('#type6').val(), 
+                type7: $('#type7').val(), 
+                type8: $('#type8').val(),
+                pos1: $('#pos1').val(), 
+                pos2: $('#pos2').val(), 
+                pos3: $('#pos3').val(), 
+                pos4: $('#pos4').val(), 
+                pos5: $('#pos5').val(), 
+                pos6: $('#pos6').val(), 
+                pos7: $('#pos7').val(), 
+                pos8: $('#pos8').val(),
+                status1: stat[1],
+                status2: stat[2],
+                status3: stat[3],
+                status4: stat[4],
+                status5: stat[5],
+                status6: stat[6],
+                status7: stat[7],
+                status8: stat[8],
+            };      
+
+            if($('#box'+newn).length === 0 && newn != 0){
+                if($('#closednorth').is(":checked")){
+                    addNonExistingRoom(newn, room, 3, "closed");
+                }
+                else{
+                    addNonExistingRoom(newn, room, 3, "open");
+                }
+            }
+            if($('#box'+newe).length === 0 && newe != 0){
+                if($('#closedeast').is(":checked")){
+                    addNonExistingRoom(newe, room, 4, "closed");
+                }
+                else{
+                    addNonExistingRoom(newe, room, 4, "open");
+                }
+            }
+            if($('#box'+news).length === 0 && news != 0){
+                if($('#closedsouth').is(":checked")){
+                    addNonExistingRoom(news, room, 1, "closed");
+                }
+                else{
+                    addNonExistingRoom(news, room, 1, "open");
+                }
+            }
+            if($('#box'+neww).length === 0 && neww != 0){
+                if($('#closedwest').is(":checked")){
+                    addNonExistingRoom(neww, room, 2, "closed");
+                }
+                else{
+                    addNonExistingRoom(neww, room, 2, "open");
+                }
+            }
+
+            if(newn != 0){
+                rooms[newn]['doorSouthTo'] = room;
+                rooms[newn]['doorSouthStatus'] = statnorth;
+            }
+            if(newe != 0){
+                rooms[newe]['doorWestTo'] = room;
+                rooms[newe]['doorWestStatus'] = stateast;
+            }
+            if(news != 0){
+                rooms[news]['doorNorthTo'] = room;
+                rooms[news]['doorNorthStatus'] = statsouth;
+            }
+            if(neww != 0){
+                rooms[neww]['doorEastTo'] = room;
+                rooms[neww]['doorEastStatus'] = statwest;
+            }
+        }
+        else{
+            if(newn != rooms[room]['doorNorthTo'] && newn != "" && $('#box'+newn).length === 0){
+                addNonExistingRoom(newn, room, 3, statnorth);
+            }
+            if(newn != rooms[room]['doorNorthTo'] && rooms[room]['doorNorthTo'] !== ""){
+                rooms[rooms[room]['doorNorthTo']]['doorSouthTo'] = '';
+                rooms[rooms[room]['doorNorthTo']]['doorSouthStatus'] = '';
+            }
+            if(newn != "" && $('#box'+newn).length === 1 && rooms[newn]['doorSouthTo'] === ""){
+                rooms[newn]['doorSouthTo'] = room;
+                rooms[newn]['doorSouthStatus'] = statnorth;
+            }
+            if(newn != "" && $('#box'+newn).length === 1 && rooms[newn]['doorSouthTo'] !== ""){
+                rooms[rooms[newn]['doorSouthTo']]['doorNorthTo'] = "";
+                rooms[rooms[newn]['doorSouthTo']]['doorNorthStatus'] = "";
+                rooms[newn]['doorSouthTo'] = room;
+                rooms[newn]['doorSouthStatus'] = statsouth;
+            }
+            
+            if(newe != rooms[room]['doorEastTo'] && newe != "" && $('#box'+newe).length === 0){
+                addNonExistingRoom(newe, room, 4, stateast);
+            }
+            if(newe != rooms[room]['doorEastTo'] && rooms[room]['doorEastTo'] !== ""){
+                rooms[rooms[room]['doorEastTo']]['doorWestTo'] = '';
+                rooms[rooms[room]['doorEastTo']]['doorWestStatus'] = '';
+            }
+            if(newe != "" && $('#box'+newe).length === 1 && rooms[newe]['doorWestTo'] === ""){
+                rooms[newe]['doorWestTo'] = room;
+                rooms[newe]['doorWestStatus'] = stateast;
+            }
+            if(newe != "" && $('#box'+newe).length === 1 && rooms[newe]['doorWestTo'] !== ""){
+                rooms[rooms[newe]['doorWestTo']]['doorEastTo'] = "";
+                rooms[rooms[newe]['doorWestTo']]['doorEastStatus'] = "";
+                rooms[newe]['doorWestTo'] = room;
+                rooms[newe]['doorWestStatus'] = statwest;
+            }
+
+            if(news != rooms[room]['doorSouthTo'] && news != "" && $('#box'+news).length === 0){
+                addNonExistingRoom(news, room, 1, statsouth);
+            }
+            if(news != rooms[room]['doorSouthTo'] && rooms[room]['doorSouthTo'] !== ""){
+                rooms[rooms[room]['doorSouthTo']]['doorNorthTo'] = '';
+                rooms[rooms[room]['doorSouthTo']]['doorNorthStatus'] = '';
+            }
+            if(news != "" && $('#box'+news).length === 1 && rooms[news]['doorNorthTo'] === ""){
+                rooms[news]['doorNorthTo'] = room;
+                rooms[news]['doorNorthStatus'] = statsouth;
+            }
+            if(news != "" && $('#box'+news).length === 1 && rooms[news]['doorNorthTo'] !== ""){
+                rooms[rooms[news]['doorNorthTo']]['doorSouthTo'] = "";
+                rooms[rooms[news]['doorNorthTo']]['doorSouthStatus'] = "";
+                rooms[news]['doorNorthTo'] = room;
+                rooms[news]['doorNorthStatus'] = statnorth;
+            }
+
+            if(neww != rooms[room]['doorWestTo'] && neww != "" && $('#box'+neww).length === 0){
+                addNonExistingRoom(neww, room, 2, statwest);
+            }
+            if(neww != rooms[room]['doorWestTo'] && rooms[room]['doorWestTo'] !== ""){
+                rooms[rooms[room]['doorWestTo']]['doorEastTo'] = '';
+                rooms[rooms[room]['doorWestTo']]['doorEastStatus'] = '';
+            }
+            if(neww != "" && $('#box'+neww).length === 1 && rooms[neww]['doorEastTo'] === ""){
+                rooms[neww]['doorEastTo'] = room;
+                rooms[neww]['doorEastStatus'] = statwest;
+            }
+            if(neww != "" && $('#box'+neww).length === 1 && rooms[neww]['doorEastTo'] !== ""){
+                rooms[rooms[neww]['doorEastTo']]['doorWestTo'] = "";
+                rooms[rooms[neww]['doorEastTo']]['doorWestStatus'] = "";
+                rooms[neww]['doorEastTo'] = room;
+                rooms[neww]['doorEastStatus'] = stateast;
+            }
+
+            rooms[room]['doorNorthTo'] = newn;
+            rooms[room]['doorNorthStatus'] = statnorth;
+            rooms[room]['doorEastTo'] = newe;
+            rooms[room]['doorEastStatus'] = stateast;
+            rooms[room]['doorSouthTo'] = news;
+            rooms[room]['doorSouthStatus'] = statsouth;
+            rooms[room]['doorWestTo'] = neww;
+            rooms[room]['doorWestStatus'] = statwest;
+
+            for(var i = 1; i <= 8; i++){
+                rooms[room]['type'+i] = parseInt($('#type'+i).val());
+                if($('#pos'+i).val()!==null){rooms[room]['pos'+i] = $('#pos'+i).val();}else{rooms[room]['pos'+i]='';}
+                rooms[room]['status'+i] = stat[i];
+            }
+        }
+        makeBoxesDraggable();
+        linesHelper();
+        connectLines();
+        exportLevel();
+        drawRoomGetInfo(document.getElementById('box'+room));
+        }
+        else{
+            alert('Room number must not be empty!');
+        }
+    }
+    function addNonExistingRoom(roomnr, connection, doornr, doorstatus){
+        $('#draw').append('<div id="box'+roomnr+'" class="box"><img src="images/kader.png"><label>'+roomnr+'</label></div>');
+        if(doornr === 3){ 
+            rooms[roomnr] = {
+                doorNorthTo: '', 
+                doorEastTo: '', 
+                doorSouthTo: connection, 
+                doorWestTo: '', 
+                doorNorthStatus: '', 
+                doorEastStatus: '', 
+                doorSouthStatus: doorstatus, 
+                doorWestStatus: '', 
+                type1: 1, 
+                type2: 1, 
+                type3: 1, 
+                type4: 1, 
+                type5: 1, 
+                type6: 1, 
+                type7: 1, 
+                type8: 1,
+                pos1: '', 
+                pos2: '', 
+                pos3: '', 
+                pos4: '', 
+                pos5: '', 
+                pos6: '', 
+                pos7: '', 
+                pos8: '',
+                status1: 'off',
+                status2: 'off',
+                status3: 'off',
+                status4: 'off',
+                status5: 'off',
+                status6: 'off',
+                status7: 'off',
+                status8: 'off',
+            };
+        }
+        if(doornr === 4){
+            rooms[roomnr] = {
+                doorNorthTo: '', 
+                doorEastTo: '', 
+                doorSouthTo: '', 
+                doorWestTo: connection, 
+                doorNorthStatus: '', 
+                doorEastStatus: '', 
+                doorSouthStatus: '', 
+                doorWestStatus: doorstatus, 
+                type1: 1, 
+                type2: 1, 
+                type3: 1, 
+                type4: 1, 
+                type5: 1, 
+                type6: 1, 
+                type7: 1, 
+                type8: 1,
+                pos1: '', 
+                pos2: '', 
+                pos3: '', 
+                pos4: '', 
+                pos5: '', 
+                pos6: '', 
+                pos7: '', 
+                pos8: '',
+                status1: 'off',
+                status2: 'off',
+                status3: 'off',
+                status4: 'off',
+                status5: 'off',
+                status6: 'off',
+                status7: 'off',
+                status8: 'off',
+            };
+        }
+        if(doornr === 1){
+            rooms[roomnr] = {
+                doorNorthTo: connection, 
+                doorEastTo: '', 
+                doorSouthTo: '', 
+                doorWestTo: '', 
+                doorNorthStatus: doorstatus, 
+                doorEastStatus: '', 
+                doorSouthStatus: '', 
+                doorWestStatus: '', 
+                type1: 1, 
+                type2: 1, 
+                type3: 1, 
+                type4: 1, 
+                type5: 1, 
+                type6: 1, 
+                type7: 1, 
+                type8: 1,
+                pos1: '', 
+                pos2: '', 
+                pos3: '', 
+                pos4: '', 
+                pos5: '', 
+                pos6: '', 
+                pos7: '', 
+                pos8: '',
+                status1: 'off',
+                status2: 'off',
+                status3: 'off',
+                status4: 'off',
+                status5: 'off',
+                status6: 'off',
+                status7: 'off',
+                status8: 'off',
+            };
+        }
+        if(doornr === 2){
+            rooms[roomnr] = {
+                doorNorthTo: '', 
+                doorEastTo: connection, 
+                doorSouthTo: '', 
+                doorWestTo: '', 
+                doorNorthStatus: '', 
+                doorEastStatus: doorstatus, 
+                doorSouthStatus: '', 
+                doorWestStatus: '', 
+                type1: 1, 
+                type2: 1, 
+                type3: 1, 
+                type4: 1, 
+                type5: 1, 
+                type6: 1, 
+                type7: 1, 
+                type8: 1,
+                pos1: '', 
+                pos2: '', 
+                pos3: '', 
+                pos4: '', 
+                pos5: '', 
+                pos6: '', 
+                pos7: '', 
+                pos8: '',
+                status1: 'off',
+                status2: 'off',
+                status3: 'off',
+                status4: 'off',
+                status5: 'off',
+                status6: 'off',
+                status7: 'off',
+                status8: 'off',
+            };
+        }
+        if(doornr === 0){
+            rooms[roomnr] = {
+                doorNorthTo: '', 
+                doorEastTo: '', 
+                doorSouthTo: '', 
+                doorWestTo: '', 
+                doorNorthStatus: '', 
+                doorEastStatus: '', 
+                doorSouthStatus: '', 
+                doorWestStatus: '', 
+                type1: 1, 
+                type2: 1, 
+                type3: 1, 
+                type4: 1, 
+                type5: 1, 
+                type6: 1, 
+                type7: 1, 
+                type8: 1,
+                pos1: '', 
+                pos2: '', 
+                pos3: '', 
+                pos4: '', 
+                pos5: '', 
+                pos6: '', 
+                pos7: '', 
+                pos8: '',
+                status1: 'off',
+                status2: 'off',
+                status3: 'off',
+                status4: 'off',
+                status5: 'off',
+                status6: 'off',
+                status7: 'off',
+                status8: 'off',
+            };
+        }
+    }
+    function deleteRoom(){
+        if($('#roomnumber').val() != 1){
+            var room = $('#roomnumber').val();
+            if(rooms[room]['doorNorthTo'] !== ""){
+                rooms[rooms[room]['doorNorthTo']]['doorSouthTo'] = "";
+                rooms[rooms[room]['doorNorthTo']]['doorSouthStatus'] = "";
+            }
+            if(rooms[room]['doorEastTo'] !== ""){
+                rooms[rooms[room]['doorEastTo']]['doorWestTo'] = "";
+                rooms[rooms[room]['doorEastTo']]['doorWestStatus'] = "";
+            }
+            if(rooms[room]['doorSouthTo'] !== ""){
+                rooms[rooms[room]['doorSouthTo']]['doorNorthTo'] = "";
+                rooms[rooms[room]['doorSouthTo']]['doorNorthStatus'] = "";
+            }
+            if(rooms[room]['doorWestTo'] !== ""){
+                rooms[rooms[room]['doorWestTo']]['doorEastTo'] = "";
+                rooms[rooms[room]['doorWestTo']]['doorEastStatus'] = "";
+            }
+            $('#box'+room).remove();
+            $('.line[fromRoom="'+room+'"][toRoomRev="'+room+'"]').remove();
+            $('.line[toRoom="'+room+'"][fromRoomRev="'+room+'"]').remove();
+            $('input[name="conn"][fromRoom="'+room+'"]').remove();
+            $('input[name="conn"][toRoom="'+room+'"]').remove();
+            delete rooms[room];
+            connectLines();
+            exportLevel();
+        }
+    }
+
+    function exportLevel(){
+        var txt = document.getElementById('exported');
+        var temp = '';
+        txt.value = '';
+        txt.value += 'const unsigned char PROGMEM levelNumber[]=';
+        txt.value += '\n';
+        txt.value += '{';
+        txt.value += '\n';
+
+        txt.value += $('.box').length+', ';
+        txt.value += '\n';
+        for(var i = 1; i <= $('.box').length; i++){
+        if(i != $('#roomnumber').val()){
+            //byte1  DOORS
+            txt.value += '0b';
+            if(rooms[i]['doorNorthTo'] !== ''){temp += '1';}else{temp += '0';}
+            if(rooms[i]['doorEastTo'] !== ''){temp += '1';}else{temp += '0';}
+            if(rooms[i]['doorSouthTo'] !== ''){temp += '1';}else{temp += '0';}
+            if(rooms[i]['doorWestTo'] !== ''){temp += '1';}else{temp += '0';}
+            if(rooms[i]['doorNorthStatus'] === 'closed'){temp += '1';}else{temp += '0';}
+            if(rooms[i]['doorEastStatus'] === 'closed'){temp += '1';}else{temp += '0';}
+            if(rooms[i]['doorSouthStatus'] === 'closed'){temp += '1';}else{temp += '0';}
+            if(rooms[i]['doorWestStatus'] === 'closed'){temp += '1';}else{temp += '0';}
+            txt.value += temp;
+            txt.value += ',   ';
+            temp = '';
+
+            //byte2  NORTH
+            txt.value += '0b';
+            if(rooms[i]['doorNorthTo'] === ''){txt.value += '00000000';}  
+            else{
+                temp += ('000000'+parseInt(rooms[i]['doorNorthTo']).toString(2)).slice(-6);
+                temp += '10';
+                txt.value += temp;
+            }
+            txt.value += ', ';
+            temp = '';
+
+            //byte3  EAST
+            txt.value += '0b';
+            if(rooms[i]['doorEastTo'] === ''){txt.value += '00000000';}  
+            else{
+                temp += ('000000'+parseInt(rooms[i]['doorEastTo']).toString(2)).slice(-6);
+                temp += '11'
+                txt.value += temp;}
+            txt.value += ', ';
+            temp = '';
+
+            //byte4  SOUTH
+            txt.value += '0b';
+            if(rooms[i]['doorSouthTo'] === ''){txt.value += '00000000';}  
+            else{
+                temp += ('000000'+parseInt(rooms[i]['doorSouthTo']).toString(2)).slice(-6);
+                temp += '00';
+                txt.value += temp;}
+            txt.value += ', ';
+            temp = '';
+
+            //byte5  WEST
+            txt.value += '0b';
+            if(rooms[i]['doorWestTo'] === ''){txt.value += '00000000';}  
+            else{
+                temp += ('000000'+parseInt(rooms[i]['doorWestTo']).toString(2)).slice(-6);
+                temp += '01';
+                txt.value += temp;
+            }
+            txt.value += ',   ';
+            temp = '';
+
+            //byte6  ENEMY1
+            txt.value += '0b';
+            if(rooms[i]['status1'] === 'on'){
+                temp += ('00000'+parseInt(rooms[i]['pos1']).toString(2)).slice(-5);
+                temp += ('000'+(parseInt(rooms[i]['type1'])-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ', ';
+            temp = '';
+
+            //byte7  ENEMY2
+            txt.value += '0b';
+            if(rooms[i]['status2'] === 'on'){
+                temp += ('00000'+parseInt(rooms[i]['pos2']).toString(2)).slice(-5);
+                temp += ('000'+(parseInt(rooms[i]['type2'])-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ',   ';
+            temp = '';
+
+            //byte8  OBJECT1
+            txt.value += '0b';
+            if(rooms[i]['status3'] === 'on'){
+                temp += ('00000'+parseInt(rooms[i]['pos3']).toString(2)).slice(-5);
+                temp += ('000'+(parseInt(rooms[i]['type3'])-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ',   ';
+            temp = '';
+
+            //byte9  FLOOR1
+            txt.value += '0b';
+            if(rooms[i]['status4'] === 'on'){
+                temp += ('00000'+parseInt(rooms[i]['pos4']).toString(2)).slice(-5);
+                temp += ('000'+(parseInt(rooms[i]['type4'])-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ', ';
+            temp = '';
+
+            //byte10 FLOOR2
+            txt.value += '0b';
+            if(rooms[i]['status5'] === 'on'){
+                temp += ('00000'+parseInt(rooms[i]['pos5']).toString(2)).slice(-5);
+                temp += ('000'+(parseInt(rooms[i]['type5'])-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ', ';
+            temp = '';
+
+            //byte11 FLOOR3
+            txt.value += '0b';
+            if(rooms[i]['status6'] === 'on'){
+                temp += ('00000'+parseInt(rooms[i]['pos6']).toString(2)).slice(-5);
+                temp += ('000'+(parseInt(rooms[i]['type6'])-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ', ';
+            temp = '';
+
+            //byte12 FLOOR4
+            txt.value += '0b';
+            if(rooms[i]['status7'] === 'on'){
+                temp += ('00000'+parseInt(rooms[i]['pos7']).toString(2)).slice(-5);
+                temp += ('000'+(parseInt(rooms[i]['type7'])-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ', ';
+            temp = '';
+
+            //byte13 FLOOR5
+            txt.value += '0b';
+            if(rooms[i]['status8'] === 'on'){
+                temp += ('00000'+parseInt(rooms[i]['pos8']).toString(2)).slice(-5);
+                temp += ('000'+(parseInt(rooms[i]['type8'])-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ', // room'+i;
+            temp = '';
+
+            txt.value += '\n';
+        }
+        else{
+            //byte1  DOORS
+            txt.value += '0b';
+            if($('#newnorth').val() !== ''){temp += '1';}else{temp += '0';}
+            if($('#neweast').val() !== ''){temp += '1';}else{temp += '0';}
+            if($('#newsouth').val() !== ''){temp += '1';}else{temp += '0';}
+            if($('#newwest').val() !== ''){temp += '1';}else{temp += '0';}
+            if($('#closednorth').is(':checked')){temp += '1';}else{temp += '0';}
+            if($('#closedeast').is(':checked')){temp += '1';}else{temp += '0';}
+            if($('#closedsouth').is(':checked')){temp += '1';}else{temp += '0';}
+            if($('#closedwest').is(':checked')){temp += '1';}else{temp += '0';}
+            txt.value += temp;
+            txt.value += ',   ';
+            temp = '';
+
+            //byte2  NORTH
+            txt.value += '0b';
+            if($('#newnorth').val() === ''){txt.value += '00000000';}  
+            else{
+                temp += ('000000'+parseInt($('#newnorth').val()).toString(2)).slice(-6);
+                temp += '10'
+                txt.value += temp;}
+            txt.value += ', ';
+            temp = '';
+
+            //byte3  EAST
+            txt.value += '0b';
+            if($('#neweast').val() === ''){txt.value += '00000000';}  
+            else{
+                temp += ('000000'+parseInt($('#neweast').val()).toString(2)).slice(-6);
+                temp += '11';
+                txt.value += temp;}
+            txt.value += ', ';
+            temp = '';
+
+            //byte4  SOUTH
+            txt.value += '0b';
+            if($('#newsouth').val() === ''){txt.value += '00000000';}  
+            else{
+                temp += ('000000'+parseInt($('#newsouth').val()).toString(2)).slice(-6);
+                temp += '00';
+                txt.value += temp;}
+            txt.value += ', ';
+            temp = '';
+
+            //byte5  WEST
+            txt.value += '0b';
+            if($('#newwest').val() === ''){txt.value += '00000000';}  
+            else{
+                temp += ('000000'+parseInt($('#newwest').val()).toString(2)).slice(-6);
+                temp += '01';
+                txt.value += temp;}
+            txt.value += ',   ';
+            temp = '';
+
+            //byte6  ENEMY1
+            txt.value += '0b';
+            if($('#status1').is(':checked')){
+                if($('#pos1').val()!==null){temp+=('00000'+parseInt($('#pos1').val()).toString(2)).slice(-5);}else{temp+='00000';}
+                temp += ('000'+(parseInt($('#type1').val().slice(-1))-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ', ';
+            temp = '';
+
+            //byte7  ENEMY2
+            txt.value += '0b';
+            if($('#status2').is(':checked')){
+                if($('#pos2').val()!==null){temp+=('00000'+parseInt($('#pos2').val()).toString(2)).slice(-5);}else{temp+='00000';}
+                temp += ('000'+(parseInt($('#type2').val().slice(-1))-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ',   ';
+            temp = '';
+
+            //byte8  OBJECT1
+            txt.value += '0b';
+            if($('#status3').is(':checked')){
+                if($('#pos3').val()!==null){temp+=('00000'+parseInt($('#pos3').val()).toString(2)).slice(-5);}else{temp+='00000';}
+                temp += ('000'+(parseInt($('#type3').val().slice(-1))-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ',   ';
+            temp = '';
+
+            //byte9  FLOOR1
+            txt.value += '0b';
+            if($('#status4').is(':checked')){
+                if($('#pos4').val()!==null){temp+=('00000'+parseInt($('#pos4').val()).toString(2)).slice(-5);}else{temp+='00000';}
+                temp += ('000'+(parseInt($('#type4').val().slice(-1))-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ', ';
+            temp = '';
+
+            //byte10 FLOOR2
+            txt.value += '0b';
+            if($('#status5').is(':checked')){
+                if($('#pos5').val()!==null){temp+=('00000'+parseInt($('#pos5').val()).toString(2)).slice(-5);}else{temp+='00000';}
+                temp += ('000'+(parseInt($('#type5').val().slice(-1))-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ', ';
+            temp = '';
+
+            //byte11 FLOOR3
+            txt.value += '0b';
+            if($('#status6').is(':checked')){
+                if($('#pos6').val()!==null){temp+=('00000'+parseInt($('#pos6').val()).toString(2)).slice(-5);}else{temp+='00000';}
+                temp += ('000'+(parseInt($('#type6').val().slice(-1))-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ', ';
+            temp = '';
+
+            //byte12 FLOOR4
+            txt.value += '0b';
+            if($('#status7').is(':checked')){
+                if($('#pos7').val()!==null){temp+=('00000'+parseInt($('#pos7').val()).toString(2)).slice(-5);}else{temp+='00000';}
+                temp += ('000'+(parseInt($('#type7').val().slice(-1))-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ', ';
+            temp = '';
+
+            //byte13 FLOOR5
+            txt.value += '0b';
+            if($('#status8').is(':checked')){
+                if($('#pos8').val()!==null){temp+=('00000'+parseInt($('#pos8').val()).toString(2)).slice(-5);}else{temp+='00000';}
+                temp += ('000'+(parseInt($('#type8').val().slice(-1))-1).toString(2)).slice(-3);
+                txt.value += temp;
+            }
+            else{txt.value += '00000000';}
+            txt.value += ', // room'+$('#roomnumber').val();
+            temp = '';
+
+            txt.value += '\n';
+        }
+        }
+        txt.value += '}';
+        txt.rows = 4+$('.box').length;
+    }
+
+    function importLevel(){
+        var arr = document.getElementById('exported').value.split(', ');
+        //room = 0;
+
+        var room = 1;
+        var amount = (arr.length - 2) / 13;
+        var ar = [];
+        for(var i = 1; i <= amount; i++){
+            ar[i] = [];
+            for(var j = 0; j < 13; j++){
+                ar[i][j] = arr[j + 1 + ((i-1)*13)];
+            }
+        }
+        for(var i = 1; i <= amount; i++){
+            var j = 0;
+           
+            var bin = hexToBin(ar[i][j].slice(-2))['result'];
+            if(bin.slice(4, 5)==='1'){rooms[room]['doorNorthStatus']='closed';}else{rooms[room]['doorNorthStatus']='';}
+            if(bin.slice(5, 6)==='1'){rooms[room]['doorEastStatus']='closed';}else{rooms[room]['doorEastStatus']='';}
+            if(bin.slice(6, 7)==='1'){rooms[room]['doorSouthStatus']='closed';}else{rooms[room]['doorSouthStatus']='';}
+            if(bin.slice(7, 8)==='1'){rooms[room]['doorWestStatus']='closed';}else{rooms[room]['doorWestStatus']='';}
+            j++;
+
+            var bin = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(0, 6)),2);
+            if(bin !== 0){rooms[room]['doorNorthTo']=bin.toString();}else{rooms[room]['doorNorthTo']='';}
+            j++;
+
+            var bin = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(0, 6)),2);
+            if(bin !== 0){rooms[room]['doorEastTo']=bin.toString();}else{rooms[room]['doorEastTo']='';}
+            j++;
+            
+            var bin = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(0, 6)),2);
+            if(bin !== 0){rooms[room]['doorSouthTo']=bin.toString();}else{rooms[room]['doorSouthTo']='';}
+            j++;
+            
+            var bin = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(0, 6)),2);
+            if(bin !== 0){rooms[room]['doorWestTo']=bin.toString();}else{rooms[room]['doorWestTo']='';}
+            j++;
+            
+            var bin = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(0, 5)),2);
+            if(bin !== 0){rooms[room]['pos1']=bin;}else{rooms[room]['pos1']='';}
+            var binn = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(5, 8)),2);
+            rooms[room]['type1'] = binn + 1;
+            if(bin !== 0 || binn !== 0){rooms[room]['status1'] = 'on';}else{rooms[room]['status1'] = 'off';}
+            j++;
+            
+            var bin = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(0, 5)),2);
+            if(bin !== 0){rooms[room]['pos2']=bin;}else{rooms[room]['pos2']='';}
+            var binn = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(5, 8)),2);
+            rooms[room]['type2'] = binn + 1;
+            if(bin !== 0 || binn !== 0){rooms[room]['status2'] = 'on';}else{rooms[room]['status2'] = 'off';}
+            j++;
+            
+            var bin = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(0, 5)),2);
+            if(bin !== 0){rooms[room]['pos3']=bin;}else{rooms[room]['pos3']='';}
+            var binn = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(5, 8)),2);
+            rooms[room]['type3'] = binn + 1;
+            if(bin !== 0 || binn !== 0){rooms[room]['status3'] = 'on';}else{rooms[room]['status3'] = 'off';}
+            j++;
+            
+            var bin = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(0, 5)),2);
+            if(bin !== 0){rooms[room]['pos4']=bin;}else{rooms[room]['pos4']='';}
+            var binn = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(5, 8)),2);
+            rooms[room]['type4'] = binn + 1;
+            if(bin !== 0 || binn !== 0){rooms[room]['status4'] = 'on';}else{rooms[room]['status4'] = 'off';}
+            j++;
+            
+            var bin = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(0, 5)),2);
+            if(bin !== 0){rooms[room]['pos5']=bin;}else{rooms[room]['pos5']='';}
+            var binn = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(5, 8)),2);
+            rooms[room]['type5'] = binn + 1;
+            if(bin !== 0 || binn !== 0){rooms[room]['status5'] = 'on';}else{rooms[room]['status5'] = 'off';}
+            j++;
+            
+            var bin = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(0, 5)),2);
+            if(bin !== 0){rooms[room]['pos6']=bin;}else{rooms[room]['pos6']='';}
+            var binn = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(5, 8)),2);
+            rooms[room]['type6'] = binn + 1;
+            if(bin !== 0 || binn !== 0){rooms[room]['status6'] = 'on';}else{rooms[room]['status6'] = 'off';}
+            j++;
+            
+            var bin = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(0, 5)),2);
+            if(bin !== 0){rooms[room]['pos7']=bin;}else{rooms[room]['pos7']='';}
+            var binn = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(5, 8)),2);
+            rooms[room]['type7'] = binn + 1;
+            if(bin !== 0 || binn !== 0){rooms[room]['status7'] = 'on';}else{rooms[room]['status7'] = 'off';}
+            j++;
+            
+            var bin = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(0, 5)),2);
+            if(bin !== 0){rooms[room]['pos8']=bin;}else{rooms[room]['pos8']='';}
+            var binn = parseInt(parseInt(hexToBin(ar[i][j].slice(-2))['result'].slice(5, 8)),2);
+            rooms[room]['type8'] = binn + 1;
+            if(bin !== 0 || binn !== 0){rooms[room]['status8'] = 'on';}else{rooms[room]['status8'] = 'off';}
+            j++;
+            
+            room++;
+            if($('#box'+room).length === 0 && room <= amount){addNonExistingRoom(room, '', 0, "open");}
+            setTimeout(function(){}, 100);
+        }
+        
+        var boxes = $('.box').length;
+        for(var i = room; i <= boxes; i++){
+            $('#box'+i).remove();
+        }
+        makeBoxesDraggable();
+        linesHelper();
+        connectLines();
+        $('#box1').dblclick();
+        $('.changeImage').trigger('change');
+        //triggerChanges();
+        //$('#box1').dblclick();
+    }
+
+    function binToHex(s) {
+        var i, k, part, accum, ret = '';
+        for (i = s.length-1; i >= 3; i -= 4) {
+            part = s.substr(i+1-4, 4);
+            accum = 0;
+            for (k = 0; k < 4; k += 1) {
+                if (part[k] !== '0' && part[k] !== '1') {
+                    return { valid: false };
+                }
+                accum = accum * 2 + parseInt(part[k], 10);
+            }
+            if (accum >= 10) {
+                ret = String.fromCharCode(accum - 10 + 'A'.charCodeAt(0)) + ret;
+            } else {
+                ret = String(accum) + ret;
+            }
+        }
+        if (i >= 0) {
+            accum = 0;
+            for (k = 0; k <= i; k += 1) {
+                if (s[k] !== '0' && s[k] !== '1') {
+                    return { valid: false };
+                }
+                accum = accum * 2 + parseInt(s[k], 10);
+            }
+            ret = String(accum) + ret;
+        }
+        return { valid: true, result: ret };
+        //return { valid: true, result: s};
+    }
+    function hexToBin(s){
+        var i, k, part, ret = '';
+        var lookupTable = {
+            '0': '0000', '1': '0001', '2': '0010', '3': '0011', '4': '0100',
+            '5': '0101', '6': '0110', '7': '0111', '8': '1000', '9': '1001',
+            'a': '1010', 'b': '1011', 'c': '1100', 'd': '1101', 'e': '1110', 'f': '1111',
+            'A': '1010', 'B': '1011', 'C': '1100', 'D': '1101', 'E': '1110', 'F': '1111'
+        };
+        for (i = 0; i < s.length; i += 1) {
+            if (lookupTable.hasOwnProperty(s[i])) {
+                ret += lookupTable[s[i]];
+            } else {
+                return { valid: false };
+            }
+        }
+        return { valid: true, result: ret };
+    }
+    </script>
+</head>
+<body>
+    <div style='width:698px;height:130px;border:1px solid black;margin-left:50px;'>
+        <table style='width:100%'>
+            <tr style='text-align:center'>
+                <td><strong>ROOM </strong><input type='text' size='1' maxlength='2' onkeyup='numericOnly(this);' id='roomnumber' tabindex='1'></td>
+                <td><button onclick='editRoom();'>add/edit room</button></td>
+                <td><button onclick='deleteRoom();'>delete room</button></td>
+                <td><button onclick='importLevel();'>import level</button></td>
+            </tr>
+            <tr>
+                <td rowspan='4' width='125'><div id='roomImage' style='position:relative;top:-47px;left:5px'></div></td>
+                <td><table style='width:100%'><tr>
+                    <td width='24'><img class='imgtablesmall' src='images/smalldoorN.png'></td>
+                    <td style='width:32px'>N to </td>
+                    <td><input type='text' size='1' maxlength='2' onkeyup='numericOnly(this);' id='newnorth' class='drawCurRoom' tabindex='2'>
+                        closed<input type='checkbox' class='drawCurRoom' id='closednorth'></td></tr></table>
+                </td>
+                <td><table style='width:100%'><tr>
+                    <td><img class='imgtablesmall' id='img1' src='images/enemy1.png'></td>
+                    <td><select class='changeImage drawCurRoom' id='type1' type='enemy'>
+                            <option value='1'>BOX</option>
+                            <option value='2'>JUMPER</option>
+                            <option value='3'>MOVER</option>
+                            <option value='4'>SHOOTER</option>
+
+                    </select>
+                    <select id='pos1' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos1').append('<option>'+i+'</option>');}</script></select>
+                    <input id='status1' class='drawCurRoom' type='checkbox'></td></tr></table>
+                </td>
+                <td><table style='width:100%'><tr>
+                    <td ><img class='imgtablesmall' id='img5' src='images/floor1.png'></td>
+                    <td><select class='changeImage drawCurRoom' id='type5' type='floor'>
+                            <option value='1'>BLOCK</option>
+                            <option value='2'>SPIKES</option>
+                            <option value='3'>PIRAMIDES</option>
+                            <option value='4'>PIT</option>
+                    </select>
+                    <select id='pos5' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos5').append('<option>'+i+'</option>');}</script></select>
+                    <input id='status5' class='drawCurRoom' type='checkbox'></td></tr></table>
+                </td>
+            </tr>
+            <tr>
+                <td><table style='width:100%'><tr>
+                    <td width='24'><img class='imgtablesmall' src='images/smalldoorE.png'></td>
+                    <td style='width:32px'>E to </td>
+                    <td><input type='text' size='1' maxlength='2' onkeyup='numericOnly(this);' id='neweast' class='drawCurRoom' tabindex='3'>
+                        closed<input type='checkbox' class='drawCurRoom' id='closedeast'></td></tr></table>
+                </td>
+                <td><table style='width:100%'><tr>
+                    <td ><img class='imgtablesmall' id='img2' src='images/enemy1.png'></td>
+                    <td><select class='changeImage drawCurRoom' id='type2' type='enemy'>
+                            <option value='1'>BOX</option>
+                            <option value='2'>JUMPER</option>
+                            <option value='3'>MOVER</option>
+                            <option value='4'>SHOOTER</option>
+                    </select>
+                    <select id='pos2' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos2').append('<option>'+i+'</option>');}</script></select>
+                    <input id='status2' class='drawCurRoom' type='checkbox'></td></tr></table>
+                </td>
+                <td><table style='width:100%'><tr>
+                    <td ><img class='imgtablesmall' id='img6' src='images/floor1.png'></td>
+                    <td><select class='changeImage drawCurRoom' id='type6' type='floor'>
+                            <option value='1'>BLOCK</option>
+                            <option value='2'>SPIKES</option>
+                            <option value='3'>PIRAMIDES</option>
+                            <option value='4'>PIT</option>
+                    </select>
+                    <select id='pos6' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos6').append('<option>'+i+'</option>');}</script></select>
+                    <input id='status6' class='drawCurRoom' type='checkbox'></td></tr></table>
+                </td>
+            </tr>
+            <tr>
+                <td><table style='width:100%'><tr>
+                    <td width='24'><img class='imgtablesmall' src='images/smalldoorS.png'></td>
+                    <td style='width:32px'>S to </td>
+                    <td><input type='text' size='1' maxlength='2' onkeyup='numericOnly(this);' id='newsouth' class='drawCurRoom' tabindex='4'>
+                        closed<input type='checkbox' class='drawCurRoom' id='closedsouth'></td></tr></table>
+                </td>
+                <td><table style='width:100%'><tr>
+                    <td ><img class='imgtablesmall' id='img3' src='images/object1.png'></td>
+                    <td><select class='changeImage drawCurRoom' id='type3' type='object'>
+                            <option value='1'>BLACK CARD</option>
+                            <option value='2'>WHITE CARD</option>
+                            <option value='3'>BATTERY</option>
+                            <option value='4'>BULLET</option>
+                            <option value='5'>CHIP</option>
+                            <option value='6'>TELEPORT</option>
+                            <option value='7'>SWITCH OFF</option>
+                            <option value='8'>SWITCH ON</option>
+                    </select>
+                    <select id='pos3' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos3').append('<option>'+i+'</option>');}</script></select>
+                    <input id='status3' class='drawCurRoom' type='checkbox'></td></tr></table>
+                </td>
+                <td><table style='width:100%'><tr>
+                    <td ><img class='imgtablesmall' id='img7' src='images/floor1.png'></td>
+                    <td><select class='changeImage drawCurRoom' id='type7' type='floor'>
+                            <option value='1'>BLOCK</option>
+                            <option value='2'>SPIKES</option>
+                            <option value='3'>PIRAMIDES</option>
+                            <option value='4'>PIT</option>
+                    </select>
+                    <select id='pos7' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos7').append('<option>'+i+'</option>');}</script></select>
+                    <input id='status7' class='drawCurRoom' type='checkbox'></td></tr></table>
+                </td>
+            </tr>
+            <tr>
+                <td><table style='width:100%'><tr>
+                    <td width='24'><img class='imgtablesmall' src='images/smalldoorW.png'></td>
+                    <td style='width:32px'>W to </td>
+                    <td><input type='text' size='1' maxlength='2' onkeyup='numericOnly(this);' id='newwest' class='drawCurRoom' tabindex='5'>
+                        closed<input type='checkbox' class='drawCurRoom' id='closedwest'></td></tr></table>
+                </td>
+                <td><table style='width:100%'><tr>
+                    <td ><img class='imgtablesmall' id='img4' src='images/floor1.png'></td>
+                    <td><select class='changeImage drawCurRoom' id='type4' type='floor'>
+                            <option value='1'>BLOCK</option>
+                            <option value='2'>SPIKES</option>
+                            <option value='3'>PIRAMIDES</option>
+                            <option value='4'>PIT</option>
+                    </select>
+                    <select id='pos4' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos4').append('<option>'+i+'</option>');}</script></select>
+                    <input id='status4' class='drawCurRoom' type='checkbox'></td></tr></table>
+                </td>
+                <td><table style='width:100%'><tr>
+                    <td ><img class='imgtablesmall' id='img8' src='images/floor1.png'></td>
+                    <td><select class='changeImage drawCurRoom' id='type8' type='floor'>
+                            <option value='1'>BLOCK</option>
+                            <option value='2'>SPIKES</option>
+                            <option value='3'>PIRAMIDES</option>
+                            <option value='4'>PIT</option>
+                    </select>
+                    <select id='pos8' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos8').append('<option>'+i+'</option>');}</script></select>
+                    <input id='status8' class='drawCurRoom' type='checkbox'></td></tr></table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <!--<div style='margin-left:50px;width:700px'>-->
+	    <div id="draw" style='width:698px;height:550px;border:1px solid black;margin-left:50px'>
+            <div id="box1" class="box"><img src='images/kader.png'><label>1</label></div>
+            <!--<div id="box1" class="box"><img src='images/kader.png'><label>1</label></div>
+            <div id="box2" class="box"><img src='images/kader.png'><label>2</label></div>
+            <div id="box3" class="box"><img src='images/kader.png'><label>3</label></div>
+            <div id="box4" class="box"><img src='images/kader.png'><label>4</label></div>
+            <div id="box5" class="box"><img src='images/kader.png'><label>5</label></div>
+            <div id="box6" class="box"><img src='images/kader.png'><label>6</label></div>-->
+        </div>
+        <!--<div style='width:140px;height:550px;float:right;border:1px solid black'>
+            <table style='width:100%'>
+                <tr>
+                    <td class='left'>ROOM</td>
+                    <td class='right'><input type='text' size='1' maxlength='2' onkeyup='numericOnly(this);' id='roomnumber'></td>
+                </tr>
+                <tr>
+                    <td class='left'>DOOR N to</td>
+                    <td class='right'><input type='text' size='1' maxlength='2' onkeyup='numericOnly(this);' id='newnorth' class='drawCurRoom'></td>
+                </tr>
+                <tr>
+                    <td class='left'>DOOR E to</td>
+                    <td class='right'><input type='text' size='1' maxlength='2' onkeyup='numericOnly(this);' id='neweast' class='drawCurRoom'></td>
+                </tr>
+                <tr>
+                    <td class='left'>DOOR S to</td>
+                    <td class='right'><input type='text' size='1' maxlength='2' onkeyup='numericOnly(this);' id='newsouth' class='drawCurRoom'></td>
+                </tr>
+                <tr>
+                    <td class='left'>DOOR W to</td>
+                    <td class='right'><input type='text' size='1' maxlength='2' onkeyup='numericOnly(this);' id='newwest' class='drawCurRoom'></td>
+                </tr>
+                <tr>
+                    <td class='left'>DOOR N closed</td>
+                    <td class='right'><input type='checkbox' class='drawCurRoom' id='closednorth'></td>
+                </tr>
+                <tr>
+                    <td class='left'>DOOR E closed</td>
+                    <td class='right'><input type='checkbox' class='drawCurRoom' id='closedeast'></td>
+                </tr>
+                <tr>
+                    <td class='left'>DOOR S closed</td>
+                    <td class='right'><input type='checkbox' class='drawCurRoom' id='closedsouth'></td>
+                </tr>
+                <tr>
+                    <td class='left'>DOOR W closed</td>
+                    <td class='right'><input type='checkbox' class='drawCurRoom' id='closedwest'></td>
+                </tr>
+
+            </table>
+            <br>
+            <div style='text-align:center'>
+                <button onclick='editRoom();'>add/edit room</button>
+                <br><br>
+                <button onclick='deleteRoom();'>delete room</button>
+                <br><br>
+                <button onclick='importLevel();'>import level</button>
+            </div>
+        </div>
+    </div>
+    <div style='width:698px;height:150px;border:1px solid black;margin-left:50px;position:absolute;top:570px'>
+        <div id='roomImage' style='position:absolute;left:50px;top:30px;'>
+        </div>
+
+        <div style='width:500px;position:absolute;top:15px;left:200px'>
+            <table id='objtable'>
+                <tr>
+                    <td><img class='imgtablesmall' id='img1' src='images/enemy1.png'></td>
+                    <td>
+                        <select class='changeImage drawCurRoom' id='type1' type='enemy'>
+                            <option value='1'>enemy 1</option>
+                            <option value='2'>enemy 2</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id='pos1' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos1').append('<option>'+i+'</option>');}</script></select>
+                    </td>
+                    <td>
+                        <input id='status1' class='drawCurRoom' type='checkbox'>
+                    </td>
+                    <td width='50'></td>
+                    <td><img class='imgtablesmall' id='img5' src='images/floor1.png'></td>
+                    <td>
+                        <select class='changeImage drawCurRoom' id='type5' type='floor'>
+                            <option value='1'>floor 1</option>
+                            <option value='2'>floor 2</option>
+                        </select>
+                    </td>
+                    <td>
+                        <!--<input id='pos5' type='text' size='1' maxlength='2'>-->
+  <!--                      <select id='pos5' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos5').append('<option>'+i+'</option>');}</script></select>
+                    </td>
+                    <td>
+                        <input id='status5' class='drawCurRoom' type='checkbox'>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img class='imgtablesmall' id='img2' src='images/enemy1.png'></td>
+                    <td>
+                        <select class='changeImage drawCurRoom' id='type2' type='enemy'>
+                            <option value='1'>enemy 1</option>
+                            <option value='2'>enemy 2</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id='pos2' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos2').append('<option>'+i+'</option>');}</script></select>
+                    </td>
+                    <td>
+                        <input id='status2' class='drawCurRoom' type='checkbox'>
+                    </td>
+                    <td width='50'></td>
+                    <td><img class='imgtablesmall' id='img6' src='images/floor1.png'></td>
+                    <td>
+                        <select class='changeImage drawCurRoom' id='type6' type='floor'>
+                            <option value='1'>floor 1</option>
+                            <option value='2'>floor 2</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id='pos6' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos6').append('<option>'+i+'</option>');}</script></select>
+                    </td>
+                    <td>
+                        <input id='status6' class='drawCurRoom' type='checkbox'>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img class='imgtablesmall' id='img3' src='images/object1.png'></td>
+                    <td>
+                        <select class='changeImage drawCurRoom' id='type3' type='object'>
+                            <option value='1'>object 1</option>
+                            <option value='2'>object 2</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id='pos3' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos3').append('<option>'+i+'</option>');}</script></select>
+                    </td>
+                    <td>
+                        <input id='status3' class='drawCurRoom' type='checkbox'>
+                    </td>
+                    <td width='50'></td>
+                    <td><img class='imgtablesmall' id='img7' src='images/floor1.png'></td>
+                    <td>
+                        <select class='changeImage drawCurRoom' id='type7' type='floor'>
+                            <option value='1'>floor 1</option>
+                            <option value='2'>floor 2</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id='pos7' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos7').append('<option>'+i+'</option>');}</script></select>
+                    </td>
+                    <td>
+                        <input id='status7' class='drawCurRoom' type='checkbox'>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img class='imgtablesmall' id='img4' src='images/floor1.png'></td>
+                    <td>
+                        <select class='changeImage drawCurRoom' id='type4' type='floor'>
+                            <option value='1'>floor 1</option>
+                            <option value='2'>floor 2</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id='pos4' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos4').append('<option>'+i+'</option>');}</script></select>
+                    </td>
+                    <td>
+                        <input id='status4' class='drawCurRoom' type='checkbox'>
+                    </td>
+                    <td width='50'></td>
+                    <td><img class='imgtablesmall' id='img8' src='images/floor1.png'></td>
+                    <td>
+                        <select class='changeImage drawCurRoom' id='type8' type='floor'>
+                            <option value='1'>floor 1</option>
+                            <option value='2'>floor 2</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id='pos8' class='drawCurRoom'><script>for(var i=1;i<26;i++){$('#pos8').append('<option>'+i+'</option>');}</script></select>
+                    </td>
+                    <td>
+                        <input id='status8' class='drawCurRoom' type='checkbox'>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>-->
+    <!--<div style='width:700px;margin-left:50px;position:absolute;top:730px'>-->
+    <br>
+        <textarea id='exported' style='width:696px;min-height:56px;resize:vertical;margin-left:50px;'>
+        </textarea>
+    <!--</div>-->
+	<script type="text/javascript">
+        $(document).ready(makeBoxesDraggable());
+        linesHelper();
+        connectLines();
+
+        function drawRoomGetInfo(elem){
+            var room = elem.id.slice(3);
+            $('#roomnumber').val(room);
+            $('#newnorth').val(rooms[room]['doorNorthTo']);
+            $('#neweast').val(rooms[room]['doorEastTo']);
+            $('#newsouth').val(rooms[room]['doorSouthTo']);
+            $('#newwest').val(rooms[room]['doorWestTo']);
+
+            if(rooms[room]['doorNorthStatus'] === 'closed'){
+                $('#closednorth').prop('checked', true);
+            }
+            else{
+                $('#closednorth').prop('checked', false);
+            }
+            if(rooms[room]['doorEastStatus'] === 'closed'){
+                $('#closedeast').prop('checked', true);
+            }
+            else{
+                $('#closedeast').prop('checked', false);
+            }
+            if(rooms[room]['doorSouthStatus'] === 'closed'){
+                $('#closedsouth').prop('checked', true);
+            }
+            else{
+                $('#closedsouth').prop('checked', false);
+            }
+            if(rooms[room]['doorWestStatus'] === 'closed'){
+                $('#closedwest').prop('checked', true);
+            }
+            else{
+                $('#closedwest').prop('checked', false);
+            }
+
+            for(var i = 1; i <= 8; i++){
+                //document.getElementById('type'+i).selectedIndex = rooms[room]['type'+i] - 1;
+                $('#type'+i).val(rooms[room]['type'+i]);
+                $('#pos'+i).val(rooms[room]['pos'+i]);
+                if(rooms[room]['status'+i] === 'on'){
+                    $('#status'+i).prop('checked', true);
+                }
+                else{
+                    $('#status'+i).prop('checked', false);
+                }
+            }
+            
+            $('#roomImage').empty();
+            $('#roomImage').append('<img src="images/room.png">');
+            if($('#closednorth').is(':checked') && $('#newnorth').val()!==''){$('#roomImage').append('<img src="images/DoorNC.png">');}
+            if(!$('#closednorth').is(':checked') && $('#newnorth').val()!==''){$('#roomImage').append('<img src="images/DoorN.png">');}
+            if($('#closedeast').is(':checked') && $('#neweast').val() !== ''){$('#roomImage').append('<img src="images/DoorEC.png">');}
+            if(!$('#closedeast').is(':checked') && $('#neweast').val()!==''){$('#roomImage').append('<img src="images/DoorE.png">');}
+
+            for(var i = 1; i <= 25; i++){
+                for(var j = 1; j <= 8; j++){
+                    if(rooms[room]['status'+j] === 'on' && parseInt(rooms[room]['pos'+j]) === i){
+                        $('#roomImage').append('<img src="'+$('#img'+j).attr('src')+'" style="position:absolute;top:'+(posTableY[rooms[room]['pos'+j]-1] - 24)+'px;left:'+(posTableX[rooms[room]['pos'+j]-1])+'px">');
+                    }
+                }
+            }
+
+            if($('#closedsouth').is(':checked') && $('#newsouth').val()!==''){$('#roomImage').append('<img src="images/DoorSC.png">');}
+            if(!$('#closedsouth').is(':checked') && $('#newsouth').val()!==''){$('#roomImage').append('<img src="images/DoorS.png">');}
+            if($('#closedwest').is(':checked') && $('#newwest').val() !== ''){$('#roomImage').append('<img src="images/DoorWC.png">');}
+            if(!$('#closedwest').is(':checked') && $('#newwest').val()!== ''){$('#roomImage').append('<img src="images/DoorW.png">');}
+        }
+        function drawCurrentRoom(){
+            $('#roomImage').empty();
+            $('#roomImage').append('<img src="images/room.png">');
+            if($('#closednorth').is(':checked') && $('#newnorth').val()!==''){$('#roomImage').append('<img src="images/DoorNC.png">');}
+            if(!$('#closednorth').is(':checked') && $('#newnorth').val()!==''){$('#roomImage').append('<img src="images/DoorN.png">');}
+            if($('#closedeast').is(':checked') && $('#neweast').val() !== ''){$('#roomImage').append('<img src="images/DoorEC.png">');}
+            if(!$('#closedeast').is(':checked') && $('#neweast').val()!==''){$('#roomImage').append('<img src="images/DoorE.png">');}
+
+            for(var i = 1; i <= 25; i++){
+                for(var j = 1; j <= 8; j++){
+                    if($('#status'+j).is(':checked') && parseInt($('#pos'+j).val()) === i){
+                        $('#roomImage').append('<img src="'+$('#img'+j).attr('src')+'" style="position:absolute;top:'+(posTableY[$('#pos'+j).val()-1] - 24)+'px;left:'+posTableX[$('#pos'+j).val()-1]+'px">');
+                    }
+                }
+            }
+
+            if($('#closedsouth').is(':checked') && $('#newsouth').val()!==''){$('#roomImage').append('<img src="images/DoorSC.png">');}
+            if(!$('#closedsouth').is(':checked') && $('#newsouth').val()!==''){$('#roomImage').append('<img src="images/DoorS.png">');}
+            if($('#closedwest').is(':checked') && $('#newwest').val() !== ''){$('#roomImage').append('<img src="images/DoorWC.png">');}
+            if(!$('#closedwest').is(':checked') && $('#newwest').val()!== ''){$('#roomImage').append('<img src="images/DoorW.png">');}
+        }
+
+        //function triggerChanges(){
+        //    $('.changeImage').trigger('change');
+        //    $('.drawCurRoom').trigger('change');
+        //}
+        $('.changeImage').change(function(){
+            $('#img'+this.id.slice(4)).attr('src', 'images/'+this.getAttribute('type')+this.value+'.png');
+        });
+        $('.drawCurRoom').change(function(){
+            drawCurrentRoom();
+            exportLevel();
+        });
+        //$('#draw').on('dblclick drag', '.box', function(){
+          $('#draw').on('dblclick', '.box', function(){
+            drawRoomGetInfo(this);
+        });
+        $('#box1').dblclick();
+        exportLevel();
+	</script>
+</body>
+</html>

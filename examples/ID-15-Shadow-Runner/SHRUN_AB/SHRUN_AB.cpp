@@ -23,7 +23,6 @@
 #include "items.h"
 #include "playfield.h"
 
-
 typedef void (*FunctionPointer) ();
 
 const FunctionPointer PROGMEM mainGameLoop[] = {
@@ -52,4 +51,3 @@ void loop() {
   ((FunctionPointer) pgm_read_word (&mainGameLoop[gameState]))();
   arduboy.display();
 }
-

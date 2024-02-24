@@ -38,3 +38,8 @@ void EEPROMClass::boot()
 	eepromPtr = (uint8_t *)malloc(1024);
 	// diskr(eepromPtr, 1024);
 }
+
+uint16_t EEPROMClass::length()
+{
+	return 1024;
+}

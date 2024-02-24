@@ -1,0 +1,42 @@
+Background and Chain Graphics notes.
+14/06/2017
+by Grapple Bug
+
+Background
+-----
+This explanation references the "background display logic" PNG seen in our "mockups" folder.
+
+- The reference PNG is 3 Arduboy screens wide and 1 Arduboy screen tall - each grey square is a 16x16 pixel grid section.
+- As you can see in the reference PNG, our background fixtures (seen in the area indicated in RED) are spaced apart evenly from each other by 80 pixels.
+- These fixtures will either be a torch or a window. There's a 2/3 chance for a torch to appear and a 1/3 chance for a window to appear.
+- Each torch has a 1/3 chance of carrying a Bad Flame. Each Bad Flame has a 50% chance to jump towards the player or stay on the wall.
+- Our background features are surrouned by brick tiles (indicated in the dark blue and light blue areas) and these appear based on a set of possible options.
+- Here is the key we are using for the brick tile placement: 0 indicates no bricks, 1 indicates the first image in our brick spritesheet (dungeonBricks_16x16.png), 2 indicates the 2nd and 3 indicates the 3rd.
+- Here are all 16 possible brick placement patterns:
+
+30	20	02	03	20	01	00	20
+21	13	33	30	01	32	12	31
+
+00	02	00	20	01	03	02	20
+32	21	13	12	20	12	31	03
+
+- Each pattern has an equal (1/16) chance of appearing.
+
+
+Chain Graphics
+-----
+This explanation references the "chains display logic" PNG seen in our "mockups" folder.
+
+- The reference PNG is 1 Arduboy screen wide and 1 Arduboy screen tall - each grey square is a 16x16 pixel grid section.
+- The light blue, medium blue and dark blue grid sections represent the 3 sections of each possible chain set.
+- Any chains appearing in the blue area are always drawn 100% of the time.
+- Chains appearing in the bright red area have a 50% chance of being drawn. They are drawn 1/2 the time.
+- Chains appearing in the dark red area have only a 25% chance of being drawn. They are only drawn 1/4 of the time.
+- Here is the key we are using for the chain graphic placement: 0 indicates no chain links, 2 indicates a chain 2 links long, 3 indicates a chain 3 links long and 4 indicates a chain 4 links long.
+- Here are all 8 possible chain graphic combinations:
+
+024	420	402	224
+
+034	324	230	340
+
+- Each pattern has an equal (1/8) chance of appearing.

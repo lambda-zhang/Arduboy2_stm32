@@ -5,10 +5,6 @@
 #include "FixedMath.h"
 #include "Platform.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 static Arduboy2Base arduboy;
 static ArduboyTones sound(arduboy.audio.enabled);
 static Sprites sprites;
@@ -219,7 +215,3 @@ void loop()
     arduboy.display(false);
   }
 }
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */

@@ -14,10 +14,6 @@
 
 #include <Arduboy2.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 // block in EEPROM to save high scores
 #define EE_FILE 2
 
@@ -770,7 +766,3 @@ void playToneTimed(uint16_t count, uint16_t duration)
   arduboy.delayShort(duration);
   beep.noTone();
 }
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */

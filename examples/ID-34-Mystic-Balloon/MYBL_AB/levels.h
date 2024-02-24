@@ -34,7 +34,7 @@ bool gridGetSolid(int8_t x, int8_t y) {
   return ((b >> (x % 8)) & 0x01);
 }
 
-static byte gridGetTile(int8_t x, int8_t y) {
+byte gridGetTile(int8_t x, int8_t y) {
   //if (!gridGetSolid(x, y)) return 0;
   if (!gridGetSolid(x, y)) return 16;
   //if (x < 0 || x >= LEVEL_WIDTH || y < 0 || y >= LEVEL_HEIGHT || !gridGetSolid(x, y))
@@ -74,7 +74,7 @@ static byte gridGetTile(int8_t x, int8_t y) {
 }
 
 
-static void levelLoad(const uint8_t *lvl) {
+void levelLoad(const uint8_t *lvl) {
   byte i = 0;
   lvl += LEVEL_ARRAY_SIZE >> 3;
 
@@ -148,7 +148,7 @@ static void levelLoad(const uint8_t *lvl) {
   }
 }
 
-static void drawGrid() {
+void drawGrid() {
   //Serial.println("Start of tile drawing");
   int spacing = 16;
   //for (int x = 0; x < 9; ++x) {
@@ -220,7 +220,7 @@ void kidHurt()
   //}
 }
 
-static void checkCollisions()
+void checkCollisions()
 {
   if (kid.balloons == 0)
     return;
@@ -396,7 +396,7 @@ static void checkCollisions()
   }
 }
 
-static void drawHUD()
+void drawHUD()
 {
   //for (byte i = 0; i < 16; i++)
   for (byte i = 15; i < 16; --i)

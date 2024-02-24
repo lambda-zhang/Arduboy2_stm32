@@ -39,10 +39,6 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <ArduboyTones.h>
 #include "bitmaps.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 static Arduboy2 arduboy;
 static ArduboyTones sound(arduboy.audio.enabled);
 
@@ -449,7 +445,3 @@ byte getOffset(unsigned int s) {
   if (s > 9) { return 6; }
   return 0;
 }
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */

@@ -9,10 +9,6 @@
 #include "src/sfx.h"
 #include "src/tileBitmaps.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 Arduboy2Base arduboy;
 ArduboyPlaytune tones(arduboy.audio.enabled);
 
@@ -51,7 +47,3 @@ void loop() {
     game.render(loopCounter);
     arduboy.display();
 }
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
