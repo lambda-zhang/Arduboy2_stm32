@@ -360,6 +360,59 @@ void Sprites::drawBitmap(int16_t x, int16_t y,
         // lower registers (l) or simple (r16-r23) upper registers (a).
         : // pushes/clobbers/pops r28 and r29 (y)
       );
+#else
+      // *2 because we use double the bits (mask + bitmap)
+      uint8_t * sprite_ofs = (uint8_t *)(bitmap + ((start_h * w) + xOffset) * 2);
+      uint8_t * buffer_ofs = (Arduboy2Base::sBuffer + ofs);
+      uint8_t * buffer_ofs_2 = (buffer_ofs + 128);
+
+      const uint8_t sprite_ofs_jump = ((w - rendered_width) * 2);
+      const uint8_t buffer_ofs_jump = (WIDTH - rendered_width);
+
+      for(uint8_t yi = loop_h; yi > 0; --yi) {
+        for(uint8_t xi = rendered_width; xi > 0; --xi) {
+          // load bitmap and mask data
+          bitmap_data = pgm_read_byte(sprite_ofs);
+          ++sprite_ofs;
+          mask_data = pgm_read_byte(sprite_ofs);
+          ++sprite_ofs;
+
+          // shift mask and buffer data
+          if(yOffset != 0) {
+            bitmap_data *= mul_amt;
+            mask_data *= mul_amt;
+
+            // SECOND PAGE
+            if(sRow < 7) {
+              data = *buffer_ofs_2;
+              mask_data = (mask_data & 0x00FF) | ((~mask_data)  & 0xFF00);
+              data &= (uint8_t)(mask_data >> 8);
+              data |= (uint8_t)(bitmap_data >> 8);
+              *buffer_ofs_2 = data;
+              ++buffer_ofs_2;
+            }
+          }
+
+          // FIRST_PAGE
+          if(sRow >= 0) {
+            data = *buffer_ofs;
+            mask_data = (mask_data & 0xFF00) | ((~mask_data)  & 0x00FF);
+            data &= (uint8_t)(mask_data);
+            data |= (uint8_t)(bitmap_data);
+            *buffer_ofs = data;
+            ++buffer_ofs;
+          } else {
+            ++buffer_ofs;
+          }
+        }
+
+        if(yi > 0) {
+          ++sRow;
+          sprite_ofs += sprite_ofs_jump;
+          buffer_ofs += buffer_ofs_jump;
+          buffer_ofs_2 += buffer_ofs_jump;
+        }
+      }
 #endif /* STM32F103xB */
       break;
   }
