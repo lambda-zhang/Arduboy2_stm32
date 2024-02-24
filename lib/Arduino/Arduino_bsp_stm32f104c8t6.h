@@ -21,6 +21,7 @@ uint32_t get_adc_val(void);
 		0x2C, /* 选择内部电源操作模式 */                                                             \
 		0x2E, /* */                                                                                            \
 		0x2F, /* */                                                                                            \
+		0xA7, /* 0xa6为常规  0xa7为反显 */ \
 		0xAF, /* 开LCD */                                                                                     \
 		0x40, /* 设置显示起始行 */
 
@@ -108,5 +109,7 @@ void speaker_set_1(int val);
 void speaker_set_2(int val);
 void speaker1_set(uint16_t freq, uint16_t duty);
 void speaker2_set(uint16_t freq, uint16_t duty);
+void audio_timer1_set(uint16_t freq);
+void audio_timer4_set(uint16_t freq);
 
 #endif /* __ARDUINO_BSP_STM32F104C8T6_H__ */

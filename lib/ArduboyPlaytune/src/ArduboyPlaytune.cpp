@@ -64,6 +64,11 @@ prevents a "stuttering" playback because of timing errors:
 #include <avr/power.h>
 #endif /* STM32F103xB */
 
+#ifdef STM32F103xB
+extern void speaker1_set(uint16_t freq, uint16_t duty);
+extern void speaker2_set(uint16_t freq, uint16_t duty);
+#endif /* STM32F103xB */
+
 static const byte tune_pin_to_timer[] = { 3, 1 };
 static volatile byte *_tunes_timer1_pin_port;
 static volatile byte _tunes_timer1_pin_mask;
@@ -147,9 +152,11 @@ void ArduboyPlaytune::initChannel(byte pin)
       TCCR1B = 0;
       bitWrite(TCCR1B, WGM12, 1);
       bitWrite(TCCR1B, CS10, 1);
-#endif /* STM32F103xB */
       _tunes_timer1_pin_port = out_reg;
       _tunes_timer1_pin_mask = pin_mask;
+#else
+      speaker1_set(0, 50);
+#endif /* STM32F103xB */
       break;
     case 3: // 16 bit timer
 #ifndef STM32F103xB
@@ -158,9 +165,11 @@ void ArduboyPlaytune::initChannel(byte pin)
       TCCR3B = 0;
       bitWrite(TCCR3B, WGM32, 1);
       bitWrite(TCCR3B, CS30, 1);
-#endif /* STM32F103xB */
       _tunes_timer3_pin_port = out_reg;
       _tunes_timer3_pin_mask = pin_mask;
+#else
+      speaker2_set(0, 50);
+#endif /* STM32F103xB */
       playNote(0, 60);  /* start and stop channel 0 (timer 3) on middle C so wait/delay works */
       stopNote(0);
       break;
@@ -213,6 +222,8 @@ void ArduboyPlaytune::playNote(byte chan, byte note)
         OCR1A = ocr;
         TCNT1 = 0;  //LJS
         bitWrite(TIMSK1, OCIE1A, 1);
+#else
+        speaker1_set(frequency2, 50);
 #endif /* STM32F103xB */
       }
       break;
@@ -226,6 +237,8 @@ void ArduboyPlaytune::playNote(byte chan, byte note)
       wait_timer_playing = true;
 #ifndef STM32F103xB
       bitWrite(TIMSK3, OCIE3A, 1);
+#else
+      speaker2_set(frequency2, 50);
 #endif /* STM32F103xB */
       break;
   }
@@ -240,14 +253,20 @@ void ArduboyPlaytune::stopNote(byte chan)
       if (!tone_playing) {
 #ifndef STM32F103xB
         TIMSK1 &= ~(1 << OCIE1A);                 // disable the interrupt
-#endif /* STM32F103xB */
         *_tunes_timer1_pin_port &= ~(_tunes_timer1_pin_mask);   // keep pin low after stop
+#else
+        speaker1_set(0, 50);
+#endif /* STM32F103xB */
       }
       break;
     case 3:
       wait_timer_playing = false;
       if (!mute_score) {
+#ifndef STM32F103xB
         *_tunes_timer3_pin_port &= ~(_tunes_timer3_pin_mask);   // keep pin low after stop
+#else
+        speaker2_set(0, 50);
+#endif /* STM32F103xB */
       }
       break;
   }
@@ -321,14 +340,18 @@ void ArduboyPlaytune::closeChannels()
       case 1:
 #ifndef STM32F103xB
         TIMSK1 &= ~(1 << OCIE1A);
-#endif /* STM32F103xB */
         *_tunes_timer1_pin_port &= ~(_tunes_timer1_pin_mask); // set pin low
+#else
+        speaker1_set(0, 50);
+#endif /* STM32F103xB */
         break;
       case 3:
 #ifndef STM32F103xB
         TIMSK3 &= ~(1 << OCIE3A);
-#endif /* STM32F103xB */
         *_tunes_timer3_pin_port &= ~(_tunes_timer3_pin_mask); // set pin low
+#else
+        speaker2_set(0, 50);
+#endif /* STM32F103xB */
         break;
     }
   }
@@ -374,10 +397,15 @@ void ArduboyPlaytune::tone(unsigned int frequency, unsigned long duration)
   // then turn on the interrupts
 #ifndef STM32F103xB
   OCR1A = ocr;
-#endif /* STM32F103xB */
   timer1_toggle_count = toggle_count;
+#else
+  timer1_toggle_count = duration;
+#endif /* STM32F103xB */
+
 #ifndef STM32F103xB  
   bitWrite(TIMSK1, OCIE1A, 1);
+#else
+  speaker1_set(frequency, 50);
 #endif /* STM32F103xB */
 }
 
@@ -419,6 +447,36 @@ ISR(TIMER3_COMPA_vect)
   // toggle the pin if we're sounding a note
   if (wait_timer_playing && !mute_score && !all_muted) {
     *_tunes_timer3_pin_port ^= _tunes_timer3_pin_mask;
+  }
+
+  if (tune_playing && wait_toggle_count && --wait_toggle_count == 0) {
+    // end of a score wait, so execute more score commands
+    ArduboyPlaytune::step();  // execute commands
+  }
+}
+#else
+void audio_timer1_PeriodElapsedCallback()
+{
+  if (tone_playing) {
+    if (timer1_toggle_count != 0) {
+      if (timer1_toggle_count > 0) timer1_toggle_count--;
+    }
+    else {
+      tone_playing = mute_score = false;
+      speaker1_set(0, 50);
+    }
+  }
+  else {
+    if (!all_muted) {
+      // printf(">>> %s[%d]\r\n", __func__, __LINE__);
+    }
+  }
+}
+
+void audio_timer4_PeriodElapsedCallback()
+{
+  // toggle the pin if we're sounding a note
+  if (wait_timer_playing && !mute_score && !all_muted) {
   }
 
   if (tune_playing && wait_toggle_count && --wait_toggle_count == 0) {

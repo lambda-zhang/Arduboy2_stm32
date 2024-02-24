@@ -2,8 +2,10 @@
 #include <stdio.h>
 
 extern SPI_HandleTypeDef hspi2;
+extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim4;
 
 // return applox number of ms since boot
 unsigned long millis()
@@ -162,6 +164,69 @@ void speaker2_set(uint16_t freq, uint16_t duty)
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, _duty);
 	__HAL_TIM_SET_AUTORELOAD(&htim2, _ARR);
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
+}
+
+void audio_timer1_set(uint16_t freq)
+{
+	uint32_t cru_pclk2 = HAL_RCC_GetPCLK2Freq(); // APB2的总线时钟
+	uint32_t cru_tim2_freq = cru_pclk2 / (htim1.Instance->PSC + 1); // 输入timer分频之后的时钟
+	uint32_t _ARR = (cru_tim2_freq / freq) - 1;
+	uint32_t _duty = 50 * (_ARR + 1) / 100;
+
+	HAL_TIM_Base_Stop_IT(&htim1);
+
+	if (freq < 1) {
+		return;
+	}
+
+	if (_duty > 65535 || _ARR > 65535) {
+		printf("bad freq or bad duty !!\r\n");
+	}
+
+	__HAL_TIM_SET_AUTORELOAD(&htim1, _ARR);
+	HAL_TIM_Base_Start_IT(&htim1);
+}
+
+void audio_timer4_set(uint16_t freq)
+{
+	uint32_t cru_pclk2 = HAL_RCC_GetPCLK2Freq(); // APB2的总线时钟
+	uint32_t cru_tim2_freq = cru_pclk2 / (htim4.Instance->PSC + 1); // 输入timer分频之后的时钟
+	uint32_t _ARR = (cru_tim2_freq / freq) - 1;
+	uint32_t _duty = 50 * (_ARR + 1) / 100;
+
+	HAL_TIM_Base_Stop_IT(&htim4);
+
+	if (freq < 1) {
+		return;
+	}
+
+	if (_duty > 65535 || _ARR > 65535) {
+		printf("bad freq or bad duty !!\r\n");
+	}
+
+	__HAL_TIM_SET_AUTORELOAD(&htim4, _ARR);
+	HAL_TIM_Base_Start_IT(&htim4);
+}
+
+__weak void audio_timer1_PeriodElapsedCallback()
+{
+}
+
+__weak void audio_timer4_PeriodElapsedCallback()
+{
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	/* Prevent unused argument(s) compilation warning */
+	UNUSED(htim);
+	static int cnt1 = 0;
+	static int cnt4 = 0;
+	if(htim->Instance == TIM1) {
+		audio_timer1_PeriodElapsedCallback();
+	} else if (htim->Instance == TIM4) {
+		audio_timer4_PeriodElapsedCallback();
+	}
 }
 
 extern ADC_HandleTypeDef hadc1;

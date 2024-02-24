@@ -13,7 +13,7 @@ extern "C" {
 #undef APP_HELLOWORLD
 #undef APP_RGBLED
 #undef APP_SETSYSTEMEEPROM
-#undef APP_PLAYTUNE
+#define APP_PLAYTUNE
 #undef APP_RUND
 #undef APP_HALLOWEEND
 #undef APP_ARDYNIA
@@ -22,7 +22,7 @@ extern "C" {
 #undef APP_ARDUBOY3D
 #undef APP_SHADOWRUNNER
 #undef APP_MYSTICBALLOON
-#define APP_ARDUBOYTETRIS
+#undef APP_ARDUBOYTETRIS
 
 #ifdef APP_ARDUBREAKOUT
 extern void ArduBreakout_setup();
@@ -81,7 +81,9 @@ extern void ArduboyTetris_loop();
 
 void arduboy2_app_init(void)
 {
-	lcd_set_bl(0);
+	lcd_set_bl(1);
+	audio_timer1_set(1000); // 1ms
+	audio_timer4_set(1000); // 1ms
 
 #ifdef APP_ARDUBREAKOUT
 	ArduBreakout_setup();

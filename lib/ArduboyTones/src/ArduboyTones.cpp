@@ -38,6 +38,12 @@ THE SOFTWARE.
 
 #include "ArduboyTones.h"
 
+#ifdef STM32F103xB
+extern void speaker1_set(uint16_t freq, uint16_t duty);
+extern void speaker2_set(uint16_t freq, uint16_t duty);
+static volatile bool tonesToBePlay = false; // 是否还有没播放的
+#endif /* STM32F103xB */
+
 // pointer to a function that indicates if sound is enabled
 static bool (*outputEnabled)();
 
@@ -76,6 +82,8 @@ void ArduboyTones::tone(uint16_t freq, uint16_t dur)
 {
 #ifndef STM32F103xB
   bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
+#else
+  speaker2_set(0, 50);
 #endif /* STM32F103xB */
   inProgmem = false;
   tonesStart = tonesIndex = toneSequence; // set to start of sequence array
@@ -83,6 +91,9 @@ void ArduboyTones::tone(uint16_t freq, uint16_t dur)
   toneSequence[1] = dur;
   toneSequence[2] = TONES_END; // set end marker
   nextTone(); // start playing
+#ifdef STM32F103xB
+  tonesToBePlay = true;
+#endif /* STM32F103xB */
 }
 
 void ArduboyTones::tone(uint16_t freq1, uint16_t dur1,
@@ -90,6 +101,8 @@ void ArduboyTones::tone(uint16_t freq1, uint16_t dur1,
 {
 #ifndef STM32F103xB
   bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
+#else
+  speaker2_set(0, 50);
 #endif /* STM32F103xB */
   inProgmem = false;
   tonesStart = tonesIndex = toneSequence; // set to start of sequence array
@@ -99,6 +112,9 @@ void ArduboyTones::tone(uint16_t freq1, uint16_t dur1,
   toneSequence[3] = dur2;
   toneSequence[4] = TONES_END; // set end marker
   nextTone(); // start playing
+#ifdef STM32F103xB
+  tonesToBePlay = true;
+#endif /* STM32F103xB */
 }
 
 void ArduboyTones::tone(uint16_t freq1, uint16_t dur1,
@@ -107,6 +123,8 @@ void ArduboyTones::tone(uint16_t freq1, uint16_t dur1,
 {
 #ifndef STM32F103xB
   bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
+#else
+  speaker2_set(0, 50);
 #endif /* STM32F103xB */
   inProgmem = false;
   tonesStart = tonesIndex = toneSequence; // set to start of sequence array
@@ -118,26 +136,39 @@ void ArduboyTones::tone(uint16_t freq1, uint16_t dur1,
   toneSequence[5] = dur3;
   // end marker was set in the constructor and will never change
   nextTone(); // start playing
+#ifdef STM32F103xB
+  tonesToBePlay = true;
+#endif /* STM32F103xB */
 }
 
 void ArduboyTones::tones(const uint16_t *tones)
 {
 #ifndef STM32F103xB
   bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
+#else
+  speaker2_set(0, 50);
 #endif /* STM32F103xB */
   inProgmem = true;
   tonesStart = tonesIndex = (uint16_t *)tones; // set to start of sequence array
   nextTone(); // start playing
+#ifdef STM32F103xB
+  tonesToBePlay = true;
+#endif /* STM32F103xB */
 }
 
 void ArduboyTones::tonesInRAM(uint16_t *tones)
 {
 #ifndef STM32F103xB
   bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
+#else
+  speaker2_set(0, 50);
 #endif /* STM32F103xB */
   inProgmem = false;
   tonesStart = tonesIndex = tones; // set to start of sequence array
   nextTone(); // start playing
+#ifdef STM32F103xB
+  tonesToBePlay = true;
+#endif /* STM32F103xB */
 }
 
 void ArduboyTones::noTone()
@@ -149,6 +180,9 @@ void ArduboyTones::noTone()
 #ifdef TONES_VOLUME_CONTROL
   bitClear(TONE_PIN2_PORT, TONE_PIN2); // set pin 2 low
 #endif
+#else
+  tonesToBePlay = false;
+  speaker2_set(0, 50);
 #endif /* STM32F103xB */
   tonesPlaying = false;
 }
@@ -277,6 +311,13 @@ void ArduboyTones::nextTone()
   OCR3A = ocrValue;
   durationToggleCount = toggleCount;
   bitWrite(TIMSK3, OCIE3A, 1); // enable the output compare match interrupt
+#else
+  durationToggleCount = dur;
+  if (freq == SILENT_FREQ) {
+    speaker2_set(0, 50);
+  } else {
+    speaker2_set(freq, 50);
+  }
 #endif /* STM32F103xB */
 }
 
@@ -306,6 +347,26 @@ ISR(TIMER3_COMPA_vect)
   }
   else {
     ArduboyTones::nextTone();
+  }
+}
+#else
+void audio_timer4_PeriodElapsedCallback()
+{
+  if (durationToggleCount != 0) {
+    if (!toneSilent) {
+#ifdef TONES_VOLUME_CONTROL
+      if (toneHighVol) {
+      }
+#endif
+    }
+    if (durationToggleCount > 0) {
+      durationToggleCount--;
+    }
+  }
+  else {
+    if (tonesToBePlay == true) {
+      ArduboyTones::nextTone();
+    }
   }
 }
 #endif /* STM32F103xB */
