@@ -212,7 +212,8 @@ CPP_SOURCE += examples/Arduboy3D/Source/Arduboy3D/Draw.cpp \
 endif
 ifeq ($(APP_SHADOWRUNNER), 1)
 APP_DEFS = -DAPP_SHADOWRUNNER
-CPP_SOURCE += examples/ShadowRunner/ShadowRunner.cpp
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/ID-15-Shadow-Runner/SHRUN_AB/SHRUN_AB.cpp
 endif
 ifeq ($(APP_MYSTICBALLOON), 1)
 APP_DEFS = -DAPP_MYSTICBALLOON

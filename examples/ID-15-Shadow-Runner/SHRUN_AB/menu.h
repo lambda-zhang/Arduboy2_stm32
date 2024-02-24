@@ -72,7 +72,6 @@ void stateMenuMain()
 
 void stateMenuHelp()
 {
-  sprites.drawSelfMasked(32, 0, qrcode, 0);
   if (arduboy.justPressed(A_BUTTON | B_BUTTON)) gameState = STATE_MENU_MAIN;
 }
 
