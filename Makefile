@@ -145,7 +145,10 @@ examples/Arduboy3D/Source/Arduboy3D/Projectile.cpp \
 examples/Arduboy3D/Source/Arduboy3D/Sounds.cpp \
 examples/Arduboy3D/Source/Arduboy3D/Arduboy3D.cpp \
 examples/ShadowRunner/ShadowRunner.cpp \
-examples/ID-34-Mystic-Balloon/MYBL_AB/MYBL_AB.cpp
+examples/ID-34-Mystic-Balloon/MYBL_AB/MYBL_AB.cpp \
+examples/ArduboyTetris/Background.cpp \
+examples/ArduboyTetris/Piece.cpp \
+examples/ArduboyTetris/Tetris.cpp
 
 # ASM sources
 ASM_SOURCES =  \

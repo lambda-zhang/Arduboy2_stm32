@@ -21,7 +21,8 @@ extern "C" {
 #undef APP_FLAPPYBALL
 #undef APP_ARDUBOY3D
 #undef APP_SHADOWRUNNER
-#define APP_MYSTICBALLOON
+#undef APP_MYSTICBALLOON
+#define APP_ARDUBOYTETRIS
 
 #ifdef APP_ARDUBREAKOUT
 extern void ArduBreakout_setup();
@@ -71,6 +72,9 @@ extern void ShadowRunner_loop();
 #elif defined(APP_MYSTICBALLOON)
 extern void Mystic_Balloon_setup();
 extern void Mystic_Balloon_loop();
+#elif defined(APP_ARDUBOYTETRIS)
+extern void ArduboyTetris_setup();
+extern void ArduboyTetris_loop();
 #else
 #error Please select the app
 #endif
@@ -143,6 +147,10 @@ void arduboy2_app_init(void)
 	Mystic_Balloon_setup();
 	while (1)
 		Mystic_Balloon_loop();
+#elif defined(APP_ARDUBOYTETRIS)
+	ArduboyTetris_setup();
+	while (1)
+		ArduboyTetris_loop();
 #else
 #error Please select the app
 #endif
