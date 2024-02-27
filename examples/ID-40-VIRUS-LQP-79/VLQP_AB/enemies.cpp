@@ -255,6 +255,8 @@ bool zombieHealthOffset(Enemy& obj, char amount)
     obj.flashTime = ZOMBIE_FLASH_TIME;
     sound.tone(640, 20);
   }
+
+  return true;
 }
 
 

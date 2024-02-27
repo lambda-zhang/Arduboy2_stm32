@@ -55,8 +55,8 @@ void drawLevel()
 void drawNumbers(byte NumbersX, byte NumbersY, byte fontType, int timerOrScoreOrLevel)
 {
   char buf[10];
-  char charLen;
-  char pad;
+  char charLen = 0;
+  char pad = 0;
   //scorePlayer = arduboy.cpuLoad();
   switch (timerOrScoreOrLevel)
   {

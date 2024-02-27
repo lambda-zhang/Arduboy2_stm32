@@ -12,6 +12,8 @@ int checkDoorOrientation()
   if (exitDoor.x == EXIT_ON_WEST_BORDER) return EXIT_FACING_WEST;
   if (exitDoor.y == EXIT_ON_NORTH_BORDER) return EXIT_FACING_NORTH;
   if (exitDoor.x == EXIT_ON_EAST_BORDER) return EXIT_FACING_EAST;
+
+  return 0;
 }
 
 void setDoorPosition(int x, int y)
