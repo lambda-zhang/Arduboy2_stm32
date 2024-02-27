@@ -236,6 +236,8 @@ boolean isOneBlobDropPossible(int array_x, int array_y)
     }
   }
   else return false;
+
+  return false;
 }
 
 
@@ -608,7 +610,7 @@ boolean isRowThreeFree()
     if (field [array_x][3] == BLOB_FREE) return true;
     else return false;
   }
-
+  return false;
 }
 
 void checkIfBlobsAreGettingToHigh()

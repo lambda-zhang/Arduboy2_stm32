@@ -1,0 +1,6 @@
+--2024-02-24 22:18:36--  https://cndl.synology.cn/download/DSM/release/6.2.2/24922/DSM_DS119j_24922.pat?model=DS119j
+正在解析主机 cndl.synology.cn (cndl.synology.cn)... 180.163.57.90, 180.163.57.73, 180.163.57.82, ...
+正在连接 cndl.synology.cn (cndl.synology.cn)|180.163.57.90|:443... 已连接。
+已发出 HTTP 请求，正在等待回应... 403 Forbidden
+2024-02-24 22:18:37 错误 403：Forbidden。
+
