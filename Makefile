@@ -57,6 +57,7 @@ APP_SPACEFIGHTER ?= 0
 APP_OMEGACHASE ?= 0
 APP_HUMANITYREVENGEDC ?= 0
 APP_COSMICPODS ?= 0
+APP_ARDUBOYARCODIA ?= 0
 
 ######################################
 # building variables
@@ -118,6 +119,7 @@ lib/Arduino/Arduino.cpp \
 lib/Arduino/Print.cpp \
 lib/Arduino/Arduino_bsp_stm32f104c8t6.cpp \
 lib/Arduino/HardwareSerial.cpp \
+lib/Arduino/WString.cpp \
 Core/Src/Arduboy2_app.cpp
 
 ifeq ($(APP_ARDUBREAKOUT), 1)
@@ -347,6 +349,9 @@ CPP_SOURCE += examples/Humanity_Revenge_DC/Humanity_Revenge_DC.cpp
 endif
 ifeq ($(APP_COSMICPODS), 1)
 CPP_SOURCE += examples/CosmicPods/CosmicPods.cpp
+endif
+ifeq ($(APP_ARDUBOYARCODIA), 1)
+CPP_SOURCE += examples/ArduboyArcodia/Arcodia.cpp
 endif
 
 # ASM sources

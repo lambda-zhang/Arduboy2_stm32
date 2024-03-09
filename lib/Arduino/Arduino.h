@@ -29,6 +29,8 @@ void randomSeed(int a);
 int random(int max);
 int random(int min, int max);
 void ltoa(long n, char s[], int base);
+void ultoa(uint16_t value, char *str, int base);
+char *dtostrf(double val, signed char width, unsigned char prec, char *sout);
 
 typedef uint8_t byte;
 typedef bool boolean;
@@ -43,7 +45,6 @@ typedef unsigned int word;
 
 // https://github.com/arduino/ArduinoCore-sam/blob/master/cores/arduino/avr/pgmspace.h
 #define PSTR(str) (str)
-#define F(str) (str)
 
 #define memchr_P(s, c, n) memchr((s), (c), (n))
 #define memcmp_P(s1, s2, n) memcmp((s1), (s2), (n))
