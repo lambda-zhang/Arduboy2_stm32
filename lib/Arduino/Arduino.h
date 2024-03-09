@@ -16,6 +16,8 @@ extern HardwareSerial Serial;
 
 #define PROGMEM
 
+#define PGM_P const char *
+
 #define bitRead(value, bit) (((value) >> (bit)) & 0x01)
 #define bitSet(value, bit) ((value) |= (1UL << (bit)))
 #define bitClear(value, bit) ((value) &= ~(1UL << (bit)))
@@ -30,6 +32,7 @@ void ltoa(long n, char s[], int base);
 
 typedef uint8_t byte;
 typedef bool boolean;
+typedef unsigned int word;
 
 #define PI               3.14159265358979f
 

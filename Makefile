@@ -52,6 +52,11 @@ APP_SUNFIRE ?= 0
 APP_EEPROMTOOL ?= 0
 APP_DARKANDUNDER ?= 0
 APP_SANSAN ?= 0
+APP_NIGHTRAID ?= 0
+APP_SPACEFIGHTER ?= 0
+APP_OMEGACHASE ?= 0
+APP_HUMANITYREVENGEDC ?= 0
+APP_COSMICPODS ?= 0
 
 ######################################
 # building variables
@@ -320,6 +325,28 @@ CPP_SOURCE += examples/sansan/bitmaps.cpp \
 	examples/sansan/obj.cpp \
 	examples/sansan/sin.cpp \
 	examples/sansan/sansan.cpp
+endif
+ifeq ($(APP_NIGHTRAID), 1)
+CPP_SOURCE += examples/night-raid/night-raid.cpp
+endif
+ifeq ($(APP_SPACEFIGHTER), 1)
+CPP_SOURCE += examples/SpaceFighter/SpaceFighter.cpp \
+	examples/SpaceFighter/SpaceFigther_bitmaps.cpp \
+	examples/SpaceFighter/collision.cpp \
+	examples/SpaceFighter/draw.cpp \
+	examples/SpaceFighter/generator.cpp \
+	examples/SpaceFighter/movement.cpp
+endif
+ifeq ($(APP_OMEGACHASE), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/OmegaChase/Omega_chase_V_1_0.cpp
+endif
+ifeq ($(APP_HUMANITYREVENGEDC), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/Humanity_Revenge_DC/Humanity_Revenge_DC.cpp
+endif
+ifeq ($(APP_COSMICPODS), 1)
+CPP_SOURCE += examples/CosmicPods/CosmicPods.cpp
 endif
 
 # ASM sources
