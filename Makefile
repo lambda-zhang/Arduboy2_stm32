@@ -58,6 +58,7 @@ APP_OMEGACHASE ?= 0
 APP_HUMANITYREVENGEDC ?= 0
 APP_COSMICPODS ?= 0
 APP_ARDUBOYARCODIA ?= 0
+APP_MINIROGUE ?= 0
 
 ######################################
 # building variables
@@ -353,6 +354,25 @@ endif
 ifeq ($(APP_ARDUBOYARCODIA), 1)
 CPP_SOURCE += examples/ArduboyArcodia/Arcodia.cpp
 endif
+ifeq ($(APP_MINIROGUE), 1)
+CPP_SOURCE += examples/MiniRogue/MiniRogue/MiniRogue.cpp \
+	examples/MiniRogue/MiniRogue/src/Game.cpp \
+	examples/MiniRogue/MiniRogue/src/fonts/Font3x5.cpp \
+	examples/MiniRogue/MiniRogue/src/states/BaseState.cpp \
+	examples/MiniRogue/MiniRogue/src/states/EventState.cpp \
+	examples/MiniRogue/MiniRogue/src/states/FightMonstersState.cpp \
+	examples/MiniRogue/MiniRogue/src/states/GameOverState.cpp \
+	examples/MiniRogue/MiniRogue/src/states/MerchantState.cpp \
+	examples/MiniRogue/MiniRogue/src/states/RestingState.cpp \
+	examples/MiniRogue/MiniRogue/src/states/ShowCardsState.cpp \
+	examples/MiniRogue/MiniRogue/src/states/SplashScreenState.cpp \
+	examples/MiniRogue/MiniRogue/src/states/TitleScreenState.cpp \
+	examples/MiniRogue/MiniRogue/src/states/TrapState.cpp \
+	examples/MiniRogue/MiniRogue/src/states/TreasureState.cpp \
+	examples/MiniRogue/MiniRogue/src/utils/Arduboy2Ext.cpp \
+	examples/MiniRogue/MiniRogue/src/utils/GameContext.cpp
+endif
+
 
 # ASM sources
 ASM_SOURCES =  \
