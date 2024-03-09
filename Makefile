@@ -51,7 +51,7 @@ APP_OUTPOSTDEFENSE ?= 0
 APP_SUNFIRE ?= 0
 APP_EEPROMTOOL ?= 0
 APP_DARKANDUNDER ?= 0
-
+APP_SANSAN ?= 0
 
 ######################################
 # building variables
@@ -313,6 +313,13 @@ CPP_SOURCE += examples/Dark-And-Under/Dark-And-Under/src/controllers/BaseControl
 	examples/Dark-And-Under/Dark-And-Under/src/utils/Arduboy2Ext.cpp \
 	examples/Dark-And-Under/Dark-And-Under/src/utils/EnemyNames.cpp \
 	examples/Dark-And-Under/Dark-And-Under/Dark-And-Under.cpp
+endif
+ifeq ($(APP_SANSAN), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/sansan/bitmaps.cpp \
+	examples/sansan/obj.cpp \
+	examples/sansan/sin.cpp \
+	examples/sansan/sansan.cpp
 endif
 
 # ASM sources
