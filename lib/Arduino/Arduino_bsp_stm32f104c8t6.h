@@ -26,7 +26,7 @@ uint32_t get_adc_val(void);
 	0xD5, /* set display clock divide ratio/oscillator frequency */ \
 	0x80, /* 105Hz */ \
 	0xD9, /* Dis-charge /Pre-charge Period Mode Set */ \
-	0xF1, \
+	0x22, \
 	0xDA, /* Common Pads Hardware Configuration Mode Set */ \
 	0x12, \
 	0xDB, /* set vcomh deselect level */ \
