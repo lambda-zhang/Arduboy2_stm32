@@ -60,6 +60,7 @@ APP_COSMICPODS ?= 0
 APP_ARDUBOYARCODIA ?= 0
 APP_MINIROGUE ?= 0
 APP_BOMBERBOY ?= 0
+APP_MINESWEEPER ?= 0
 
 ######################################
 # building variables
@@ -384,6 +385,10 @@ CPP_SOURCE += examples/Bomberboy/Bomberboy/Game.cpp \
 	examples/Bomberboy/Bomberboy/assets.cpp \
 	examples/Bomberboy/Bomberboy/audio.cpp \
 	examples/Bomberboy/Bomberboy/Bomberboy.cpp
+endif
+ifeq ($(APP_MINESWEEPER), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/minesweeper/minesweeper.cpp
 endif
 
 
