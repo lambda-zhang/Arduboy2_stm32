@@ -89,9 +89,7 @@ void checkInputs()
           currentLetter = 0;
           clearCursor();
           gameState = STATE_GAME_INTRO;
-          #ifndef STM32F103xB
           ATM.play(badNews);
-          #endif /* STM32F103xB */
           return;
         }
         else
@@ -327,9 +325,7 @@ void checkInputs()
         if (cursorYesNoY)
         {
           gameState = STATE_MENU_MAIN;
-          #ifndef STM32F103xB
           ATM.play(titleSong);
-          #endif /* STM32F103xB */
           cursorY = 3;
           //gameState = STATE_GAME_OVER;
           //ATM.play(youDied);
@@ -348,9 +344,7 @@ void checkInputs()
       if (arduboy.justPressed(B_BUTTON))
       {
         gameState = STATE_MENU_MAIN;
-        #ifndef STM32F103xB
         ATM.play(titleSong);
-        #endif /* STM32F103xB */
         cursorY = STATE_MENU_CONTINUE + firstGame;
       }
       break;

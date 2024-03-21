@@ -3,9 +3,7 @@
 
 #include <Arduino.h>
 #include <Arduboy2.h>
-#ifndef STM32F103xB
 #include <ATMlib.h>
-#endif /* STM32F103xB */
 #include "bitmaps.h"
 
 
@@ -135,9 +133,7 @@ const byte MAGIC_COST[] = { 4, 5, 7, 9 };
 
 Arduboy2Base arduboy;
 Sprites sprites;
-#ifndef STM32F103xB
 ATMsynth ATM;
-#endif /* STM32F103xB */
 
 byte gameState = STATE_MENU_INTRO;           // start the game with the TEAM a.r.g. logo
 byte previousGameState = STATE_MENU_INTRO;

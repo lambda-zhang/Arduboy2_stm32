@@ -70,18 +70,14 @@ void stateMenuContinue()
 {
   loadGame();
   gameState = STATE_GAME_PLAYING;
-#ifndef STM32F103xB
   ATM.stop();
-#endif /* STM32F103xB */
 }
 
 void stateMenuNew()
 {
   setPlayer();
   gameState = STATE_GAME_NEW;
-#ifndef STM32F103xB
   ATM.play(nameSong);
-#endif /* STM32F103xB */
 }
 
 void toggleSound()

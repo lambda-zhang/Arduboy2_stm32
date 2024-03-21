@@ -291,6 +291,7 @@ ifeq ($(APP_PINBALL), 1)
 CPP_SOURCE += examples/ID-44-Pinball/PNBL_AB/PNBL_AB.cpp
 endif
 ifeq ($(APP_ARDUVENTURE), 1)
+CPP_SOURCE += lib/ATMlib/src/ATMlib.cpp
 CPP_SOURCE += examples/ID-46-Arduventure/ARDU_AB/ARDU_AB.cpp
 endif
 ifeq ($(APP_HELMETSHORDES), 1)
@@ -449,7 +450,8 @@ CPP_INCLUDES =  \
 -Ilib/Arduboy2/src \
 -Ilib/Arduino \
 -Ilib/ArduboyPlaytune/src \
--Ilib/ArduboyTones/src
+-Ilib/ArduboyTones/src \
+-Ilib/ATMlib/src
 
 
 # compile gcc flags

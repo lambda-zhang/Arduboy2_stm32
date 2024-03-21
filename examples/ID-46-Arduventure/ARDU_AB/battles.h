@@ -365,9 +365,7 @@ void stateGameBattle()
           else
           {
             gameState = STATE_GAME_OVER;
-#ifndef STM32F103xB
             ATM.play(youDied);
-#endif /* STM32F103xB */
             //++fadeCounter;    // Player is dead.
           }
         }
@@ -527,9 +525,7 @@ void stateGameBattle()
  */
 void setupBattle()
 {
-#ifndef STM32F103xB
   ATM.play(battleSong);
-#endif /* STM32F103xB */
   songPlaying = 0;
   foundSomething = false;
   //textRollAmount = 0;

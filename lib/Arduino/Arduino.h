@@ -34,7 +34,7 @@ char *dtostrf(double val, signed char width, unsigned char prec, char *sout);
 
 typedef uint8_t byte;
 typedef bool boolean;
-typedef unsigned int word;
+typedef uint16_t word;
 
 #define PI               3.14159265358979f
 

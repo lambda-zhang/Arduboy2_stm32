@@ -739,9 +739,7 @@ void changeSong(byte region)
       if (songPlaying != 1)
       {
         songPlaying = 1;
-        #ifndef STM32F103xB
         ATM.play(fieldSong);
-        #endif /* STM32F103xB */
       }
       break;
     case REGION_SWAMP:
@@ -751,9 +749,7 @@ void changeSong(byte region)
       if (songPlaying != 2)
       {
         songPlaying = 2;
-        #ifndef STM32F103xB
         ATM.play(swampSong);
-        #endif /* STM32F103xB */
       }
       break;
     case REGION_FOREST:
@@ -761,36 +757,28 @@ void changeSong(byte region)
       if (songPlaying != 3)
       {
         songPlaying = 3;
-        #ifndef STM32F103xB
         ATM.play(darkForest);
-        #endif /* STM32F103xB */
       }
       break;
     case REGION_CANYONS:
       if (songPlaying != 4)
       {
         songPlaying = 4;
-        #ifndef STM32F103xB
         ATM.play(canyonSong);
-        #endif /* STM32F103xB */
       }
       break;
     case REGION_CAVE_INTERIOR:
       if (songPlaying != 5)
       {
         songPlaying = 5;
-        #ifndef STM32F103xB
         ATM.play(badNews);
-        #endif /* STM32F103xB */
       }
       break;
     case REGION_YOUR_GARDEN:
       if (songPlaying != 6)
       {
         songPlaying = 6;
-        #ifndef STM32F103xB
         ATM.play(nameSong);
-        #endif /* STM32F103xB */
       }
       break;
     default:

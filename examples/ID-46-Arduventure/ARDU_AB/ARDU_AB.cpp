@@ -73,9 +73,7 @@ int main() {
 void setup() {
   arduboy.boot();
   arduboy.audio.begin();
-  #ifndef STM32F103xB
   ATM.play(titleSong);
-  #endif /* STM32F103xB */
   arduboy.setFrameRate(60);                                 // set the frame rate of the game at 60 fps
 }
 
