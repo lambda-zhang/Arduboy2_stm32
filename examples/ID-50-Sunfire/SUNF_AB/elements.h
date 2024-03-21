@@ -105,7 +105,11 @@ LevelElement level_element_get(char id) {
   return levelElements[id];
 }
 
+#ifdef STM32F103xB
 void level_element_update(char id, LevelElement element) {
+#else
+level_element_update(char id, LevelElement element) {
+#endif /* STM32F103xB */
   levelElements[id] = element;
 }
 
@@ -371,7 +375,11 @@ LevelElement missile_handle(LevelElement element)
     return element;
 }
 
+#ifdef STM32F103xB
 void missile_launch(char x, char y) {
+#else
+missile_launch(char x, char y) {
+#endif /* STM32F103xB */
   danger = true;
   LevelElement missile = level_element_get(3);
   missile.step = 0;

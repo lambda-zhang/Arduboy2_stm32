@@ -13,6 +13,31 @@ unsigned long millis()
 	return HAL_GetTick();
 }
 
+void delayMicroseconds(unsigned int us)
+{
+	uint32_t total = 0;
+	uint32_t target = (SystemCoreClock/1000000U) * us;
+	int last = SysTick->VAL;
+	int now = last;
+	int diff = 0;
+
+	while(1) {
+		now = SysTick->VAL;
+		diff = last - now;
+		if(diff > 0) {
+			total += diff;
+		}
+		else {
+			total += diff + SysTick->LOAD;
+		}
+		if(total > target) {
+			return;
+		}
+		last = now;
+	}
+	return;
+}
+
 void delay(unsigned long ms)
 {
 	HAL_Delay(ms);
@@ -169,8 +194,8 @@ void speaker2_set(uint16_t freq, uint16_t duty)
 void audio_timer1_set(uint16_t freq)
 {
 	uint32_t cru_pclk2 = HAL_RCC_GetPCLK2Freq(); // APB2的总线时钟
-	uint32_t cru_tim2_freq = cru_pclk2 / (htim1.Instance->PSC + 1); // 输入timer分频之后的时钟
-	uint32_t _ARR = (cru_tim2_freq / freq) - 1;
+	uint32_t cru_tim1_freq = cru_pclk2 / (htim1.Instance->PSC + 1); // 输入timer分频之后的时钟
+	uint32_t _ARR = (cru_tim1_freq / freq) - 1;
 	uint32_t _duty = 50 * (_ARR + 1) / 100;
 
 	HAL_TIM_Base_Stop_IT(&htim1);
@@ -180,7 +205,7 @@ void audio_timer1_set(uint16_t freq)
 	}
 
 	if (_duty > 65535 || _ARR > 65535) {
-		printf("bad freq or bad duty !!\r\n");
+		printf("htim1 bad freq or bad duty !!\r\n");
 	}
 
 	__HAL_TIM_SET_AUTORELOAD(&htim1, _ARR);
@@ -190,8 +215,8 @@ void audio_timer1_set(uint16_t freq)
 void audio_timer4_set(uint16_t freq)
 {
 	uint32_t cru_pclk2 = HAL_RCC_GetPCLK2Freq(); // APB2的总线时钟
-	uint32_t cru_tim2_freq = cru_pclk2 / (htim4.Instance->PSC + 1); // 输入timer分频之后的时钟
-	uint32_t _ARR = (cru_tim2_freq / freq) - 1;
+	uint32_t cru_tim4_freq = cru_pclk2 / (htim4.Instance->PSC + 1); // 输入timer分频之后的时钟
+	uint32_t _ARR = (cru_tim4_freq / freq) - 1;
 	uint32_t _duty = 50 * (_ARR + 1) / 100;
 
 	HAL_TIM_Base_Stop_IT(&htim4);
@@ -201,7 +226,7 @@ void audio_timer4_set(uint16_t freq)
 	}
 
 	if (_duty > 65535 || _ARR > 65535) {
-		printf("bad freq or bad duty !!\r\n");
+		printf("htim4 bad freq or bad duty !!\r\n");
 	}
 
 	__HAL_TIM_SET_AUTORELOAD(&htim4, _ARR);

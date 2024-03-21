@@ -29,6 +29,7 @@
 #include "enemies.h"
 #include "battles.h"
 
+
 typedef void (*FunctionPointer) ();
 
 const FunctionPointer PROGMEM mainGameLoop[] = {
@@ -95,3 +96,4 @@ void loop() {
   //Serial.write(arduboy.getBuffer(), 128 * 64 / 8);
   arduboy.display();
 }
+

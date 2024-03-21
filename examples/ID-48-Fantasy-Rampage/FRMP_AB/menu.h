@@ -86,9 +86,7 @@ void stateMenuIntro()
   if (globalCounter > 120)
   {
     gameState = STATE_MENU_MAIN;
-    #ifndef STM32F103xB
     ATM.play(themeSong);
-    #endif /* STM32F103xB */
     setSmallMonster();
   }
 }

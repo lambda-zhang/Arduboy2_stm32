@@ -3,6 +3,10 @@
 
 #define Song const uint8_t PROGMEM
 
+#ifdef STM32F103xB
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wnarrowing"
+#endif /* STM32F103xB */
 Song themeSong[] = {
   0x1B,                   // Number of tracks
   0x00, 0x00,             // Address of track 0
@@ -41,7 +45,7 @@ Song themeSong[] = {
   //"Intro channel 0"
   0x40, 36,               // FX: SET VOLUME: volume = 36
   0x9E, 4, 5, 6, 7,       // FX: GOTO advanced: ch0 = 0x04 / ch1 = 0x05 / ch2 = 0x06 / ch3 = 0x07
-  0x41, 4,               // FX: SLIDE VOLUME ON: -4
+  0x41, -4,               // FX: SLIDE VOLUME ON: -4
   0x54, 2,                // FX: SET NOTE CUT: 2
   0x9D, 24,               // FX: SET TEMPO: tempo = 24
   0xFD, 6, 9,             // REPEAT: count = 6 + 1 / track = 9
@@ -52,7 +56,7 @@ Song themeSong[] = {
 
   //"Intro channel 2"
   0x40, 64,               // FX: SET VOLUME: volume = 64
-  0x41, 6,               // FX: SLIDE VOLUME ON: -6
+  0x41, -6,               // FX: SLIDE VOLUME ON: -6
   0xFD, 1, 24,            // REPEAT: count = 1 + 1 / track = 24
   0xFC, 13,               // GOTO track 13
   0xFC, 14,               // GOTO track 14
@@ -78,7 +82,7 @@ Song themeSong[] = {
   //"Track channel 4"
   0x40, 36,               // FX: SET VOLUME: volume = 36
   0x9E, 4, 5, 6, 7,       // FX: GOTO advanced: ch0 = 0x04 / ch1 = 0x05 / ch2 = 0x06 / ch3 = 0x07
-  0x41, 4,               // FX: SLIDE VOLUME ON: -4
+  0x41, -4,               // FX: SLIDE VOLUME ON: -4
   0x54, 2,                // FX: SET NOTE CUT: 2
   0x9D, 24,               // FX: SET TEMPO: tempo = 24
   0xFD, 5, 9,             // REPEAT: count = 5 + 1 / track = 9
@@ -89,7 +93,7 @@ Song themeSong[] = {
 
   //"Track channel 6"
   0x40, 64,               // FX: SET VOLUME: volume = 64
-  0x41, 6,               // FX: SLIDE VOLUME ON: -6
+  0x41, -6,               // FX: SLIDE VOLUME ON: -6
   0xFC, 13,               // GOTO track 13
   0xFC, 14,               // GOTO track 14
   0xFC, 15,               // GOTO track 15
@@ -343,7 +347,7 @@ Song victorySong[] = {
 
   //"Track channel 1"
   0x40, 48,               // FX: SET VOLUME: volume = 48
-  0x41, 1,               // FX: SLIDE VOLUME ON: -1
+  0x41, -1,               // FX: SLIDE VOLUME ON: -1
   0x50, 4, 1,             // FX: SET VIBRATO: 4 1
   0x54, 3,                // FX: SET NOTE CUT: 3
   0xFC, 5,                // GOTO track 5
@@ -351,7 +355,7 @@ Song victorySong[] = {
 
   //"Track channel 2"
   0x40, 48,               // FX: SET VOLUME: volume = 48
-  0x41, 1,               // FX: SLIDE VOLUME ON: -1
+  0x41, -1,               // FX: SLIDE VOLUME ON: -1
   0x4E, 6, 1,             // FX: SET TREMOLO: 6 1
   0x40, 24,               // FX: SET VOLUME: volume = 24
   0xFC, 4,                // GOTO track 4
@@ -428,10 +432,10 @@ Song lostSong[] = {
   //"Track channel 0"
   0x40, 48,               // FX: SET VOLUME: volume = 48
   0x9D, 25,               // FX: SET TEMPO: tempo = 25
-  0x41, 1,               // FX: SLIDE VOLUME ON: -1
+  0x41, -1,               // FX: SLIDE VOLUME ON: -1
   0xFC, 5,                // GOTO track 5
   0xFC, 9,                // GOTO track 9
-  0x41, 12,              // FX: SLIDE VOLUME ON: -12
+  0x41, -12,              // FX: SLIDE VOLUME ON: -12
   0xFC, 6,                // GOTO track 6
   0x9F,                   // FX: STOP CURRENT CHANNEL
 
@@ -449,7 +453,7 @@ Song lostSong[] = {
 
   //"Track snare"
   0x40, 32,               // FX: SET VOLUME: volume = 32
-  0x41, 16,              // FX: VOLUME SLIDE ON: steps = -16
+  0x41, -16,              // FX: VOLUME SLIDE ON: steps = -16
   0x9F + 2,               // DELAY: ticks = 2
   0x43,                   // FX: VOLUME SLIDE OFF
   0xFE,                   // RETURN
@@ -520,5 +524,8 @@ Song lostSong[] = {
   0xEB, 0x00,             // Address of track 22
 };
 
+#ifdef STM32F103xB
+#pragma GCC diagnostic pop
+#endif /* STM32F103xB */
 
 #endif

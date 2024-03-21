@@ -31,6 +31,7 @@ int random(int min, int max);
 void ltoa(long n, char s[], int base);
 void ultoa(uint16_t value, char *str, int base);
 char *dtostrf(double val, signed char width, unsigned char prec, char *sout);
+void digitalWrite(uint8_t pin, uint8_t val);
 
 typedef uint8_t byte;
 typedef bool boolean;

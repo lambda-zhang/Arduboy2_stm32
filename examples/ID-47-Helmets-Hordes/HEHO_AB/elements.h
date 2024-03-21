@@ -102,6 +102,9 @@ boolean windowOrTorch()
       return false;
       break;
   }
+#ifdef STM32F103xB
+  return false;
+#endif /* STM32F103xB */
 }
 
 byte gifBrick(byte type, byte row)

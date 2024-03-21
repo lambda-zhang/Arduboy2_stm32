@@ -140,9 +140,7 @@ void stateGamePlaying() {
 
 void stateMenuPlay()
 {
-#ifndef STM32F103xB
   ATM.stop();
-#endif /* STM32F103xB */
   danger = false;
   //bullets
   level_element_add(TYPE_BULLET, 0, 0, STATE_HIDDEN, 2, 0);
@@ -165,9 +163,7 @@ void stateMenuPlay()
 };
 
 void waveComplete() {
-#ifndef STM32F103xB
   ATM.play(playing);
-#endif /* STM32F103xB */
   gameState = STATE_WAVE_COMPLETE;
 }
 
@@ -183,9 +179,7 @@ void stateGameOver() {
     memset(levelElements, 0, sizeof(levelElements));
     element_count = 0;
     gameState = STATE_MENU_MAIN;
-#ifndef STM32F103xB
     ATM.play(titleSong);
-#endif /* STM32F103xB */
   }
 }
 

@@ -3,9 +3,7 @@
 
 #include <Arduino.h>
 #include <Arduboy2.h>
-#ifndef STM32F103xB
 #include <ATMlib.h>
-#endif /* STM32F103xB */
 #include "bitmaps.h"
 #include "songs.h"
 
@@ -30,9 +28,7 @@
 #define POINTER_TARGET               2
 Arduboy2Base arduboy;
 Sprites sprites;
-#ifndef STM32F103xB
 ATMsynth ATM;
-#endif /* STM32F103xB */
 
 byte gameState = STATE_MENU_INTRO;   // start the game with the TEAM a.r.g. logo
 byte menuSelection = STATE_MENU_PLAY; // PLAY menu item is pre-selected

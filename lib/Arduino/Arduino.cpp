@@ -165,3 +165,8 @@ char *dtostrf(double val, signed char width, unsigned char prec, char *sout) {
   sprintf(sout, fmt, val);
   return sout;
 }
+
+void digitalWrite(uint8_t pin, uint8_t val)
+{
+    return;
+}

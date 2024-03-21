@@ -59,3 +59,4 @@ void loop() {
   //Serial.write(arduboy.getBuffer(), 128 * 64 / 8);
   arduboy.display();
 }
+

@@ -3,6 +3,10 @@
 
 #define Song const uint8_t PROGMEM
 
+#ifdef STM32F103xB
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wnarrowing"
+#endif /* STM32F103xB */
 Song titleSong[] = {
   0x0B,             // Number of tracks
   0x00, 0x00,       // Address of track 0   0
@@ -32,7 +36,7 @@ Song titleSong[] = {
 
   //"Track channel 1"
   0x40, 63,         // FX: SET VOLUME: volume = 63
-  0x41, 16,        // FX: SLIDE VOLUME ON: -16
+  0x41, -16,        // FX: SLIDE VOLUME ON: -16
   0xFD, 7, 8,       // REPEAT: count = 7 + 1 / track = 8
   0x9F,             // FX: STOP CURRENT CHANNEL
 
@@ -52,7 +56,7 @@ Song titleSong[] = {
   //"Track shake"
   0x49, 4 + 0,      // FX: RETRIG NOISE: point = 1 (*4) / speed = 0 (fastest)
   0x40, 32,         // FX: SET VOLUME: volume = 32
-  0x41, 8,         // FX: VOLUME SLIDE ON: steps = -8
+  0x41, -8,         // FX: VOLUME SLIDE ON: steps = -8
   0x9F + 4,         // DELAY: ticks = 4
   0x4A,             // FX: RETRIG: off
   0x43,             // FX: VOLUME SLIDE OFF
@@ -70,14 +74,14 @@ Song titleSong[] = {
   //"Track 7"
   0x4C, 0,          // FX: SET TRANSPOSITION: 0
   0xFD, 2, 10,      // REPEAT: count = 2 + 1 / track = 10
-  0x4C, 2,         // FX: SET TRANSPOSITION: -2
+  0x4C, -2,         // FX: SET TRANSPOSITION: -2
   0xFD, 2, 10,      // REPEAT: count = 2 + 1 / track = 10
   0xFE,             // RETURN
 
   //"Track 8"
   0x4C, 0,          // FX: SET TRANSPOSITION: 0
   0xFD, 2, 9,       // REPEAT: count = 2 + 1 / track = 9
-  0x4C, 2,         // FX: SET TRANSPOSITION: -2
+  0x4C, -2,         // FX: SET TRANSPOSITION: -2
   0xFD, 2, 9,       // REPEAT: count = 2 + 1 / track = 9
   0xFE,             // RETURN
 
@@ -139,7 +143,7 @@ Song playing[] = {
   0x9F,			// FX: STOP CURRENT CHANNEL
   //"Track snare"
   0x40, 32,		// FX: SET VOLUME: volume = 32
-  0x41, 16,		// FX: VOLUME SLIDE ON: steps = -16
+  0x41, -16,		// FX: VOLUME SLIDE ON: steps = -16
   0x9F + 2,		// DELAY: ticks = 2
   0x43,			// FX: VOLUME SLIDE OFF
   0xFE,			// RETURN
@@ -285,5 +289,8 @@ Song playing[] = {
 
 };
 
+#ifdef STM32F103xB
+#pragma GCC diagnostic pop
+#endif /* STM32F103xB */
 
 #endif

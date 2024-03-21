@@ -3,9 +3,7 @@
 
 #include <Arduino.h>
 #include <Arduboy2.h>
-#ifndef STM32F103xB
 #include <ATMlib.h>
-#endif /* STM32F103xB */
 #include <Sprites.h>
 #include "bitmaps.h"
 
@@ -27,9 +25,8 @@
 
 Arduboy2Base arduboy;
 Sprites sprites;
-#ifndef STM32F103xB
+
 ATMsynth ATM;
-#endif /* STM32F103xB */
 
 boolean danger = false;
 boolean blinking = true;

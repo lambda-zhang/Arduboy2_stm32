@@ -13,8 +13,15 @@ __weak void loop() {
 void arduboy2_app_init_hw(void)
 {
 	lcd_set_bl(1);
+#if defined(SND1_ARDUBOYPLAYTUNE)
 	audio_timer1_set(1000); // 1ms
 	audio_timer4_set(1000); // 1ms
+#elif defined(SND2_ARDUBOYTONES)
+	audio_timer1_set(1000); // 1ms
+	audio_timer4_set(1000); // 1ms
+#elif defined(SND3_ATMLIB)
+	audio_timer1_set(31250);
+#endif
 }
 
 #ifdef __cplusplus

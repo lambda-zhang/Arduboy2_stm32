@@ -38,9 +38,7 @@ void setup() {
   arduboy.begin();
   arduboy.setFrameRate(30);                                 // set the frame rate of the game at 30 fps
   arduboy.initRandomSeed();                                 // This sets the random to more random, remove this if no random is needed !
-  #ifndef STM32F103xB
   ATM.play(themeSong);
-  #endif /* STM32F103xB */
 }
 
 
@@ -52,3 +50,4 @@ void loop() {
   arduboy.display();
   if (arduboy.everyXFrames(3)) blinking = !blinking;
 }
+

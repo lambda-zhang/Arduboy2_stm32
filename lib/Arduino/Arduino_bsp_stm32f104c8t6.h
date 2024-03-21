@@ -4,6 +4,7 @@
 #include "stm32f1xx_hal.h"
 
 unsigned long millis();
+void delayMicroseconds(unsigned int us);
 void delay(unsigned long ms);
 uint32_t get_adc_val(void);
 
@@ -24,7 +25,7 @@ uint32_t get_adc_val(void);
 	0xD3, /* set display offset */ \
 	0x00, \
 	0xD5, /* set display clock divide ratio/oscillator frequency */ \
-	0x80, /* 105Hz */ \
+	0x70, /* 105Hz */ \
 	0xD9, /* Dis-charge /Pre-charge Period Mode Set */ \
 	0x22, \
 	0xDA, /* Common Pads Hardware Configuration Mode Set */ \

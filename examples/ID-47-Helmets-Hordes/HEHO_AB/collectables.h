@@ -54,7 +54,11 @@ void updateGoldBars()
   }
 }
 
+#ifndef STM32F103xB
+goldBarSetInLine(byte firstGold, byte lastGold, int x, int y, int spacingX)
+#else
 void goldBarSetInLine(byte firstGold, byte lastGold, int x, int y, int spacingX)
+#endif /* STM32F103xB */
 {
   for (byte i = firstGold; i < lastGold + 1; i++)
   {

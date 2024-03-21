@@ -495,9 +495,7 @@ void audio_timer1_PeriodElapsedCallback()
 #ifndef STM32F103xB
   OCR4A = vol + pcm;
 #else
-  if(vol + pcm != 128) {
-    printf("%d\r\n", vol + pcm);
-  }
+  speaker1_set(31250, ((vol + pcm)*100/256));
 #endif /* STM32F103xB */
   if (--cia_count) return;
 

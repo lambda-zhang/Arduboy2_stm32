@@ -132,15 +132,28 @@ $ gdb-multiarch build/Arduboy2_stm32f103c8t6.elf
 | PC14          | GPIO_Input |       | B      |
 
 ## speaker
-| STM32F103C8T6 | FUNC        | speaker | DESC      |
-| ------------- | ----------- | ------- | --------- |
-| PB4           | GPIO_Outout |         | SPEAKER_1 |
-| PB3           | GPIO_Outout |         | SPEAKER_2 |
+| STM32F103C8T6 | FUNC       | speaker | DESC      |
+| ------------- | ---------- | ------- | --------- |
+| PB4           | S_TIM3_CH1 |         | SPEAKER_1 |
+| PB3           | S_TIM2_CH2 |         | SPEAKER_2 |
 
 ## adc (for generateRandomSeed)
 | STM32F103C8T6 | FUNC        |           | DESC      |
 | ------------- | ----------- | --------- | --------- |
 | PA2           | ADC1_EXTI15 |           |           |
+
+# 模块功能和说明
+## 音频相关
+### TIM2_CH2
+产生频率和占空比可以调的PWM，用来输出音符对应的频率来驱动无源蜂鸣器。最高频率1MHZ，占空比分辨率1/500=0.2%
+### TIM3_CH1
+产生频率和占空比可以调的PWM，用来输出音符对应的频率来驱动无源蜂鸣器。最高频率1MHZ，占空比分辨率1/500=0.2%
+### TIM1
+产生周期可以配置的定时中断，定时的周期更具不同的音频方案，做不同的配置。
+SND1_ARDUBOYPLAYTUNE 配置1KHZ，SND2_ARDUBOYTONES配置1KHZ，SND3_ATMLIB配置31.25KHZ。
+### TIM4
+产生周期可以配置的定时中断，定时的周期更具不同的音频方案，做不同的配置。
+SND1_ARDUBOYPLAYTUNE 配置1KHZ，SND2_ARDUBOYTONES配置1KHZ，SND3_ATMLIB不配置。
 
 # 问题
 ### 是否支持多个游戏打包到Flash？

@@ -532,9 +532,7 @@ void showScore()
 void stateMenuPlay()
 {
   gameState = STATE_GAME_SELECT_GAME_MODE;
-  #ifndef STM32F103xB
   ATM.stop();
-  #endif /* STM32F103xB */
 };
 
 void stateGameSelectPlayerMode() {
@@ -833,9 +831,7 @@ void stateShowWinner() {
     //player wins
     if (!songPlayed)
     {
-      #ifndef STM32F103xB
       ATM.play(victorySong);
-      #endif /* STM32F103xB */
       songPlayed = true;
     }
     print_progmem(51, 56, text_win);
@@ -855,9 +851,7 @@ void stateShowWinner() {
       if (player_mode == PLAYER_MODE_1_PLAYER) {
         if (!songPlayed)
         {
-          #ifndef STM32F103xB
           ATM.play(lostSong);
-          #endif /* STM32F103xB */
           songPlayed = true;
         }
         print_progmem(44, 16, text_computer);
@@ -865,9 +859,7 @@ void stateShowWinner() {
         print_progmem(44, 16, text_player_2);
         if (!songPlayed)
         {
-          #ifndef STM32F103xB
           ATM.play(victorySong);
-          #endif /* STM32F103xB */
           songPlayed = true;
         }
       }
@@ -884,9 +876,7 @@ void stateShowWinner() {
   if (arduboy.justPressed(A_BUTTON | B_BUTTON))
   {
     gameState = STATE_MENU_MAIN;
-    #ifndef STM32F103xB
     ATM.play(themeSong);
-    #endif /* STM32F103xB */
   }
 }
 
@@ -905,9 +895,7 @@ void stateShowReallyQuit() {
     {
       case true:
         gameState = STATE_MENU_MAIN;
-        #ifndef STM32F103xB
         ATM.play(themeSong);
-        #endif /* STM32F103xB */
         break;
       case false:
         disp_state = prev_disp_state;
