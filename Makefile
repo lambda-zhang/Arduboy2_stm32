@@ -59,6 +59,7 @@ APP_HUMANITYREVENGEDC ?= 0
 APP_COSMICPODS ?= 0
 APP_ARDUBOYARCODIA ?= 0
 APP_MINIROGUE ?= 0
+APP_BOMBERBOY ?= 0
 
 ######################################
 # building variables
@@ -372,6 +373,17 @@ CPP_SOURCE += examples/MiniRogue/MiniRogue/MiniRogue.cpp \
 	examples/MiniRogue/MiniRogue/src/states/TreasureState.cpp \
 	examples/MiniRogue/MiniRogue/src/utils/Arduboy2Ext.cpp \
 	examples/MiniRogue/MiniRogue/src/utils/GameContext.cpp
+endif
+ifeq ($(APP_BOMBERBOY), 1)
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/Bomberboy/Bomberboy/Game.cpp \
+	examples/Bomberboy/Bomberboy/Map.cpp \
+	examples/Bomberboy/Bomberboy/Menu.cpp \
+	examples/Bomberboy/Bomberboy/Player.cpp \
+	examples/Bomberboy/Bomberboy/Unit.cpp \
+	examples/Bomberboy/Bomberboy/assets.cpp \
+	examples/Bomberboy/Bomberboy/audio.cpp \
+	examples/Bomberboy/Bomberboy/Bomberboy.cpp
 endif
 
 
