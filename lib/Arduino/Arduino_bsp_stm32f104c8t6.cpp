@@ -16,21 +16,20 @@ unsigned long millis()
 void delayMicroseconds(unsigned int us)
 {
 	uint32_t total = 0;
-	uint32_t target = (SystemCoreClock/1000000U) * us;
+	uint32_t target = (SystemCoreClock / 1000000U) * us;
 	int last = SysTick->VAL;
 	int now = last;
 	int diff = 0;
 
-	while(1) {
+	while (1) {
 		now = SysTick->VAL;
 		diff = last - now;
-		if(diff > 0) {
+		if (diff > 0) {
 			total += diff;
-		}
-		else {
+		} else {
 			total += diff + SysTick->LOAD;
 		}
-		if(total > target) {
+		if (total > target) {
 			return;
 		}
 		last = now;
@@ -245,7 +244,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	/* Prevent unused argument(s) compilation warning */
 	UNUSED(htim);
-	if(htim->Instance == TIM1) {
+	if (htim->Instance == TIM1) {
 		audio_timer1_PeriodElapsedCallback();
 	} else if (htim->Instance == TIM4) {
 		audio_timer4_PeriodElapsedCallback();
