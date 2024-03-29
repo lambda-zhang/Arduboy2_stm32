@@ -62,6 +62,7 @@ APP_MINIROGUE ?= 0
 APP_BOMBERBOY ?= 0
 APP_MINESWEEPER ?= 0
 APP_2048 ?= 0
+APP_ARDUMAN ?= 0
 
 ######################################
 # building variables
@@ -455,6 +456,19 @@ CPP_SOURCE += examples/2048-Arduboy/2048-Arduboy/2048-Arduboy.cpp \
 	examples/2048-Arduboy/2048-Arduboy/game.cpp \
 	examples/2048-Arduboy/2048-Arduboy/stars.cpp \
 	examples/2048-Arduboy/2048-Arduboy/utils.cpp
+endif
+ifeq ($(APP_ARDUMAN), 1)
+APP_CPP_INCLUDES += -Ilib/ArduboyPlaytune/src
+APP_SND_DEFS += -DSND1_ARDUBOYPLAYTUNE
+CPP_SOURCE += lib/ArduboyPlaytune/src/ArduboyPlaytune.cpp
+CPP_SOURCE += examples/arduman/ardu_main.cpp \
+	examples/arduman/arduman.cpp \
+	examples/arduman/Fruit.cpp \
+	examples/arduman/Ghost.cpp \
+	examples/arduman/Highscores.cpp \
+	examples/arduman/Player.cpp \
+	examples/arduman/Utils.cpp \
+	examples/arduman/ab_printer.cpp
 endif
 
 # ASM sources
