@@ -61,6 +61,7 @@ APP_ARDUBOYARCODIA ?= 0
 APP_MINIROGUE ?= 0
 APP_BOMBERBOY ?= 0
 APP_MINESWEEPER ?= 0
+APP_2048 ?= 0
 
 ######################################
 # building variables
@@ -446,7 +447,15 @@ APP_SND_DEFS += -DSND2_ARDUBOYTONES
 CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
 CPP_SOURCE += examples/minesweeper/minesweeper.cpp
 endif
-
+ifeq ($(APP_2048), 1)
+CPP_SOURCE += examples/2048-Arduboy/2048-Arduboy/2048-Arduboy.cpp \
+	examples/2048-Arduboy/2048-Arduboy/controller.cpp \
+	examples/2048-Arduboy/2048-Arduboy/draw.cpp \
+	examples/2048-Arduboy/2048-Arduboy/font.cpp \
+	examples/2048-Arduboy/2048-Arduboy/game.cpp \
+	examples/2048-Arduboy/2048-Arduboy/stars.cpp \
+	examples/2048-Arduboy/2048-Arduboy/utils.cpp
+endif
 
 # ASM sources
 ASM_SOURCES =  \
