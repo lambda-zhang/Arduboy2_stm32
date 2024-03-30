@@ -63,6 +63,7 @@ APP_BOMBERBOY ?= 0
 APP_MINESWEEPER ?= 0
 APP_2048 ?= 0
 APP_ARDUMAN ?= 0
+APP_MICROCITY ?= 0
 
 ######################################
 # building variables
@@ -469,6 +470,18 @@ CPP_SOURCE += examples/arduman/ardu_main.cpp \
 	examples/arduman/Player.cpp \
 	examples/arduman/Utils.cpp \
 	examples/arduman/ab_printer.cpp
+endif
+ifeq ($(APP_MICROCITY), 1)
+CPP_SOURCE += examples/MicroCity/Source/MicroCity/Building.cpp \
+	examples/MicroCity/Source/MicroCity/Connectivity.cpp \
+	examples/MicroCity/Source/MicroCity/Draw.cpp \
+	examples/MicroCity/Source/MicroCity/Font.cpp \
+	examples/MicroCity/Source/MicroCity/Game.cpp \
+	examples/MicroCity/Source/MicroCity/Interface.cpp \
+	examples/MicroCity/Source/MicroCity/MicroCity.cpp \
+	examples/MicroCity/Source/MicroCity/Simulation.cpp \
+	examples/MicroCity/Source/MicroCity/Strings.cpp \
+	examples/MicroCity/Source/MicroCity/Terrain.cpp
 endif
 
 # ASM sources
