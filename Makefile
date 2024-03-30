@@ -68,6 +68,7 @@ APP_GLOVE ?= 0
 APP_HOLLOW ?= 0
 APP_ARDUBOYJETPACK ?= 0
 APP_ROOFTOP ?= 0
+APP_KONG ?= 0
 
 ######################################
 # building variables
@@ -532,6 +533,33 @@ APP_CPP_INCLUDES += -Ilib/ArduboyTones/src
 APP_SND_DEFS += -DSND2_ARDUBOYTONES
 CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
 CPP_SOURCE += examples/Rooftop/rooftop/rooftop.cpp
+endif
+ifeq ($(APP_KONG), 1)
+CPP_SOURCE += examples/Kong/Kong/src/Game.cpp \
+	examples/Kong/Kong/src/entities/Barrel.cpp \
+	examples/Kong/Kong/src/entities/Base.cpp \
+	examples/Kong/Kong/src/entities/Crane.cpp \
+	examples/Kong/Kong/src/entities/Dinner.cpp \
+	examples/Kong/Kong/src/entities/Fire.cpp \
+	examples/Kong/Kong/src/entities/Girder.cpp \
+	examples/Kong/Kong/src/entities/Gorilla.cpp \
+	examples/Kong/Kong/src/entities/Hook.cpp \
+	examples/Kong/Kong/src/entities/Lever.cpp \
+	examples/Kong/Kong/src/entities/Plate.cpp \
+	examples/Kong/Kong/src/entities/Player.cpp \
+	examples/Kong/Kong/src/states/BaseState.cpp \
+	examples/Kong/Kong/src/states/HighScoreState.cpp \
+	examples/Kong/Kong/src/states/PlayGameState_activate.cpp \
+	examples/Kong/Kong/src/states/PlayGameState_render.cpp \
+	examples/Kong/Kong/src/states/PlayGameState_update.cpp \
+	examples/Kong/Kong/src/states/PlayGameState_utils.cpp \
+	examples/Kong/Kong/src/states/SplashScreenState.cpp \
+	examples/Kong/Kong/src/states/TitleScreenState.cpp \
+	examples/Kong/Kong/src/utils/Arduboy2Ext.cpp \
+	examples/Kong/Kong/src/utils/EEPROM_Utils.cpp \
+	examples/Kong/Kong/src/utils/GameContext.cpp \
+	examples/Kong/Kong/src/arduboyTones/ArduboyTonesExt.cpp \
+	examples/Kong/Kong/Kong.cpp
 endif
 
 # ASM sources

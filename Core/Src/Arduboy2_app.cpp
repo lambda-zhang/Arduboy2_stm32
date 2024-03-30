@@ -1,7 +1,5 @@
 #include "Arduboy2.h"
 
-EEPROMClass EEPROM;
-
 __weak void setup() {
 	printf("setup is NULL\r\n");
 }

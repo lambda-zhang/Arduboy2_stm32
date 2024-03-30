@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+EEPROMClass EEPROM;
+
 volatile uint8_t ubrrh;
 volatile uint8_t ubrrl;
 volatile uint8_t ucsra;
@@ -169,4 +171,70 @@ char *dtostrf(double val, signed char width, unsigned char prec, char *sout) {
 void digitalWrite(uint8_t pin, uint8_t val)
 {
     return;
+}
+
+void eeprom_busy_wait() {}
+uint8_t eeprom_read_byte (const uint8_t *__p)
+{
+    uint8_t dta;
+    EEPROM.get((int)__p, dta);
+    return (dta);
+}
+uint16_t eeprom_read_word (const uint16_t *__p)
+{
+    uint16_t dta;
+    EEPROM.get((int)__p, dta);
+    return (dta);
+}
+uint32_t eeprom_read_dword (const uint32_t *__p)
+{
+    uint32_t dta;
+    EEPROM.get((int)__p, dta);
+    return (dta);
+}
+void eeprom_read_block (void *__dst, const void *__src, size_t __n)
+{
+    uint8_t dta;
+    for (uint8_t i=0; i<__n; i++) {
+        EEPROM.get((int)__src+i, dta);
+        ((uint8_t*)__dst)[i]=dta;
+    };
+}
+void eeprom_write_byte (uint8_t *__p, uint8_t __value)
+{
+    EEPROM.put((int)__p, __value);
+}
+void eeprom_write_word (uint16_t *__p, uint16_t __value)
+{
+    EEPROM.put((int)__p, __value);
+}
+void eeprom_write_dword(uint16_t* eepAddr, uint32_t val)
+{
+    EEPROM.put((int)eepAddr, val);
+}
+void eeprom_write_block(uint8_t *p, uint16_t* eepAddr, uint8_t n)
+{
+    for (uint8_t i=0; i<n; i++){
+        EEPROM.put((int)eepAddr+i, p[i]);
+    }
+}
+void eeprom_write_dword (uint32_t *__p, uint32_t __value)
+{
+    eeprom_write_word((uint16_t *)__p, __value);
+}
+void eeprom_update_block (const void *__src, void *__dst, size_t __n)
+{
+	uint8_t* p = (uint8_t*)__dst;
+	const uint8_t *src = (const uint8_t *)__src;
+	while (__n--) {
+		eeprom_write_byte(p++, *src++);
+	}
+}
+void eeprom_update_byte (uint8_t *__p, uint8_t __value)
+{
+	eeprom_write_byte(__p, __value);
+}
+void eeprom_update_word (uint16_t *__p, uint16_t __value)
+{
+    eeprom_write_dword(__p, __value);
 }
