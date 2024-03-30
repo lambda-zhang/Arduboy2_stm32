@@ -4,7 +4,11 @@ void add_bullet(short x, short y, short vx, short vy)
 {
 	for(int i=0; i<numBullets; ++i) {
 		if(!bullets[i].active) {
+			#ifndef STM32F103xB
 			arduboy.tunes.tone(TONE_EXPLORER_FIRE, 20);
+			#else
+			sound.tone(TONE_EXPLORER_FIRE, 20);
+			#endif /* STM32F103xB */
 			bullets[i].active = true;
 			bullets[i].x = x;
 			bullets[i].y = y;

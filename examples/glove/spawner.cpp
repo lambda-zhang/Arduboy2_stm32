@@ -40,8 +40,16 @@ void damage_spawner(Spawner& obj, short dmg)
 	{
 		obj.active = false;
 		addScore(1);
+		#ifndef STM32F103xB
 		arduboy.tunes.tone(TONE_SPAWNER_DESTROY, 20);
+		#else
+		sound.tone(TONE_SPAWNER_DESTROY, 20);
+		#endif /* STM32F103xB */
 	} else {
+		#ifndef STM32F103xB
 		arduboy.tunes.tone(TONE_SPAWNER_DAMAGE, 20);
+		#else
+		sound.tone(TONE_SPAWNER_DAMAGE, 20);
+		#endif /* STM32F103xB */
 	}
 }

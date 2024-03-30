@@ -14,24 +14,40 @@ char prompt_start(const char* const* prompts, unsigned char promptCount)
 		delay(10);
 		updateInput();
 		if(A_PRESSED) {
+			#ifndef STM32F103xB
 			arduboy.tunes.tone(TONE_ACCEPT, 20);
+			#else
+			sound.tone(TONE_ACCEPT, 20);
+			#endif /* STM32F103xB */
 			return choice;
 		}
 		if(B_PRESSED) {		
+			#ifndef STM32F103xB
 			arduboy.tunes.tone(TONE_BACK, 20);
+			#else
+			sound.tone(TONE_BACK, 20);
+			#endif /* STM32F103xB */
 			return 255;
 		}
 		if(DOWN_PRESSED) {
 			if(choice < promptCount-1) {
 				choice++;
+				#ifndef STM32F103xB
 				arduboy.tunes.tone(TONE_MOVE, 20);
+				#else
+				sound.tone(TONE_MOVE, 20);
+				#endif /* STM32F103xB */
 				prompt_draw(prompts, promptCount, choice);
 			}
 		}
 		if(UP_PRESSED) {
 			if(choice > 0) {
 				choice--;
+				#ifndef STM32F103xB
 				arduboy.tunes.tone(TONE_MOVE, 20);
+				#else
+				sound.tone(TONE_MOVE, 20);
+				#endif /* STM32F103xB */
 				prompt_draw(prompts, promptCount, choice);
 			}
 		}
@@ -83,28 +99,52 @@ char prompt_table(const char choiceString[], const char* const rowStrings[], cha
 			arduboy.print(" ");
 		}
 		if(A_PRESSED) {
+			#ifndef STM32F103xB
 			arduboy.tunes.tone(TONE_ACCEPT, 20);
+			#else
+			sound.tone(TONE_ACCEPT, 20);
+			#endif /* STM32F103xB */
 			return pgm_read_byte_near(choiceString + cursor);
 		} else if(B_PRESSED) {
+			#ifndef STM32F103xB
 			arduboy.tunes.tone(TONE_BACK, 20);
+			#else
+			sound.tone(TONE_BACK, 20);
+			#endif /* STM32F103xB */
 			return 0;
 		} else if(UP_PRESSED) {
+			#ifndef STM32F103xB
 			arduboy.tunes.tone(TONE_MOVE, 20);
+			#else
+			sound.tone(TONE_MOVE, 20);
+			#endif /* STM32F103xB */
 			if(cursor < tabCount)
 				cursor += tabCount*rows;
 			cursor -= tabCount;
 		} else if(DOWN_PRESSED) {
+			#ifndef STM32F103xB
 			arduboy.tunes.tone(TONE_MOVE, 20);
+			#else
+			sound.tone(TONE_MOVE, 20);
+			#endif /* STM32F103xB */
 			cursor += tabCount;
 			if(cursor >= tabCount*rows)
 				cursor -= tabCount*rows;
 		} else if(LEFT_PRESSED) {
+			#ifndef STM32F103xB
 			arduboy.tunes.tone(TONE_MOVE, 20);
+			#else
+			sound.tone(TONE_MOVE, 20);
+			#endif /* STM32F103xB */
 			if(cursor % tabCount == 0)
 				cursor += tabCount;
 			cursor --;
 		} else if(RIGHT_PRESSED) {
+			#ifndef STM32F103xB
 			arduboy.tunes.tone(TONE_MOVE, 20);
+			#else
+			sound.tone(TONE_MOVE, 20);
+			#endif /* STM32F103xB */
 			cursor ++;
 			if(cursor % tabCount == 0)
 				cursor -= tabCount;

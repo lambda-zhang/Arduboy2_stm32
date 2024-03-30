@@ -122,7 +122,11 @@ void draw_badguy(BadGuy &b)
 void destroy_badguy(BadGuy &obj)
 {
 	if(obj.active) {
+		#ifndef STM32F103xB
 		arduboy.tunes.tone(TONE_BADGUY_DESTROY, 20);
+		#else
+		sound.tone(TONE_BADGUY_DESTROY, 20);
+		#endif /* STM32F103xB */
 		obj.active = false;
 	}		
 }

@@ -26,6 +26,10 @@ void activate_key(Key& obj)
 	{
 		walls[obj.target].active = false;
 		obj.active = false;
+		#ifndef STM32F103xB
 		arduboy.tunes.tone(TONE_KEY_ACTIVATE, 20);
+		#else
+		sound.tone(TONE_KEY_ACTIVATE, 20);
+		#endif /* STM32F103xB */
 	}
 }

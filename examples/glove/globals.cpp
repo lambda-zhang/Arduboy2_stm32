@@ -1,6 +1,11 @@
 #include "globals.h"
 
+#ifndef STM32F103xB
 Arduboy arduboy;
+#else
+Arduboy2 arduboy;
+ArduboyTones sound(arduboy.audio.enabled);
+#endif /* STM32F103xB */
 
 bool old_a = false;
 bool old_b = false;

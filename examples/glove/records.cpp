@@ -59,7 +59,11 @@ void displayRecords()
 		delay(10);
 		updateInput();
 		if(B_PRESSED || A_PRESSED) {
+			#ifndef STM32F103xB
 			arduboy.tunes.tone(TONE_BACK, 20);
+			#else
+			sound.tone(TONE_BACK, 20);
+			#endif /* STM32F103xB */
 			break;
 		}
 	}

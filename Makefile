@@ -64,6 +64,7 @@ APP_MINESWEEPER ?= 0
 APP_2048 ?= 0
 APP_ARDUMAN ?= 0
 APP_MICROCITY ?= 0
+APP_GLOVE ?= 0
 
 ######################################
 # building variables
@@ -482,6 +483,30 @@ CPP_SOURCE += examples/MicroCity/Source/MicroCity/Building.cpp \
 	examples/MicroCity/Source/MicroCity/Simulation.cpp \
 	examples/MicroCity/Source/MicroCity/Strings.cpp \
 	examples/MicroCity/Source/MicroCity/Terrain.cpp
+endif
+ifeq ($(APP_GLOVE), 1)
+APP_CPP_INCLUDES += -Ilib/ArduboyTones/src
+APP_SND_DEFS += -DSND2_ARDUBOYTONES
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/glove/badguy.cpp \
+	examples/glove/bullet.cpp \
+	examples/glove/exit.cpp \
+	examples/glove/explorer.cpp \
+	examples/glove/game.cpp \
+	examples/glove/globals.cpp \
+	examples/glove/glove.cpp \
+	examples/glove/key.cpp \
+	examples/glove/mainmenu.cpp \
+	examples/glove/options.cpp \
+	examples/glove/physics.cpp \
+	examples/glove/prompt.cpp \
+	examples/glove/records.cpp \
+	examples/glove/save.cpp \
+	examples/glove/spawner.cpp \
+	examples/glove/title.cpp \
+	examples/glove/treasure.cpp \
+	examples/glove/wall.cpp \
+	examples/glove/world.cpp
 endif
 
 # ASM sources

@@ -1,8 +1,15 @@
 #ifndef _GLOBALS_H
 #define _GLOBALS_H
 
+#ifndef STM32F103xB
 #include "Arduboy.h"
 extern Arduboy arduboy;
+#else
+#include "Arduboy2.h"
+#include <ArduboyTones.h>
+extern Arduboy2 arduboy;
+extern ArduboyTones sound;
+#endif /* STM32F103xB */
 
 #define FACE_UP 0
 #define FACE_DOWN 1
