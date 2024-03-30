@@ -65,6 +65,7 @@ APP_2048 ?= 0
 APP_ARDUMAN ?= 0
 APP_MICROCITY ?= 0
 APP_GLOVE ?= 0
+APP_HOLLOW ?= 0
 
 ######################################
 # building variables
@@ -507,6 +508,16 @@ CPP_SOURCE += examples/glove/badguy.cpp \
 	examples/glove/treasure.cpp \
 	examples/glove/wall.cpp \
 	examples/glove/world.cpp
+endif
+ifeq ($(APP_HOLLOW), 1)
+APP_CPP_INCLUDES += -Ilib/ArduboyPlaytune/src
+APP_SND_DEFS += -DSND1_ARDUBOYPLAYTUNE
+CPP_SOURCE += lib/ArduboyPlaytune/src/ArduboyPlaytune.cpp
+CPP_SOURCE += examples/hollow/game.cpp \
+	examples/hollow/hollow.cpp \
+	examples/hollow/logo.cpp \
+	examples/hollow/MyArduboy.cpp \
+	examples/hollow/title.cpp
 endif
 
 # ASM sources
