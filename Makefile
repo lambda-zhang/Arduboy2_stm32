@@ -66,6 +66,7 @@ APP_ARDUMAN ?= 0
 APP_MICROCITY ?= 0
 APP_GLOVE ?= 0
 APP_HOLLOW ?= 0
+APP_ARDUBOYJETPACK ?= 0
 
 ######################################
 # building variables
@@ -518,6 +519,12 @@ CPP_SOURCE += examples/hollow/game.cpp \
 	examples/hollow/logo.cpp \
 	examples/hollow/MyArduboy.cpp \
 	examples/hollow/title.cpp
+endif
+ifeq ($(APP_ARDUBOYJETPACK), 1)
+APP_CPP_INCLUDES += -Ilib/ArduboyTones/src
+APP_SND_DEFS += -DSND2_ARDUBOYTONES
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/ArduBoyJetPack/JetPac.cpp
 endif
 
 # ASM sources
