@@ -1,0 +1,3 @@
+- [ ] Properly seed the random number generator (ie. don't just call `arduboy.initRandomSeed()` in setup)
+	- [ ] Consider modifying the seed during gameplay based on user input
+- [ ] Evaluate the built in random number generator. Should I keep using it or switch to a custom one that's either faster, or better for my use cases?

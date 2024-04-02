@@ -1,0 +1,2 @@
+- [ ] All input (main menu and gameplay) should use the same basic input handling (latch detection, etc...)
+- [ ] Prevent Pressing "A" in the main menu from rotating the first piece

@@ -70,6 +70,7 @@ APP_ARDUBOYJETPACK ?= 0
 APP_ROOFTOP ?= 0
 APP_KONG ?= 0
 APP_CHICKENX ?= 0
+APP_PETRIS ?= 0
 
 ######################################
 # building variables
@@ -568,6 +569,9 @@ APP_SND_DEFS += -DSND2_ARDUBOYTONES
 CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
 CPP_SOURCE += examples/ChickenX/Collision.cpp \
 	examples/ChickenX/ChickenX.cpp
+endif
+ifeq ($(APP_PETRIS), 1)
+CPP_SOURCE += examples/petris/Petris.cpp
 endif
 
 # ASM sources

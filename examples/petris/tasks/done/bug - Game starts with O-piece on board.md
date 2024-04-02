@@ -1,0 +1,1 @@
+Fixed - CurrentPiece was being initialized to 0 instead of Invalid, and 0 represents the O-piece

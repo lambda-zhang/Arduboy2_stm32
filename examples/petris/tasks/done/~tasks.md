@@ -1,0 +1,26 @@
+- [x] Move to github (?)... or at least split into better notes, here in the Tasks folder
+- [x] 1) [Basic controls and behavior](done/Basic%20controls%20and%20behavior.md)
+- [x] 2) [Tetriminos and end of game](done/Tetriminos%20and%20end%20of%20game.md)
+- [x] 3) Basic Rotation
+- [x] 4) SRS Rotation
+- [x] 5) Wall and floor kicks (implemented as part of SRS Rotation)
+- [x] 6) Next
+- [x] 7) 5 Next
+- [x] 8) 7-Bucket
+- [x] 9) Hold
+	- [x] Show Hold Piece
+- [x] 10)Piece visuals
+- [x] 11) Track and display stats
+	- [x] Lines completed ([Issue 13](https://github.com/bendapootie/petris/issues/13))
+	- [x] Track line stats (num singles, doubles, triples, quads) ([Issue 14](https://github.com/bendapootie/petris/issues/14))
+	- [x] Display line stats at end of game ([Issue 15](https://github.com/bendapootie/petris/issues/15))
+- [x] 12) Increase level on line counts
+- [x] 13) Score (basic)
+- [x] 14) Score (advanced) ([Issue 17](https://github.com/bendapootie/petris/issues/17))
+	- [x] Full standard Tetris scoring (t-spins, B2B, combos, etc...)
+- [x] 15) "Fancy" line clear visuals
+- [x] Configure controller so one button can be pause ([Issue 19](https://github.com/bendapootie/petris/issues/19))
+- [x] Zone - Auto-enter zone when full? ([Issue 20](https://github.com/bendapootie/petris/issues/20))
+
+Things to consider
+- Make DAS (Delayed Auto Shift) initial delay and repeat delay scale with game speed

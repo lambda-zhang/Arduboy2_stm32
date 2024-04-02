@@ -1,0 +1,2 @@
+- [ ] Add some sort of runtime validation to verify behavior
+	- [ ] 💡Asserts that can be conditionally compiled in?

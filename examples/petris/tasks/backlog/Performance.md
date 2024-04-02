@@ -1,0 +1,3 @@
+- [ ] Don't draw the grid every frame! Only draw/clear what has changed.
+- [ ] `Grid::Draw` - Optimize nested loop; Avoid repeated work from calling Get() over and over
+- [ ] `Grid::ProcessFullLines` - Remove nested loop with single loop

@@ -1,0 +1,1 @@
+- [ ] These two functions do very similar things. They should probably be a single function with parameters

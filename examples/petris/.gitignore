@@ -1,0 +1,5 @@
+# Obsidian editor configuration files
+.obsidian/
+
+# Visual Studio configuration files
+.vs/
