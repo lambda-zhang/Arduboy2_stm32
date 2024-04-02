@@ -65,6 +65,10 @@ $ gdb-multiarch build/Arduboy2_stm32f103c8t6.elf
 | Helmets & Hordes                | ![图片](doc/Images/ID-47-Helmets-Hordes.png) | [链接](https://github.com/Team-ARG-Museum/ID-47-Helmets-Hordes),[commit](https://github.com/Team-ARG-Museum/ID-47-Helmets-Hordes/commit/87d1b7e1cc7419be84e078404cbceba58f76a64e) | make APP_HELMETSHORDES=1 | 不正常                                              |
 | SanSan                          | ![图片](doc/Images/sansan.gif)               | [链接](http://vxo.jp/arduboy/sansan/sansan.zip)              | make APP_SANSAN=1        | 可正常运行，会有图像错误                            |
 | Shadow Runner                   | ![图片](doc/Images/ID-15-Shadow-Runner.gif)  | [链接](https://github.com/Team-ARG-Museum/ID-15-Shadow-Runner/tree/master/SHRUN_AB),[commit](https://github.com/Team-ARG-Museum/ID-15-Shadow-Runner/commit/25f277508f28bd379deadba48ff2871f82970344) | make APP_SHADOWRUNNER=1  | 可正常运行                                          |
+| Glove                           | ![图片](doc/Images/Glove.gif)                | [链接](https://github.com/fuopy/glove),[commit](https://github.com/fuopy/glove/commit/81e9988fea3fc68edc984260b17d6f52beb5d497) | make APP_GLOVE=1         | 可正常运行                                          |
+| hollow                          | ![图片](doc/Images/hollow.gif)               | [链接](https://github.com/obono/ArduboyWorks/tree/master),[commit](https://github.com/obono/ArduboyWorks/commit/c0fe2111bfc5df625a8130ffdf5380cdd70b881a) | make APP_HOLLOW=1        | 可正常运行                                          |
+| Rooftop Rescue                  | ![图片](doc/Images/Rooftop.gif)              | [链接](https://github.com/BertVeer/Rooftop),[commit](https://github.com/BertVeer/Rooftop/commit/cb8e9203f62f5ce49423742aa3fb7bc6e1ca3847) | make APP_ROOFTOP=1       | 可正常运行,可能有bug                                |
+| KONG                            | ![图片](doc/Images/kong.gif)                 | [链接](https://github.com/Press-Play-On-Tape/Kong),[commit](https://github.com/Press-Play-On-Tape/Kong/commit/ec95141029a2a401edcf97b4b8d0f121139a2d15) | make APP_KONG=1          |                                                     |
 
 ## 游戏 - 街机
 
@@ -76,24 +80,39 @@ $ gdb-multiarch build/Arduboy2_stm32f103c8t6.elf
 
 ## 游戏 - 休闲益智
 
-| 应用/游戏名称          | 预览                                          | 来源                                                         | 编译方法                  | 备注       |
-| ---------------------- | --------------------------------------------- | ------------------------------------------------------------ | ------------------------- | ---------- |
-| ArduBreakout           | ![图片](doc/Images/ArduBreakout.gif)          | [链接](https://github.com/MLXXXp/Arduboy2/tree/master/examples/ArduBreakout),[commit](https://github.com/MLXXXp/Arduboy2/commit/bc460a2cff1a3e116880991aa2f88bae4b2e3160) | make APP_ARDUBREAKOUT=1   | 可正常运行 |
-| Bomberboy              | ![图片](doc/Images/Bomberboy.gif)             | [链接](https://github.com/evgenykzz2/Bomberboy),[commit](https://github.com/evgenykzz2/Bomberboy/commit/fe14427e5fdbca0fa0056b798c6475b68fe3b791) | make APP_BOMBERBOY=1      | 可正常运行 |
-| Ardusweeper            | ![图像](doc/Images/minesweeper.gif)           | [链接](https://github.com/jbellue/minesweeper),[commit](https://github.com/jbellue/minesweeper/commit/c22895784f6f4dbc092f91eb4c06aeab82d7583c) | make APP_MINESWEEPER=1    | 可正常运行 |
-| Mini Rogue             | ![图片](doc/Images/MiniRogue.gif)             | [链接](https://github.com/Press-Play-On-Tape/MiniRogue),[commit](https://github.com/Press-Play-On-Tape/MiniRogue/commit/e1309ddbf1ed8d3b5e944dee9f4559ca7a830dfc) | make APP_MINIROGUE=1      | 可正常运行 |
-| Flappy Ball            | ![图片](doc/Images/FlappyBall.gif)            | [链接](https://github.com/MLXXXp/FlappyBall),[commit](https://github.com/MLXXXp/FlappyBall/commit/263e70f240a6811541c3794d2d27bf8323d347a6) | make APP_FLAPPYBALL=1     | 可正常运行 |
-| ArduboyTetris          |                                               | [链接](https://github.com/Nautili/ArduboyTetris),[commit](https://github.com/Nautili/ArduboyTetris/commit/3cc72e452c4a7dd3737f72e728e165f666ef9e80) | make APP_ARDUBOYTETRIS=1  | 可正常运行 |
-| Dark-And-Under         | ![图片](doc/Images/Dark-And-Under.png)        | [链接](https://hub.nuaa.cf/Garage-Collective/Dark-And-Under),[commit](https://hub.nuaa.cf/Garage-Collective/Dark-And-Under/commit/7dd8f6a03eb179cec12ebc9261ddcb7a88259ce5) | make APP_DARKANDUNDER=1   | 可正常运行 |
-| Bubble PoP             | ![图片](doc/Images/ID-14-Bubble-PoP.gif)      | [链接](https://github.com/Team-ARG-Museum/ID-14-Bubble-PoP),[commit](https://github.com/Team-ARG-Museum/ID-14-Bubble-PoP/commit/17bc3feb1240556dd3ca2b0a0ab0292b9c9eab71) | make APP_BUBBLEPOP=1      | 可正常运行 |
-| ID-10-Dungeons         |                                               | [链接](https://github.com/Team-ARG-Museum/ID-10-Dungeons),[commit](https://github.com/Team-ARG-Museum/ID-10-Dungeons/commit/ac8ff35bbd6bd74f2a54bfc2b853e581b8c35ecb) | make APP_DUNGEONS=1       | 不正常     |
-| ID-20-Escaper-Droid    | ![图片](doc/Images/ID-20-Escaper-Droid.gif)   | [链接](https://github.com/Team-ARG-Museum/ID-20-Escaper-Droid),[commit](https://github.com/Team-ARG-Museum/ID-20-Escaper-Droid/commit/d8a6bf7274ca917a46213c668164bd99f6f653f5) | make APP_ESCAPERDROID=1   | 可正常运行 |
-| Blob Attack            | ![图片](doc/Images/ID-28-Blob-Attack.gif)     | [链接](https://github.com/Team-ARG-Museum/ID-28-Blob-Attack),[commit](https://github.com/Team-ARG-Museum/ID-28-Blob-Attack/commit/71d33c8a5df90a27500f27fbe899eacf8f5a0ecd) | make APP_BLOBATTACK=1     | 可正常运行 |
-| BEGEMMED               | ![图片](doc/Images/ID-30-BEGEMMED.gif)        | [链接](https://github.com/Team-ARG-Museum/ID-30-BEGEMMED),[commit](https://github.com/Team-ARG-Museum/ID-30-BEGEMMED/commit/7dcb1be9e1dd3fb833f8b3933ad259d8c7f4cd03) | make APP_BEGEMMED=1       | 可正常运行 |
-| Reverse Mermaid Hockey | ![图片](doc/Images/ID-31-RMH.gif)             | [链接](https://github.com/Team-ARG-Museum/ID-31-RMH),[commit](https://github.com/Team-ARG-Museum/ID-31-RMH/commit/377a31443e4571873d6cdf25e685d2d1269083e1) | make APP_RMH=1            | 可正常运行 |
-| Trolly Fish            | ![图片](doc/Images/ID-36-Trolly-Fish.png)     | [链接](https://github.com/Team-ARG-Museum/ID-36-Trolly-Fish),[commit](https://github.com/Team-ARG-Museum/ID-36-Trolly-Fish/commit/ddaf606287aded96adf441521b6515b5f86d50f2) | make APP_TROLLYFISH=1     | 可正常运行 |
-| DICE of FATE           | ![图片](doc/Images/ID-37-DICE-of-FATE.gif)    | [链接](https://github.com/Team-ARG-Museum/ID-37-DICE-of-FATE),[commit](https://github.com/Team-ARG-Museum/ID-37-DICE-of-FATE/commit/d2d7cf40f81e69a64dee461114f79ef8a8e7e714) | make APP_DICEOFFATE=1     | 可正常运行 |
-| Fantasy Rampage        | ![图片](doc/Images/ID-48-Fantasy-Rampage.png) | [链接](https://github.com/Team-ARG-Museum/ID-48-Fantasy-Rampage),[commit](https://github.com/Team-ARG-Museum/ID-48-Fantasy-Rampage/commit/29d30d3574e31074aa8bb5d070c073f652b85f1a) | make APP_FANTASYRAMPAGE=1 | 可正常运行 |
+| 应用/游戏名称          | 预览                                        | 来源                                                         | 编译方法                 | 备注       |
+| ---------------------- | ------------------------------------------- | ------------------------------------------------------------ | ------------------------ | ---------- |
+| 03_tiny_2048           | ![图片](doc/Images/03_tiny_2048.gif)        | [链接](https://github.com/akkera102/03_tiny_2048),[commit](https://github.com/akkera102/03_tiny_2048/commit/4ea9c6b9a0f91fd796e4a3772b7e54520569c427) | make APP_2048=1          | 可正常运行 |
+| Ardu-man               | ![图片](doc/Images/arduman.gif)             | [链接](https://github.com/SethRobinson/arduman),[commit](https://github.com/SethRobinson/arduman/commit/3f3af2f503a2255235de8c76a3657407a7b256a1),[PR](https://github.com/SethRobinson/arduman/pull/1) | make APP_ARDUMAN=1       | 可正常运行 |
+| ArduBreakout           | ![图片](doc/Images/ArduBreakout.gif)        | [链接](https://github.com/MLXXXp/Arduboy2/tree/master/examples/ArduBreakout),[commit](https://github.com/MLXXXp/Arduboy2/commit/bc460a2cff1a3e116880991aa2f88bae4b2e3160) | make APP_ARDUBREAKOUT=1  | 可正常运行 |
+| Bomberboy              | ![图片](doc/Images/Bomberboy.gif)           | [链接](https://github.com/evgenykzz2/Bomberboy),[commit](https://github.com/evgenykzz2/Bomberboy/commit/fe14427e5fdbca0fa0056b798c6475b68fe3b791) | make APP_BOMBERBOY=1     | 可正常运行 |
+| Ardusweeper            | ![图像](doc/Images/minesweeper.gif)         | [链接](https://github.com/jbellue/minesweeper),[commit](https://github.com/jbellue/minesweeper/commit/c22895784f6f4dbc092f91eb4c06aeab82d7583c) | make APP_MINESWEEPER=1   | 可正常运行 |
+| Flappy Ball            | ![图片](doc/Images/FlappyBall.gif)          | [链接](https://github.com/MLXXXp/FlappyBall),[commit](https://github.com/MLXXXp/FlappyBall/commit/263e70f240a6811541c3794d2d27bf8323d347a6) | make APP_FLAPPYBALL=1    | 可正常运行 |
+| ArduboyTetris          |                                             | [链接](https://github.com/Nautili/ArduboyTetris),[commit](https://github.com/Nautili/ArduboyTetris/commit/3cc72e452c4a7dd3737f72e728e165f666ef9e80) | make APP_ARDUBOYTETRIS=1 | 可正常运行 |
+| Dark-And-Under         | ![图片](doc/Images/Dark-And-Under.png)      | [链接](https://hub.nuaa.cf/Garage-Collective/Dark-And-Under),[commit](https://hub.nuaa.cf/Garage-Collective/Dark-And-Under/commit/7dd8f6a03eb179cec12ebc9261ddcb7a88259ce5) | make APP_DARKANDUNDER=1  | 可正常运行 |
+| Bubble PoP             | ![图片](doc/Images/ID-14-Bubble-PoP.gif)    | [链接](https://github.com/Team-ARG-Museum/ID-14-Bubble-PoP),[commit](https://github.com/Team-ARG-Museum/ID-14-Bubble-PoP/commit/17bc3feb1240556dd3ca2b0a0ab0292b9c9eab71) | make APP_BUBBLEPOP=1     | 可正常运行 |
+| ID-10-Dungeons         |                                             | [链接](https://github.com/Team-ARG-Museum/ID-10-Dungeons),[commit](https://github.com/Team-ARG-Museum/ID-10-Dungeons/commit/ac8ff35bbd6bd74f2a54bfc2b853e581b8c35ecb) | make APP_DUNGEONS=1      | 不正常     |
+| ID-20-Escaper-Droid    | ![图片](doc/Images/ID-20-Escaper-Droid.gif) | [链接](https://github.com/Team-ARG-Museum/ID-20-Escaper-Droid),[commit](https://github.com/Team-ARG-Museum/ID-20-Escaper-Droid/commit/d8a6bf7274ca917a46213c668164bd99f6f653f5) | make APP_ESCAPERDROID=1  | 可正常运行 |
+| Blob Attack            | ![图片](doc/Images/ID-28-Blob-Attack.gif)   | [链接](https://github.com/Team-ARG-Museum/ID-28-Blob-Attack),[commit](https://github.com/Team-ARG-Museum/ID-28-Blob-Attack/commit/71d33c8a5df90a27500f27fbe899eacf8f5a0ecd) | make APP_BLOBATTACK=1    | 可正常运行 |
+| BEGEMMED               | ![图片](doc/Images/ID-30-BEGEMMED.gif)      | [链接](https://github.com/Team-ARG-Museum/ID-30-BEGEMMED),[commit](https://github.com/Team-ARG-Museum/ID-30-BEGEMMED/commit/7dcb1be9e1dd3fb833f8b3933ad259d8c7f4cd03) | make APP_BEGEMMED=1      | 可正常运行 |
+| Reverse Mermaid Hockey | ![图片](doc/Images/ID-31-RMH.gif)           | [链接](https://github.com/Team-ARG-Museum/ID-31-RMH),[commit](https://github.com/Team-ARG-Museum/ID-31-RMH/commit/377a31443e4571873d6cdf25e685d2d1269083e1) | make APP_RMH=1           | 可正常运行 |
+| Trolly Fish            | ![图片](doc/Images/ID-36-Trolly-Fish.png)   | [链接](https://github.com/Team-ARG-Museum/ID-36-Trolly-Fish),[commit](https://github.com/Team-ARG-Museum/ID-36-Trolly-Fish/commit/ddaf606287aded96adf441521b6515b5f86d50f2) | make APP_TROLLYFISH=1    | 可正常运行 |
+
+## 游戏 - 棋牌/卡片
+
+| 应用/游戏名称   | 预览                                          | 来源                                                         | 编译方法                  | 备注       |
+| --------------- | --------------------------------------------- | ------------------------------------------------------------ | ------------------------- | ---------- |
+| Mini Rogue      | ![图片](doc/Images/MiniRogue.gif)             | [链接](https://github.com/Press-Play-On-Tape/MiniRogue),[commit](https://github.com/Press-Play-On-Tape/MiniRogue/commit/e1309ddbf1ed8d3b5e944dee9f4559ca7a830dfc) | make APP_MINIROGUE=1      | 可正常运行 |
+| DICE of FATE    | ![图片](doc/Images/ID-37-DICE-of-FATE.gif)    | [链接](https://github.com/Team-ARG-Museum/ID-37-DICE-of-FATE),[commit](https://github.com/Team-ARG-Museum/ID-37-DICE-of-FATE/commit/d2d7cf40f81e69a64dee461114f79ef8a8e7e714) | make APP_DICEOFFATE=1     | 可正常运行 |
+| Fantasy Rampage | ![图片](doc/Images/ID-48-Fantasy-Rampage.png) | [链接](https://github.com/Team-ARG-Museum/ID-48-Fantasy-Rampage),[commit](https://github.com/Team-ARG-Museum/ID-48-Fantasy-Rampage/commit/29d30d3574e31074aa8bb5d070c073f652b85f1a) | make APP_FANTASYRAMPAGE=1 | 可正常运行 |
+
+## 游戏 - 模拟/经营
+
+| 应用/游戏名称 | 预览                              | 来源                                                         | 编译方法             | 备注       |
+| ------------- | --------------------------------- | ------------------------------------------------------------ | -------------------- | ---------- |
+| MicroCity     | ![图片](doc/Images/MicroCity.gif) | [链接](https://github.com/jhhoward/MicroCity),[commit](https://github.com/jhhoward/MicroCity/commit/ae265f1923e9ac9789df601bb438faa29b7ae339) | make APP_MICROCITY=1 | 可正常运行 |
+
+
 
 ## 游戏 - 竞速
 
@@ -118,6 +137,7 @@ $ gdb-multiarch build/Arduboy2_stm32f103c8t6.elf
 | Night Raid                      | ![图片](doc/Images/night-raid.gif)            | [链接](https://github.com/epbarger/night-raid),[commit](https://github.com/epbarger/night-raid) | make APP_NIGHTRAID=1         | 可正常运行 |
 | Omega Chase                     | ![图片](doc/Images/OmegaChase.gif)            | [链接](https://github.com/Karl-Williams/OmegaChase),[commit](https://github.com/Karl-Williams/OmegaChase/commit/64bc7d38d21fe6684a147554b4b46b043fe6be4f) | make APP_OMEGACHASE=1        | 可正常运行 |
 | SpaceFighter                    | ![图片](doc/Images/SpaceFighter.gif)          | [链接](https://github.com/mhieronymus/SpaceFighter),[commit](https://github.com/mhieronymus/SpaceFighter/commit/89f6144765ce758ed12a6de040a9913fbed492d8) | make APP_SPACEFIGHTER=1      | 可正常运行 |
+| ArduBoy Jet Pac                 | ![图片](doc/Images/ArduBoyJetPack.gif)        | [链接](https://github.com/thearduinoguy/ArduBoyJetPack),[commit](https://github.com/thearduinoguy/ArduBoyJetPack/commit/c9f92259414869388117f2ef76defc0a7c7b38f1) | make APP_ARDUBOYJETPACK=1    | 可正常运行 |
 
 
 
