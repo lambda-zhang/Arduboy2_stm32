@@ -69,6 +69,7 @@ APP_HOLLOW ?= 0
 APP_ARDUBOYJETPACK ?= 0
 APP_ROOFTOP ?= 0
 APP_KONG ?= 0
+APP_CHICKENX ?= 0
 
 ######################################
 # building variables
@@ -560,6 +561,13 @@ CPP_SOURCE += examples/Kong/Kong/src/Game.cpp \
 	examples/Kong/Kong/src/utils/GameContext.cpp \
 	examples/Kong/Kong/src/arduboyTones/ArduboyTonesExt.cpp \
 	examples/Kong/Kong/Kong.cpp
+endif
+ifeq ($(APP_CHICKENX), 1)
+APP_CPP_INCLUDES += -Ilib/ArduboyTones/src
+APP_SND_DEFS += -DSND2_ARDUBOYTONES
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/ChickenX/Collision.cpp \
+	examples/ChickenX/ChickenX.cpp
 endif
 
 # ASM sources
