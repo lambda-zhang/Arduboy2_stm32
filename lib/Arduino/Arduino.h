@@ -46,6 +46,10 @@ void eeprom_write_dword (uint32_t *__p, uint32_t __value);
 void eeprom_update_block (const void *__src, void *__dst, size_t __n);
 void eeprom_update_byte (uint8_t *__p, uint8_t __value);
 void eeprom_update_word (uint16_t *__p, uint16_t __value);
+void eeprom_write_float(float *addr, float value);
+float eeprom_read_float(const float *addr);
+void eeprom_update_float(float *addr, float value);
+void eeprom_update_dword(uint32_t *addr, uint32_t value);
 
 typedef uint8_t byte;
 typedef bool boolean;

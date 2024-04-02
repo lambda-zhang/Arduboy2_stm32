@@ -238,3 +238,25 @@ void eeprom_update_word (uint16_t *__p, uint16_t __value)
 {
     eeprom_write_dword(__p, __value);
 }
+void eeprom_write_float(float *addr, float value)
+{
+	union {float f; uint32_t u32;} u;
+	u.f = value;
+	eeprom_write_dword((uint32_t *)addr, u.u32);
+}
+float eeprom_read_float(const float *addr)
+{
+	union {float f; uint32_t u32;} u;
+	u.u32 = eeprom_read_dword((const uint32_t *)addr);
+	return u.f;
+}
+void eeprom_update_float(float *addr, float value)
+{
+	union {float f; uint32_t u32;} u;
+	u.f = value;
+	eeprom_write_dword((uint32_t *)addr, u.u32);
+}
+void eeprom_update_dword(uint32_t *addr, uint32_t value)
+{
+	eeprom_write_dword(addr, value);
+}

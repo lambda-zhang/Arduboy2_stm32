@@ -68,7 +68,7 @@ $ gdb-multiarch build/Arduboy2_stm32f103c8t6.elf
 | Glove                           | ![图片](doc/Images/Glove.gif)                | [链接](https://github.com/fuopy/glove),[commit](https://github.com/fuopy/glove/commit/81e9988fea3fc68edc984260b17d6f52beb5d497) | make APP_GLOVE=1         | 可正常运行                                          |
 | hollow                          | ![图片](doc/Images/hollow.gif)               | [链接](https://github.com/obono/ArduboyWorks/tree/master),[commit](https://github.com/obono/ArduboyWorks/commit/c0fe2111bfc5df625a8130ffdf5380cdd70b881a) | make APP_HOLLOW=1        | 可正常运行                                          |
 | Rooftop Rescue                  | ![图片](doc/Images/Rooftop.gif)              | [链接](https://github.com/BertVeer/Rooftop),[commit](https://github.com/BertVeer/Rooftop/commit/cb8e9203f62f5ce49423742aa3fb7bc6e1ca3847) | make APP_ROOFTOP=1       | 可正常运行,可能有bug                                |
-| KONG                            | ![图片](doc/Images/kong.gif)                 | [链接](https://github.com/Press-Play-On-Tape/Kong),[commit](https://github.com/Press-Play-On-Tape/Kong/commit/ec95141029a2a401edcf97b4b8d0f121139a2d15) | make APP_KONG=1          |                                                     |
+| KONG                            | ![图片](doc/Images/kong.gif)                 | [链接](https://github.com/Press-Play-On-Tape/Kong),[commit](https://github.com/Press-Play-On-Tape/Kong/commit/ec95141029a2a401edcf97b4b8d0f121139a2d15) | make APP_KONG=1          | 运行不正常                                          |
 
 ## 游戏 - 街机
 

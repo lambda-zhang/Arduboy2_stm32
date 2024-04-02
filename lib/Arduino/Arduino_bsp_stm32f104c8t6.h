@@ -4,6 +4,7 @@
 #include "stm32f1xx_hal.h"
 
 unsigned long millis();
+unsigned long micros(void);
 void delayMicroseconds(unsigned int us);
 void delay(unsigned long ms);
 uint32_t get_adc_val(void);

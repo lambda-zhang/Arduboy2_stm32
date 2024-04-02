@@ -13,6 +13,12 @@ unsigned long millis()
 	return HAL_GetTick();
 }
 
+// FIXME: this is us, but ms for now
+unsigned long micros(void)
+{
+    return HAL_GetTick();
+}
+
 void delayMicroseconds(unsigned int us)
 {
 	uint32_t total = 0;

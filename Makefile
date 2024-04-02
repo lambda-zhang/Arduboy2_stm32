@@ -71,6 +71,7 @@ APP_ROOFTOP ?= 0
 APP_KONG ?= 0
 APP_CHICKENX ?= 0
 APP_PETRIS ?= 0
+APP_MINESWEEPER2 ?= 0
 
 ######################################
 # building variables
@@ -572,6 +573,20 @@ CPP_SOURCE += examples/ChickenX/Collision.cpp \
 endif
 ifeq ($(APP_PETRIS), 1)
 CPP_SOURCE += examples/petris/Petris.cpp
+endif
+ifeq ($(APP_MINESWEEPER2), 1)
+CPP_SOURCE += examples/Minesweeper/Minesweeper/CreditsState.cpp \
+	examples/Minesweeper/Minesweeper/Game.cpp \
+	examples/Minesweeper/Minesweeper/GameContext.cpp \
+	examples/Minesweeper/Minesweeper/GameplayState.cpp \
+	examples/Minesweeper/Minesweeper/SaveCheckState.cpp \
+	examples/Minesweeper/Minesweeper/SplashscreenState.cpp \
+	examples/Minesweeper/Minesweeper/StatsState.cpp \
+	examples/Minesweeper/Minesweeper/ThemesState.cpp \
+	examples/Minesweeper/Minesweeper/Tile.cpp \
+	examples/Minesweeper/Minesweeper/TileGridRenderer.cpp \
+	examples/Minesweeper/Minesweeper/TitlescreenState.cpp \
+	examples/Minesweeper/Minesweeper/Minesweeper.cpp
 endif
 
 # ASM sources
