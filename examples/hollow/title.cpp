@@ -30,18 +30,6 @@ static void     eepWrite16(uint16_t val);
 static void     eepWrite32(uint32_t val);
 static void     eepWriteBlock(const void *p, size_t n);
 
-#ifdef STM32F103xB
-void eeprom_busy_wait(){};
-void eeprom_write_dword(uint16_t eepAddr, uint32_t val) {}
-void eeprom_write_block(uint8_t *p, uint16_t eepAddr, uint8_t n) {}
-void eeprom_write_word(uint16_t eepAddr, uint16_t val) {}
-void eeprom_write_byte(uint16_t eepAddr, uint8_t val) {}
-void eeprom_read_block(uint8_t *p, uint16_t  eepAddr, uint8_t n) {}
-uint32_t eeprom_read_dword(uint16_t eepAddr) {}
-uint16_t eeprom_read_word(uint16_t eepAddr) {}
-uint8_t eeprom_read_byte(uint16_t eepAddr) {}
-#endif /* STM32F103xB */
-
 /*  Local Variables  */
 
 PROGMEM static const uint8_t imgTitle1[] = { // "Hollow" 84x20
@@ -406,78 +394,58 @@ void eepSeek(int addr)
 
 uint8_t eepRead8(void)
 {
-    #ifndef STM32F103xB
     eeprom_busy_wait();
     return eeprom_read_byte((const uint8_t *) eepAddr++);
-    #else
-    return 0;
-    #endif /* STM32F103xB */
 }
 
 uint16_t eepRead16(void)
 {
-    #ifndef STM32F103xB
     eeprom_busy_wait();
     uint16_t ret = eeprom_read_word((const uint16_t *)eepAddr);
     eepAddr += 2;
     return ret;
-    #else
-    return 0;
-    #endif /* STM32F103xB */
 }
 
 uint32_t eepRead32(void)
 {
-    #ifndef STM32F103xB
     eeprom_busy_wait();
     uint32_t ret = eeprom_read_dword((const uint32_t *) eepAddr);
     eepAddr += 4;
     return ret;
-    #else
-    return 0;
-    #endif /* STM32F103xB */
 }
 
 void eepReadBlock(void *p, size_t n)
 {
-    #ifndef STM32F103xB
     eeprom_busy_wait();
     eeprom_read_block(p, (const void *) eepAddr, n);
     eepAddr += n;
-    #endif /* STM32F103xB */
 }
 
 void eepWrite8(uint8_t val)
 {
-    #ifndef STM32F103xB
     eeprom_busy_wait();
     eeprom_write_byte((uint8_t *) eepAddr, val);
     eepAddr++;
-    #endif /* STM32F103xB */
 }
 
 void eepWrite16(uint16_t val)
 {
-    #ifndef STM32F103xB
     eeprom_busy_wait();
     eeprom_write_word((uint16_t *)eepAddr, val);
     eepAddr += 2;
-    #endif /* STM32F103xB */
 }
 
 void eepWrite32(uint32_t val)
 {
-    #ifndef STM32F103xB
     eeprom_busy_wait();
     eeprom_write_dword((uint32_t *)eepAddr, val);
     eepAddr += 4;
-    #endif /* STM32F103xB */
 }
 
 void eepWriteBlock(const void *p, size_t n)
 {
-    #ifndef STM32F103xB
     eeprom_busy_wait();
+    #ifndef STM32F103xB
     eeprom_write_block(p, (void *) eepAddr, n);
     #endif /* STM32F103xB */
     eepAddr += n;
