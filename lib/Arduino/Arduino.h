@@ -14,7 +14,7 @@ extern HardwareSerial Serial;
 #undef AB_DEVKIT
 #define ARDUBOY_10 YES
 
-#define PROGMEM
+#define PROGMEM __attribute__((unused))
 
 #define PGM_P const char *
 
