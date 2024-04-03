@@ -73,6 +73,7 @@ APP_PETRIS ?= 0
 APP_MINESWEEPER2 ?= 0
 APP_EVADE ?= 0
 APP_DICESOLITAIRE ?= 0
+APP_TETROI ?= 0
 
 ######################################
 # building variables
@@ -594,6 +595,12 @@ CPP_SOURCE += examples/evade-arduboy-game/arduboy-game/arduboy-game.cpp
 endif
 ifeq ($(APP_DICESOLITAIRE), 1)
 CPP_SOURCE += examples/DiceSolitaire/DiceSolitaire.cpp
+endif
+ifeq ($(APP_TETROI), 1)
+APP_CPP_INCLUDES += -Ilib/ArduboyTones/src
+APP_SND_DEFS += -DSND2_ARDUBOYTONES
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/Tetroi/Tetroi-10/Tetroi-10.cpp
 endif
 
 # ASM sources
