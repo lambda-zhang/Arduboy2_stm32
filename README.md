@@ -141,6 +141,7 @@ $ gdb-multiarch build/Arduboy2_stm32f103c8t6.elf
 | SpaceFighter                    | ![图片](doc/Images/SpaceFighter.gif)          | 来源: [链接](https://github.com/mhieronymus/SpaceFighter),[commit](https://github.com/mhieronymus/SpaceFighter/commit/89f6144765ce758ed12a6de040a9913fbed492d8)<br />编译方法: make APP_SPACEFIGHTER=1 | 可正常运行 |
 | ArduBoy Jet Pac                 | ![图片](doc/Images/ArduBoyJetPack.gif)        | 来源: [链接](https://github.com/thearduinoguy/ArduBoyJetPack),[commit](https://github.com/thearduinoguy/ArduBoyJetPack/commit/c9f92259414869388117f2ef76defc0a7c7b38f1)<br />编译方法: make APP_ARDUBOYJETPACK=1 | 可正常运行 |
 | Glove                           | ![图片](doc/Images/Glove.gif)                 | 来源: [链接](https://github.com/fuopy/glove),[commit](https://github.com/fuopy/glove/commit/81e9988fea3fc68edc984260b17d6f52beb5d497)<br />编译方法: make APP_GLOVE=1 | 可正常运行 |
+| Evade                           | ![图片](doc/Images/evade-arduboy-game.gif)    | 来源: [链接](https://github.com/ModusCreateOrg/evade-arduboy-game),[commit](https://github.com/ModusCreateOrg/evade-arduboy-game/commit/0933a8fb3cb78c083e38c7e37124ad3f08f3d90a)<br />编译方法: make APP_EVADE=1 | 可正常运行 |
 
 
 

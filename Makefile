@@ -72,6 +72,7 @@ APP_KONG ?= 0
 APP_CHICKENX ?= 0
 APP_PETRIS ?= 0
 APP_MINESWEEPER2 ?= 0
+APP_EVADE ?= 0
 
 ######################################
 # building variables
@@ -587,6 +588,12 @@ CPP_SOURCE += examples/Minesweeper/Minesweeper/CreditsState.cpp \
 	examples/Minesweeper/Minesweeper/TileGridRenderer.cpp \
 	examples/Minesweeper/Minesweeper/TitlescreenState.cpp \
 	examples/Minesweeper/Minesweeper/Minesweeper.cpp
+endif
+ifeq ($(APP_EVADE), 1)
+APP_CPP_INCLUDES += -Ilib/ArduboyTones/src
+APP_SND_DEFS += -DSND2_ARDUBOYTONES
+CPP_SOURCE += lib/ArduboyTones/src/ArduboyTones.cpp
+CPP_SOURCE += examples/evade-arduboy-game/arduboy-game/arduboy-game.cpp
 endif
 
 # ASM sources
